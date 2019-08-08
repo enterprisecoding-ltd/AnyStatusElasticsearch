@@ -1,13 +1,13 @@
 ﻿using AnyStatus.API;
-using AnyStatus.Plugins.Elasticsearch.ClusterHealth;
+using AnyStatus.Plugins.Elasticsearch.Cluster.Health;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets
+namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Cluster
 {
     [TestClass]
-    public class ClusterHealthTests
+    public class HealthTests
     {
         [TestMethod]
         public async Task ClusterHealth()

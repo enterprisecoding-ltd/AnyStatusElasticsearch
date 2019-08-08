@@ -8,6 +8,8 @@ Widgets for AnyStatus to provide capability to check various Elasticsearch metri
 ### Avaliable Widgets
 
 - [x] Cluster Health Check
+- [x] Cluster CPU Usage
+- [x] Cluster Ram Usage
 
 ## Contribute
 

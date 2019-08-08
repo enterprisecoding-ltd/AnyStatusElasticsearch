@@ -5,7 +5,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AnyStatus.Plugins.Elasticsearch.ClusterHealth
+namespace AnyStatus.Plugins.Elasticsearch.Cluster.Health
 {
     public class ClusterHealthCheck : ICheckHealth<ClusterHealthWidget>
     {
@@ -24,10 +24,10 @@ namespace AnyStatus.Plugins.Elasticsearch.ClusterHealth
             {
                 switch (clusterHealthResponse.Status)
                 {
-                    case Health.Green:
+                    case global::Elasticsearch.Net.Health.Green:
                         clusterHealthWidget.State = State.Ok;
                         break;
-                    case Health.Yellow:
+                    case global::Elasticsearch.Net.Health.Yellow:
                         clusterHealthWidget.State = State.PartiallySucceeded;
                         break;
                     default:

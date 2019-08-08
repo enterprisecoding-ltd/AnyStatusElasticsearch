@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace AnyStatus.Plugins.Elasticsearch.ClusterHealth
+namespace AnyStatus.Plugins.Elasticsearch.Cluster.Health
 {
     [DisplayName("Cluster Health")]
     [DisplayColumn("Elasticsearch")]
@@ -18,5 +18,10 @@ namespace AnyStatus.Plugins.Elasticsearch.ClusterHealth
         [Category("Master")]
         [Description("Elasticsearch master server port")]
         public int MasterPort { get; set; }
+
+        public ClusterHealthWidget()
+        {
+            MasterPort = 9200;
+        }
     }
 }

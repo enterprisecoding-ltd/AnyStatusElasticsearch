@@ -72,8 +72,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClusterHealth\ClusterHealthCheck.cs" />
-    <Compile Include="ClusterHealth\ClusterHealthWidget.cs" />
+    <Compile Include="Cluster\CPU\ClusterCPUUsageQuery.cs" />
+    <Compile Include="Cluster\CPU\ClusterCPUUsageWidget.cs" />
+    <Compile Include="Cluster\Health\ClusterHealthCheck.cs" />
+    <Compile Include="Cluster\Health\ClusterHealthWidget.cs" />
+    <Compile Include="Cluster\Ram\ClusterRamUsageQuery.cs" />
+    <Compile Include="Cluster\Ram\ClusterRamUsageWidget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
