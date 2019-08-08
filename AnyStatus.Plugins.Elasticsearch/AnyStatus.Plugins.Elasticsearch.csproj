@@ -78,6 +78,8 @@
     <Compile Include="Cluster\Health\ClusterHealthWidget.cs" />
     <Compile Include="Cluster\Ram\ClusterRamUsageHandler.cs" />
     <Compile Include="Cluster\Ram\ClusterRamUsageWidget.cs" />
+    <Compile Include="Index\DeletedDocumentCount\DeletedDocumentCountMetricQuery.cs" />
+    <Compile Include="Index\DeletedDocumentCount\DeletedDocumentCountWidget.cs" />
     <Compile Include="Index\DocumentCount\DocumentCountMetricQuery.cs" />
     <Compile Include="Index\DocumentCount\DocumentCountWidget.cs" />
     <Compile Include="Node\CPU\NodeCPUUsageHandler.cs" />

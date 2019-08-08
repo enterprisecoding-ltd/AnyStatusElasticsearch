@@ -2,12 +2,12 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace AnyStatus.Plugins.Elasticsearch.Index.DocumentCount
+namespace AnyStatus.Plugins.Elasticsearch.Index.DeletedDocumentCount
 {
-    [DisplayName("Document Count")]
+    [DisplayName("Deleted Document Count")]
     [DisplayColumn("Elasticsearch")]
-    [Description("Shows total document count for the Elasticsearch Cluster")]
-    public class DocumentCountWidget : Metric, ISchedulable
+    [Description("Shows total deleted document count for the Elasticsearch Cluster")]
+    public class DeletedDocumentCountWidget : Metric, ISchedulable
     {
         [Required]
         [Category("Master")]
@@ -19,7 +19,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.DocumentCount
         [Description("Elasticsearch master server port")]
         public int MasterPort { get; set; }
 
-        public DocumentCountWidget()
+        public DeletedDocumentCountWidget()
         {
             MasterPort = 9200;
 

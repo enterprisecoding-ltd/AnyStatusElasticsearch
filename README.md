@@ -11,6 +11,7 @@ Widgets for AnyStatus to provide capability to check various Elasticsearch metri
 -  [x] Cluster CPU Usage
 -  [x] Cluster Ram Usage
 -  [x] Document Count
+-  [x] Deleted Document Count
 -  [x] Node CPU Usage
 -  [x] Node Ram Usage
 
