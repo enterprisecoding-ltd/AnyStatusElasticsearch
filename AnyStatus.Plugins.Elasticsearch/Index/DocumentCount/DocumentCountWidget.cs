@@ -2,12 +2,12 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace AnyStatus.Plugins.Elasticsearch.Cluster.Health
+namespace AnyStatus.Plugins.Elasticsearch.Index.DocumentCount
 {
-    [DisplayName("Cluster Health")]
+    [DisplayName("Document Count")]
     [DisplayColumn("Elasticsearch")]
-    [Description("Shows Elasticsearch cluster health")]
-    public class ClusterHealthWidget : Widget, IHealthCheck, ISchedulable, IStartable, IStoppable
+    [Description("Shows total document count for the Elasticsearch Cluster")]
+    public class DocumentCountWidget : Metric, ISchedulable
     {
         [Required]
         [Category("Master")]
@@ -19,10 +19,8 @@ namespace AnyStatus.Plugins.Elasticsearch.Cluster.Health
         [Description("Elasticsearch master server port")]
         public int MasterPort { get; set; }
 
-        public ClusterHealthWidget()
+        public DocumentCountWidget()
         {
-            MasterPort = 9200;
-
             Interval = 1;
             Units = IntervalUnits.Minutes;
         }

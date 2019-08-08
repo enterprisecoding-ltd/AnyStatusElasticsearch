@@ -71,6 +71,7 @@
     <Compile Include="Widgets\Cluster\HealthTests.cs" />
     <Compile Include="Widgets\Cluster\CPUUsageTests.cs" />
     <Compile Include="Widgets\Cluster\RamUsageTests.cs" />
+    <Compile Include="Widgets\Index\DocumentCountTests.cs" />
     <Compile Include="Widgets\Node\CPUUsageTests.cs" />
     <Compile Include="Widgets\Node\RamUsageTests.cs" />
   </ItemGroup>

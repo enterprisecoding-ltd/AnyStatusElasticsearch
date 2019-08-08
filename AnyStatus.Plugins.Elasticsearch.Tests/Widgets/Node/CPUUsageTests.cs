@@ -16,7 +16,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Node
 
             var request = MetricQueryRequest.Create(widget);
 
-            var handler = new NodeCPUUsageQuery();
+            var handler = new NodeCPUUsageHandler();
 
             await handler.Handle(request, CancellationToken.None).ConfigureAwait(false);
 

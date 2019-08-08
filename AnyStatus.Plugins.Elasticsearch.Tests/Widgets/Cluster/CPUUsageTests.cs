@@ -16,7 +16,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Cluster
 
             var request = MetricQueryRequest.Create(widget);
 
-            var handler = new ClusterCPUUsageQuery();
+            var handler = new ClusterCPUUsageHandler();
 
             await handler.Handle(request, CancellationToken.None).ConfigureAwait(false);
 

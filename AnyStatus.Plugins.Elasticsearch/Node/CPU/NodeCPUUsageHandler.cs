@@ -5,11 +5,11 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AnyStatus.Plugins.Elasticsearch.Cluster.Ram
+namespace AnyStatus.Plugins.Elasticsearch.Node.CPU
 {
-    public class ClusterRamUsageQuery : IRequestHandler<MetricQueryRequest<ClusterRamUsageWidget>>
+    public class NodeCPUUsageHandler : IRequestHandler<MetricQueryRequest<NodeCPUUsageWidget>>
     {
-        public async Task Handle(MetricQueryRequest<ClusterRamUsageWidget> request, CancellationToken cancellationToken)
+        public async Task Handle(MetricQueryRequest<NodeCPUUsageWidget> request, CancellationToken cancellationToken)
         {
             var clusterHealthWidget = request.DataContext;
 
@@ -17,12 +17,13 @@ namespace AnyStatus.Plugins.Elasticsearch.Cluster.Ram
 
             var settings = new ConnectionSettings(connectionPool);
             var client = new ElasticClient(settings);
+            var nodeId = new NodeIds(new[] { clusterHealthWidget.NodeId });
 
-            var clusterStatsResponse = await client.Cluster.StatsAsync(new ClusterStatsRequest { FilterPath= new[] { "nodes.os.mem.used_percent" } }, cancellationToken);
+            var clusterStatsResponse = await client.Cluster.StatsAsync(new ClusterStatsRequest(nodeId) { FilterPath= new[] { "nodes.process.cpu.percent" } }, cancellationToken);
 
             if (clusterStatsResponse.IsValid)
             {
-                request.DataContext.Value = clusterStatsResponse.Nodes.OperatingSystem.Memory.UsedPercent;
+                request.DataContext.Value = clusterStatsResponse.Nodes.Process.Cpu.Percent;
                 request.DataContext.State = State.Ok;
             }
             else

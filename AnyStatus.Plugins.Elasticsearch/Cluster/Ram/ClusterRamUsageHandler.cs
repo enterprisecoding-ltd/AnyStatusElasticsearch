@@ -5,11 +5,11 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AnyStatus.Plugins.Elasticsearch.Cluster.CPU
+namespace AnyStatus.Plugins.Elasticsearch.Cluster.Ram
 {
-    public class ClusterCPUUsageQuery : IRequestHandler<MetricQueryRequest<ClusterCPUUsageWidget>>
+    public class ClusterRamUsageHandler : IRequestHandler<MetricQueryRequest<ClusterRamUsageWidget>>
     {
-        public async Task Handle(MetricQueryRequest<ClusterCPUUsageWidget> request, CancellationToken cancellationToken)
+        public async Task Handle(MetricQueryRequest<ClusterRamUsageWidget> request, CancellationToken cancellationToken)
         {
             var clusterHealthWidget = request.DataContext;
 
@@ -18,11 +18,11 @@ namespace AnyStatus.Plugins.Elasticsearch.Cluster.CPU
             var settings = new ConnectionSettings(connectionPool);
             var client = new ElasticClient(settings);
 
-            var clusterStatsResponse = await client.Cluster.StatsAsync(new ClusterStatsRequest { FilterPath= new[] { "nodes.process.cpu.percent" } }, cancellationToken);
+            var clusterStatsResponse = await client.Cluster.StatsAsync(new ClusterStatsRequest { FilterPath= new[] { "nodes.os.mem.used_percent" } }, cancellationToken);
 
             if (clusterStatsResponse.IsValid)
             {
-                request.DataContext.Value = clusterStatsResponse.Nodes.Process.Cpu.Percent;
+                request.DataContext.Value = clusterStatsResponse.Nodes.OperatingSystem.Memory.UsedPercent;
                 request.DataContext.State = State.Ok;
             }
             else
