@@ -2,12 +2,12 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace AnyStatus.Plugins.Elasticsearch.Cluster.CPU
+namespace AnyStatus.Plugins.Elasticsearch.Node.Ram
 {
-    [DisplayName("Cluster CPU Usage")]
+    [DisplayName("Node RAM Usage")]
     [DisplayColumn("Elasticsearch")]
-    [Description("Shows the percentage of CPU usage for the Elasticsearch Cluster")]
-    public class ClusterCPUUsageWidget : Sparkline, ISchedulable
+    [Description("Shows the percentage of RAM usage for the Elasticsearch Cluster")]
+    public class NodeRamUsageWidget : Sparkline, ISchedulable
     {
         [Required]
         [Category("Master")]
@@ -19,9 +19,14 @@ namespace AnyStatus.Plugins.Elasticsearch.Cluster.CPU
         [Description("Elasticsearch master server port")]
         public int MasterPort { get; set; }
 
-        public ClusterCPUUsageWidget()
+        [Required]
+        [Category("Node")]
+        [Description("Elasticsearch node id")]
+        public string NodeId { get; set; }
+
+        public NodeRamUsageWidget()
         {
-            Name = "Cluster CPU Usage";
+            Name = "Node RAM Usage";
             Symbol = "%";
             MaxValue = 100;
             Interval = 1;

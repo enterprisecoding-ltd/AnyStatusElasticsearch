@@ -78,6 +78,10 @@
     <Compile Include="Cluster\Health\ClusterHealthWidget.cs" />
     <Compile Include="Cluster\Ram\ClusterRamUsageQuery.cs" />
     <Compile Include="Cluster\Ram\ClusterRamUsageWidget.cs" />
+    <Compile Include="Node\CPU\NodeCPUUsageQuery.cs" />
+    <Compile Include="Node\CPU\NodeCPUUsageWidget.cs" />
+    <Compile Include="Node\Ram\NodeRamUsageQuery.cs" />
+    <Compile Include="Node\Ram\NodeRamUsageWidget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
