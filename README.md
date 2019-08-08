@@ -1,7 +1,7 @@
 # AnyStatus Elasticsearch Plugin
 [AnyStatus](https://www.anystat.us) plugin for Elasticsearch.
 
-![Screenshot](https://raw.githubusercontent.com/fatihboy/AnyStatusElasticsearch/Docs/images/Screenshot.png)
+![Screenshot](https://raw.githubusercontent.com/fatihboy/AnyStatusElasticsearch//master/Docs/images/Screenshot.png)
 
 Widgets for AnyStatus to provide capability to check various Elasticsearch metrics.
 
