@@ -1,4 +1,5 @@
 ﻿using AnyStatus.API;
+using AnyStatus.Plugins.Elasticsearch.Helpers;
 using Elasticsearch.Net;
 using Nest;
 using System;
@@ -13,10 +14,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.DocumentCount
         {
             var documentCountWidget = request.DataContext;
 
-            var connectionPool = new SingleNodeConnectionPool(new Uri($"http://{documentCountWidget.MasterIp}:{documentCountWidget.MasterPort}"));
-
-            var settings = new ConnectionSettings(connectionPool);
-            var client = new ElasticClient(settings);
+            var client = ElasticsearchHelper.GetElasticClient(documentCountWidget);
 
             var clusterStatsResponse = await client.Cluster.StatsAsync(new ClusterStatsRequest { FilterPath = new[] { "indices.docs.count" } }, cancellationToken);
 

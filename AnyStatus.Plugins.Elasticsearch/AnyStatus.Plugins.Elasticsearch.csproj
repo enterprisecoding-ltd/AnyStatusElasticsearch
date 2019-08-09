@@ -80,6 +80,7 @@
     <Compile Include="Cluster\Health\ClusterHealthWidget.cs" />
     <Compile Include="Cluster\Ram\ClusterRamUsageHandler.cs" />
     <Compile Include="Cluster\Ram\ClusterRamUsageWidget.cs" />
+    <Compile Include="Helpers\ElasticsearchHelper.cs" />
     <Compile Include="Helpers\FileSizeFormatter.cs" />
     <Compile Include="Index\DeletedDocumentCount\DeletedDocumentCountMetricQuery.cs" />
     <Compile Include="Index\DeletedDocumentCount\DeletedDocumentCountWidget.cs" />
@@ -97,6 +98,8 @@
     <Compile Include="Node\StoreSize\StoreSizeWidget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shared\FileSystemPercentageType.cs" />
+    <Compile Include="Shared\IElasticsearchNodeWidget.cs" />
+    <Compile Include="Shared\IElasticsearchWidget.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

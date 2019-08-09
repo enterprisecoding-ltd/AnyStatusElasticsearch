@@ -1,7 +1,6 @@
 ﻿using AnyStatus.API;
-using Elasticsearch.Net;
+using AnyStatus.Plugins.Elasticsearch.Helpers;
 using Nest;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,10 +12,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Cluster.CPU
         {
             var clusterHealthWidget = request.DataContext;
 
-            var connectionPool = new SingleNodeConnectionPool(new Uri($"http://{clusterHealthWidget.MasterIp}:{clusterHealthWidget.MasterPort}"));
-
-            var settings = new ConnectionSettings(connectionPool);
-            var client = new ElasticClient(settings);
+            var client = ElasticsearchHelper.GetElasticClient(clusterHealthWidget);
 
             var clusterStatsResponse = await client.Cluster.StatsAsync(new ClusterStatsRequest { FilterPath= new[] { "nodes.process.cpu.percent" } }, cancellationToken);
 

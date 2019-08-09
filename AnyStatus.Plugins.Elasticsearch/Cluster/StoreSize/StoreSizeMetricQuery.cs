@@ -1,7 +1,5 @@
 ﻿using AnyStatus.API;
-using Elasticsearch.Net;
 using Nest;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using AnyStatus.Plugins.Elasticsearch.Helpers;
@@ -14,10 +12,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Cluster.StoreSize
         {
             var storeSizeWidget = request.DataContext;
 
-            var connectionPool = new SingleNodeConnectionPool(new Uri($"http://{storeSizeWidget.MasterIp}:{storeSizeWidget.MasterPort}"));
-
-            var settings = new ConnectionSettings(connectionPool);
-            var client = new ElasticClient(settings);
+            var client = ElasticsearchHelper.GetElasticClient(storeSizeWidget);
 
             var clusterStatsResponse = await client.Cluster.StatsAsync(new ClusterStatsRequest { FilterPath = new[] { "indices.store.size_in_bytes" } }, cancellationToken);
 

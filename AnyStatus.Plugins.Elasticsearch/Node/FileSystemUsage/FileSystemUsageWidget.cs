@@ -1,5 +1,6 @@
 ﻿using AnyStatus.API;
 using AnyStatus.Plugins.Elasticsearch.Shared;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Serialization;
@@ -9,17 +10,29 @@ namespace AnyStatus.Plugins.Elasticsearch.Node.FileSystemUsage
     [DisplayName("Node File System Usage")]
     [DisplayColumn("Elasticsearch")]
     [Description("Shows file system usage for given Elasticsearch Node")]
-    public class FileSystemUsageWidget : Metric, ISchedulable, IReportProgress
+    public class FileSystemUsageWidget : Metric, IElasticsearchNodeWidget, ISchedulable, IReportProgress
     {
-        [Required]
-        [Category("File System Usage")]
-        [Description("Elasticsearch master server ip")]
-        public string MasterIp { get; set; }
 
         [Required]
         [Category("File System Usage")]
-        [Description("Elasticsearch master server port")]
-        public int MasterPort { get; set; }
+        [Description("Elasticsearch node uris to connect")]
+        public List<string> NodeUris { get; set; }
+
+        [Category("File System Usage")]
+        [Description("Use Basic Authentication to connect Elasticsearch Cluster")]
+        public bool UseBasicAuthentication { get; set; }
+
+        [Category("File System Usage")]
+        [Description("Username to connect Elasticsearch Cluster")]
+        public string Username { get; set; }
+
+        [Category("File System Usage")]
+        [Description("Password to connect Elasticsearch Cluster")]
+        public string Password { get; set; }
+
+        [Category("File System Usage")]
+        [Description("Always trust server certificate")]
+        public bool TrustCertificate { get; set; }
 
         [Required]
         [Category("File System Usage")]
@@ -56,7 +69,6 @@ namespace AnyStatus.Plugins.Elasticsearch.Node.FileSystemUsage
 
         public FileSystemUsageWidget()
         {
-            MasterPort = 9200;
             ErrorPercentage = 85;
             PercentageType = FileSystemPercentageType.PercentageUsed;
 

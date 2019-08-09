@@ -1,7 +1,6 @@
 ﻿using AnyStatus.API;
-using Elasticsearch.Net;
+using AnyStatus.Plugins.Elasticsearch.Helpers;
 using Nest;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,12 +10,9 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.DeletedDocumentCount
     {
         public async Task Handle(MetricQueryRequest<DeletedDocumentCountWidget> request, CancellationToken cancellationToken)
         {
-            var documentCountWidget = request.DataContext;
+            var deleteDocumentCountWidget = request.DataContext;
 
-            var connectionPool = new SingleNodeConnectionPool(new Uri($"http://{documentCountWidget.MasterIp}:{documentCountWidget.MasterPort}"));
-
-            var settings = new ConnectionSettings(connectionPool);
-            var client = new ElasticClient(settings);
+            var client = ElasticsearchHelper.GetElasticClient(deleteDocumentCountWidget);
 
             var clusterStatsResponse = await client.Cluster.StatsAsync(new ClusterStatsRequest { FilterPath = new[] { "indices.docs.deleted" } }, cancellationToken);
 
@@ -27,7 +23,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.DeletedDocumentCount
             }
             else
             {
-                documentCountWidget.State = State.Invalid;
+                deleteDocumentCountWidget.State = State.Invalid;
             }
         }
     }

@@ -1,4 +1,6 @@
 ﻿using AnyStatus.API;
+using AnyStatus.Plugins.Elasticsearch.Shared;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -7,17 +9,28 @@ namespace AnyStatus.Plugins.Elasticsearch.Cluster.CPU
     [DisplayName("Cluster CPU Usage")]
     [DisplayColumn("Elasticsearch")]
     [Description("Shows the percentage of CPU usage for the Elasticsearch Cluster")]
-    public class ClusterCPUUsageWidget : Sparkline, ISchedulable
+    public class ClusterCPUUsageWidget : Sparkline, IElasticsearchWidget, ISchedulable
     {
         [Required]
         [Category("Cluster CPU Usage")]
-        [Description("Elasticsearch master server ip")]
-        public string MasterIp { get; set; }
+        [Description("Elasticsearch node uris to connect")]
+        public List<string> NodeUris { get; set; }
 
-        [Required]
         [Category("Cluster CPU Usage")]
-        [Description("Elasticsearch master server port")]
-        public int MasterPort { get; set; }
+        [Description("Use Basic Authentication to connect Elasticsearch Cluster")]
+        public bool UseBasicAuthentication { get; set; }
+
+        [Category("Cluster CPU Usage")]
+        [Description("Username to connect Elasticsearch Cluster")]
+        public string Username { get; set; }
+
+        [Category("Cluster CPU Usage")]
+        [Description("Password to connect Elasticsearch Cluster")]
+        public string Password { get; set; }
+
+        [Category("Cluster CPU Usage")]
+        [Description("Always trust server certificate")]
+        public bool TrustCertificate { get; set; }
 
         public ClusterCPUUsageWidget()
         {
@@ -26,8 +39,6 @@ namespace AnyStatus.Plugins.Elasticsearch.Cluster.CPU
             MaxValue = 100;
             Interval = 1;
             Units = IntervalUnits.Minutes;
-
-            MasterPort = 9200;
         }
     }
 }

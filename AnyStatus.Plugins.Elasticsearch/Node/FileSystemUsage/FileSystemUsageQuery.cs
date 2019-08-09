@@ -1,11 +1,7 @@
 ﻿using AnyStatus.API;
 using AnyStatus.Plugins.Elasticsearch.Helpers;
-using Elasticsearch.Net;
 using Nest;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,11 +12,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Node.FileSystemUsage
         public async Task Handle(MetricQueryRequest<FileSystemUsageWidget> request, CancellationToken cancellationToken)
         {
             var fileSystemUsageWidget = request.DataContext;
-
-            var connectionPool = new SingleNodeConnectionPool(new Uri($"http://{fileSystemUsageWidget.MasterIp}:{fileSystemUsageWidget.MasterPort}"));
-
-            var settings = new ConnectionSettings(connectionPool);
-            var client = new ElasticClient(settings);
+            var client = ElasticsearchHelper.GetElasticClient(fileSystemUsageWidget);
             var nodeId = new NodeIds(new[] { fileSystemUsageWidget.NodeId });
 
             var clusterStatsResponse = await client.Cluster.StatsAsync(new ClusterStatsRequest(nodeId), cancellationToken);
