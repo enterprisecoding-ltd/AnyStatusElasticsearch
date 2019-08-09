@@ -89,6 +89,8 @@
     <Compile Include="Node\CPU\NodeCPUUsageWidget.cs" />
     <Compile Include="Node\Ram\NodeRamUsageHandler.cs" />
     <Compile Include="Node\Ram\NodeRamUsageWidget.cs" />
+    <Compile Include="Node\StoreSize\StoreSizeMetricQuery.cs" />
+    <Compile Include="Node\StoreSize\StoreSizeWidget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
