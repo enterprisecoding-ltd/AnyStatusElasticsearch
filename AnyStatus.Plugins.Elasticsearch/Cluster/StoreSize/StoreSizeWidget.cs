@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace AnyStatus.Plugins.Elasticsearch.Index.StoreSize
+namespace AnyStatus.Plugins.Elasticsearch.Cluster.StoreSize
 {
     [DisplayName("Store Size")]
     [DisplayColumn("Elasticsearch")]

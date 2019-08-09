@@ -71,7 +71,7 @@
     <Compile Include="Widgets\Cluster\HealthTests.cs" />
     <Compile Include="Widgets\Cluster\CPUUsageTests.cs" />
     <Compile Include="Widgets\Cluster\RamUsageTests.cs" />
-    <Compile Include="Widgets\Index\StoreSizeTests.cs" />
+    <Compile Include="Widgets\Cluster\StoreSizeTests.cs" />
     <Compile Include="Widgets\Index\DeletedDocumentCountTests.cs" />
     <Compile Include="Widgets\Index\DocumentCountTests.cs" />
     <Compile Include="Widgets\Node\CPUUsageTests.cs" />

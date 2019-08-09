@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AnyStatus.Plugins.Elasticsearch.Helpers;
 
-namespace AnyStatus.Plugins.Elasticsearch.Index.StoreSize
+namespace AnyStatus.Plugins.Elasticsearch.Cluster.StoreSize
 {
     public class StoreSizeMetricQuery : IMetricQuery<StoreSizeWidget>
     {

@@ -1,10 +1,10 @@
 ﻿using AnyStatus.API;
-using AnyStatus.Plugins.Elasticsearch.Index.StoreSize;
+using AnyStatus.Plugins.Elasticsearch.Cluster.StoreSize;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Index
+namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Cluster
 {
     [TestClass]
     public class StoreSizeTests

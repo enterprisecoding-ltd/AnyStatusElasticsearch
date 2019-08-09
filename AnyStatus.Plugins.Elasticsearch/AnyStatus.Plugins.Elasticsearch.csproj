@@ -81,8 +81,8 @@
     <Compile Include="Helpers\FileSizeFormatter.cs" />
     <Compile Include="Index\DeletedDocumentCount\DeletedDocumentCountMetricQuery.cs" />
     <Compile Include="Index\DeletedDocumentCount\DeletedDocumentCountWidget.cs" />
-    <Compile Include="Index\StoreSize\StoreSizeMetricQuery.cs" />
-    <Compile Include="Index\StoreSize\StoreSizeWidget.cs" />
+    <Compile Include="Cluster\StoreSize\StoreSizeMetricQuery.cs" />
+    <Compile Include="Cluster\StoreSize\StoreSizeWidget.cs" />
     <Compile Include="Index\DocumentCount\DocumentCountMetricQuery.cs" />
     <Compile Include="Index\DocumentCount\DocumentCountWidget.cs" />
     <Compile Include="Node\CPU\NodeCPUUsageHandler.cs" />
