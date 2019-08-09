@@ -19,7 +19,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Cluster.FileSystemUsage
             var settings = new ConnectionSettings(connectionPool);
             var client = new ElasticClient(settings);
 
-            var clusterStatsResponse = await client.Cluster.StatsAsync(new ClusterStatsRequest(), cancellationToken);
+            var clusterStatsResponse = await client.Cluster.StatsAsync(new ClusterStatsRequest() { FilterPath = new[] { "nodes.fs" } }, cancellationToken);
 
             if (clusterStatsResponse.IsValid)
             {

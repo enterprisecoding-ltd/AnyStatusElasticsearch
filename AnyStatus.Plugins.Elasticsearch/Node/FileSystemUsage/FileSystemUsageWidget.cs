@@ -57,7 +57,8 @@ namespace AnyStatus.Plugins.Elasticsearch.Node.FileSystemUsage
         public FileSystemUsageWidget()
         {
             MasterPort = 9200;
-            ErrorPercentage = 100;
+            ErrorPercentage = 85;
+            PercentageType = FileSystemPercentageType.PercentageUsed;
 
             Name = "Node File System Usage";
             Symbol = "%";

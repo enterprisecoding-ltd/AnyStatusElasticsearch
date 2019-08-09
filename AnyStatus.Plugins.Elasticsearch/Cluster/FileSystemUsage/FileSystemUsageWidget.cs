@@ -52,7 +52,8 @@ namespace AnyStatus.Plugins.Elasticsearch.Cluster.FileSystemUsage
         public FileSystemUsageWidget()
         {
             MasterPort = 9200;
-            ErrorPercentage = 100;
+            ErrorPercentage = 85;
+            PercentageType = FileSystemPercentageType.PercentageUsed;
 
             Name = "Cluster File System Usage";
             Symbol = "%";

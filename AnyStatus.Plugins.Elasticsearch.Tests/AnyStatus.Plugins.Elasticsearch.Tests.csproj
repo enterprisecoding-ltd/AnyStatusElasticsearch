@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Widgets\Cluster\FileSystemUsageTests.cs" />
     <Compile Include="Widgets\Cluster\HealthTests.cs" />
     <Compile Include="Widgets\Cluster\CPUUsageTests.cs" />
     <Compile Include="Widgets\Cluster\RamUsageTests.cs" />
