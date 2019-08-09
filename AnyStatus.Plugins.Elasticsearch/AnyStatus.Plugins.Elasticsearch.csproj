@@ -87,11 +87,14 @@
     <Compile Include="Index\DocumentCount\DocumentCountWidget.cs" />
     <Compile Include="Node\CPU\NodeCPUUsageHandler.cs" />
     <Compile Include="Node\CPU\NodeCPUUsageWidget.cs" />
+    <Compile Include="Node\FileSystemUsage\FileSystemUsageQuery.cs" />
+    <Compile Include="Node\FileSystemUsage\FileSystemUsageWidget.cs" />
     <Compile Include="Node\Ram\NodeRamUsageHandler.cs" />
     <Compile Include="Node\Ram\NodeRamUsageWidget.cs" />
     <Compile Include="Node\StoreSize\StoreSizeMetricQuery.cs" />
     <Compile Include="Node\StoreSize\StoreSizeWidget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shared\FileSystemPercentageType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

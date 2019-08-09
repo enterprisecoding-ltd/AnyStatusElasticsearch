@@ -16,6 +16,7 @@ Widgets for AnyStatus to provide capability to check various Elasticsearch metri
 -  [x] Node CPU Usage
 -  [x] Node Ram Usage
 -  [x] Node Store Size
+-  [x] Node File System Usage
 
 ## Contribute
 

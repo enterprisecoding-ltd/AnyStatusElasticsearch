@@ -76,6 +76,7 @@
     <Compile Include="Widgets\Index\DocumentCountTests.cs" />
     <Compile Include="Widgets\Node\CPUUsageTests.cs" />
     <Compile Include="Widgets\Node\RamUsageTests.cs" />
+    <Compile Include="Widgets\Node\FileSystemUsageTests.cs" />
     <Compile Include="Widgets\Node\StoreSizeTests.cs" />
   </ItemGroup>
   <ItemGroup>
