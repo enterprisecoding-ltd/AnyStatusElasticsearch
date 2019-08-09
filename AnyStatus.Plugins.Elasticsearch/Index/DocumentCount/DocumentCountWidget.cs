@@ -10,17 +10,18 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.DocumentCount
     public class DocumentCountWidget : Metric, ISchedulable
     {
         [Required]
-        [Category("Master")]
+        [Category("Document Count")]
         [Description("Elasticsearch master server ip")]
         public string MasterIp { get; set; }
 
         [Required]
-        [Category("Master")]
+        [Category("Document Count")]
         [Description("Elasticsearch master server port")]
         public int MasterPort { get; set; }
 
         public DocumentCountWidget()
         {
+            Name = "Document Count";
             MasterPort = 9200;
 
             Interval = 1;

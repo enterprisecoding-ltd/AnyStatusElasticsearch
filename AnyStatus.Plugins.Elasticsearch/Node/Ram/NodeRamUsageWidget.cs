@@ -10,17 +10,17 @@ namespace AnyStatus.Plugins.Elasticsearch.Node.Ram
     public class NodeRamUsageWidget : Sparkline, ISchedulable
     {
         [Required]
-        [Category("Master")]
+        [Category("Node RAM Usage")]
         [Description("Elasticsearch master server ip")]
         public string MasterIp { get; set; }
 
         [Required]
-        [Category("Master")]
+        [Category("Node RAM Usage")]
         [Description("Elasticsearch master server port")]
         public int MasterPort { get; set; }
 
         [Required]
-        [Category("Node")]
+        [Category("Node RAM Usage")]
         [Description("Elasticsearch node id")]
         public string NodeId { get; set; }
 

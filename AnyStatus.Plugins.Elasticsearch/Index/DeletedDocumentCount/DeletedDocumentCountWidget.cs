@@ -10,17 +10,18 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.DeletedDocumentCount
     public class DeletedDocumentCountWidget : Metric, ISchedulable
     {
         [Required]
-        [Category("Master")]
+        [Category("Deleted Document Count")]
         [Description("Elasticsearch master server ip")]
         public string MasterIp { get; set; }
 
         [Required]
-        [Category("Master")]
+        [Category("Deleted Document Count")]
         [Description("Elasticsearch master server port")]
         public int MasterPort { get; set; }
 
         public DeletedDocumentCountWidget()
         {
+            Name = "Deleted Document Count";
             MasterPort = 9200;
 
             Interval = 1;

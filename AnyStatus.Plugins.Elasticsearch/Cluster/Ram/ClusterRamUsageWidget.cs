@@ -10,12 +10,12 @@ namespace AnyStatus.Plugins.Elasticsearch.Cluster.Ram
     public class ClusterRamUsageWidget : Sparkline, ISchedulable
     {
         [Required]
-        [Category("Master")]
+        [Category("Cluster RAM Usage")]
         [Description("Elasticsearch master server ip")]
         public string MasterIp { get; set; }
 
         [Required]
-        [Category("Master")]
+        [Category("Cluster RAM Usage")]
         [Description("Elasticsearch master server port")]
         public int MasterPort { get; set; }
 

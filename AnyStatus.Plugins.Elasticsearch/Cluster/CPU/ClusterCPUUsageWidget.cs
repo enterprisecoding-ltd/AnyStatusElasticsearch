@@ -10,12 +10,12 @@ namespace AnyStatus.Plugins.Elasticsearch.Cluster.CPU
     public class ClusterCPUUsageWidget : Sparkline, ISchedulable
     {
         [Required]
-        [Category("Master")]
+        [Category("Cluster CPU Usage")]
         [Description("Elasticsearch master server ip")]
         public string MasterIp { get; set; }
 
         [Required]
-        [Category("Master")]
+        [Category("Cluster CPU Usage")]
         [Description("Elasticsearch master server port")]
         public int MasterPort { get; set; }
 

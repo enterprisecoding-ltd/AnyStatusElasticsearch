@@ -10,17 +10,17 @@ namespace AnyStatus.Plugins.Elasticsearch.Node.CPU
     public class NodeCPUUsageWidget : Sparkline, ISchedulable
     {
         [Required]
-        [Category("Master")]
+        [Category("Node CPU Usage")]
         [Description("Elasticsearch master server ip")]
         public string MasterIp { get; set; }
 
         [Required]
-        [Category("Master")]
+        [Category("Node CPU Usage")]
         [Description("Elasticsearch master server port")]
         public int MasterPort { get; set; }
 
         [Required]
-        [Category("Node")]
+        [Category("Node CPU Usage")]
         [Description("Elasticsearch node id")]
         public string NodeId { get; set; }
 

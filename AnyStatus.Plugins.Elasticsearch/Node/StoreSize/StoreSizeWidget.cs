@@ -10,22 +10,23 @@ namespace AnyStatus.Plugins.Elasticsearch.Node.StoreSize
     public class StoreSizeWidget : Metric, ISchedulable
     {
         [Required]
-        [Category("Master")]
+        [Category("Node Store Size")]
         [Description("Elasticsearch master server ip")]
         public string MasterIp { get; set; }
 
         [Required]
-        [Category("Master")]
+        [Category("Node Store Size")]
         [Description("Elasticsearch master server port")]
         public int MasterPort { get; set; }
 
         [Required]
-        [Category("Node")]
+        [Category("Node Store Size")]
         [Description("Elasticsearch node id")]
         public string NodeId { get; set; }
 
         public StoreSizeWidget()
         {
+            Name = "Node Store Size";
             MasterPort = 9200;
 
             Interval = 1;

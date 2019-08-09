@@ -10,17 +10,18 @@ namespace AnyStatus.Plugins.Elasticsearch.Cluster.Health
     public class ClusterHealthWidget : Widget, IHealthCheck, ISchedulable, IStartable, IStoppable
     {
         [Required]
-        [Category("Master")]
+        [Category("Cluster Health")]
         [Description("Elasticsearch master server ip")]
         public string MasterIp { get; set; }
 
         [Required]
-        [Category("Master")]
+        [Category("Cluster Health")]
         [Description("Elasticsearch master server port")]
         public int MasterPort { get; set; }
 
         public ClusterHealthWidget()
         {
+            Name = "Cluster Health";
             MasterPort = 9200;
 
             Interval = 1;
