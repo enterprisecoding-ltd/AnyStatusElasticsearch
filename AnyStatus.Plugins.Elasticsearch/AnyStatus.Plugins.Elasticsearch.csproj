@@ -74,6 +74,8 @@
   <ItemGroup>
     <Compile Include="Cluster\CPU\ClusterCPUUsageHandler.cs" />
     <Compile Include="Cluster\CPU\ClusterCPUUsageWidget.cs" />
+    <Compile Include="Cluster\FileSystemUsage\FileSystemUsageQuery.cs" />
+    <Compile Include="Cluster\FileSystemUsage\FileSystemUsageWidget.cs" />
     <Compile Include="Cluster\Health\ClusterHealthCheck.cs" />
     <Compile Include="Cluster\Health\ClusterHealthWidget.cs" />
     <Compile Include="Cluster\Ram\ClusterRamUsageHandler.cs" />
