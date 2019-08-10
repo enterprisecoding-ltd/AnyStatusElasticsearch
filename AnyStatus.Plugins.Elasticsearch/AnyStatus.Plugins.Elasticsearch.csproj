@@ -74,7 +74,7 @@
   <ItemGroup>
     <Compile Include="Cluster\CPU\ClusterCPUUsageHandler.cs" />
     <Compile Include="Cluster\CPU\ClusterCPUUsageWidget.cs" />
-    <Compile Include="Cluster\FileSystemUsage\FileSystemUsageQuery.cs" />
+    <Compile Include="Cluster\FileSystemUsage\FileSystemUsageHandler.cs" />
     <Compile Include="Cluster\FileSystemUsage\FileSystemUsageWidget.cs" />
     <Compile Include="Cluster\Health\ClusterHealthCheck.cs" />
     <Compile Include="Cluster\Health\ClusterHealthWidget.cs" />
@@ -90,7 +90,7 @@
     <Compile Include="Index\DocumentCount\DocumentCountWidget.cs" />
     <Compile Include="Node\CPU\NodeCPUUsageHandler.cs" />
     <Compile Include="Node\CPU\NodeCPUUsageWidget.cs" />
-    <Compile Include="Node\FileSystemUsage\FileSystemUsageQuery.cs" />
+    <Compile Include="Node\FileSystemUsage\FileSystemUsageHandler.cs" />
     <Compile Include="Node\FileSystemUsage\FileSystemUsageWidget.cs" />
     <Compile Include="Node\Ram\NodeRamUsageHandler.cs" />
     <Compile Include="Node\Ram\NodeRamUsageWidget.cs" />

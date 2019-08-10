@@ -5,17 +5,17 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AnyStatus.Plugins.Elasticsearch.Cluster.FileSystemUsage
+namespace AnyStatus.Plugins.Elasticsearch.Node.FileSystemUsage
 {
-    public class FileSystemUsageQuery : IRequestHandler<MetricQueryRequest<FileSystemUsageWidget>>
+    public class FileSystemUsageHandler : IRequestHandler<MetricQueryRequest<FileSystemUsageWidget>>
     {
         public async Task Handle(MetricQueryRequest<FileSystemUsageWidget> request, CancellationToken cancellationToken)
         {
             var fileSystemUsageWidget = request.DataContext;
-
             var client = ElasticsearchHelper.GetElasticClient(fileSystemUsageWidget);
+            var nodeId = new NodeIds(new[] { fileSystemUsageWidget.NodeId });
 
-            var clusterStatsResponse = await client.Cluster.StatsAsync(new ClusterStatsRequest() { FilterPath = new[] { "nodes.fs" } }, cancellationToken);
+            var clusterStatsResponse = await client.Cluster.StatsAsync(new ClusterStatsRequest(nodeId), cancellationToken);
 
             if (clusterStatsResponse.IsValid)
             {

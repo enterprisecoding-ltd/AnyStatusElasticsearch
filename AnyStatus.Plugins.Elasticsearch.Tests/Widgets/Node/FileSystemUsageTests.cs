@@ -20,7 +20,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Node
                 PercentageType = Shared.FileSystemPercentageType.PercentageUsed
             };
             var request = MetricQueryRequest.Create(fileSystemUsageTestsWidget);
-            var metricQuery = new FileSystemUsageQuery();
+            var metricQuery = new FileSystemUsageHandler();
 
             await metricQuery.Handle(request, CancellationToken.None);
 
@@ -41,7 +41,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Node
                 PercentageType = Shared.FileSystemPercentageType.PercentageUsed
             };
             var request = MetricQueryRequest.Create(fileSystemUsageTestsWidget);
-            var metricQuery = new FileSystemUsageQuery();
+            var metricQuery = new FileSystemUsageHandler();
 
             await metricQuery.Handle(request, CancellationToken.None);
 
