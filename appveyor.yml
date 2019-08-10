@@ -16,7 +16,7 @@ nuget:
   account_feed: true
   
 before_build:
-- cmd: nuget restore AnyStatus.Plugins.Elasticsearch
+- cmd: nuget restore .
 - ps: $file = "$env:appveyor_build_folder\AnyStatus.Plugins.Elasticsearch\AnyStatus.Plugins.Elasticsearch.nuspec"
 - ps: $xml = [xml](Get-Content $file)
 - ps: $xml.package.metadata.version = $env:APPVEYOR_BUILD_VERSION
@@ -28,6 +28,6 @@ build:
   
 deploy:
   provider: Environment
-  name: AnyStatus
+  name: AnyStatus.PlugIns.Enterprisecoding
   on:
     branch: master
