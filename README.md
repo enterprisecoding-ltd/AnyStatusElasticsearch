@@ -1,6 +1,9 @@
 # AnyStatus Elasticsearch Plugin
 [AnyStatus](https://www.anystat.us) plugin for Elasticsearch.
 
+[![Build status](https://ci.appveyor.com/api/projects/status/4gh0513b19s0tnmk?svg=true)](https://ci.appveyor.com/project/fatihboy/anystatuselasticsearch)
+[![NuGet](https://img.shields.io/nuget/v/AnyStatus.Plugins.Elasticsearch.svg)]()
+
 ![Screenshot](https://raw.githubusercontent.com/fatihboy/AnyStatusElasticsearch//master/Docs/images/Screenshot.png)
 
 Widgets for AnyStatus to provide capability to check various Elasticsearch metrics.
