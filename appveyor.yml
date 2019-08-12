@@ -30,6 +30,6 @@ test: off
 
 deploy:
   provider: Environment
-  name: AnyStatus.PlugIns.Enterprisecoding
+  name: NuGet
   on:
     branch: master
