@@ -25,7 +25,9 @@ before_build:
 build:
   publish_nuget: true
   verbosity: minimal
-  
+
+test: off
+
 deploy:
   provider: Environment
   name: AnyStatus.PlugIns.Enterprisecoding
