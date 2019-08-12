@@ -15,12 +15,8 @@
     <tags>AnyStatus VisualStudio Monitor Monitoring Elasticsearch Enterprisecoding</tags>
     <dependencies>
       <dependency id="AnyStatus.API" version="2.0.128" />
-      <dependency id="Extended.Wpf.Toolkit" version="3.0" />
-      <dependency id="Elasticsearch.Net" version="7.1.0" />
       <dependency id="Extended.Wpf.Toolkit" version="3.5.0" />
       <dependency id="NEST" version="7.1.0" />
-      <dependency id="System.Buffers" version="4.5.0" />
-      <dependency id="System.Diagnostics.DiagnosticSource" version="4.5.1" />
     </dependencies>
   </metadata>
 </package>
