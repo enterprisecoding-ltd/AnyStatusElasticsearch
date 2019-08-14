@@ -5,46 +5,50 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Serialization;
 
-namespace AnyStatus.Plugins.Elasticsearch.Cluster.FileSystemUsage
+namespace AnyStatus.Plugins.Elasticsearch.FileSystemUsage
 {
-    [DisplayName("Cluster File System Usage")]
+    [DisplayName("File System Usage")]
     [DisplayColumn("Elasticsearch")]
     [Description("Shows file system usage for the Elasticsearch Cluster")]
     public class FileSystemUsageWidget : Metric, IElasticsearchWidget, ISchedulable, IReportProgress
     {
 
         [Required]
-        [Category("Cluster File System Usage")]
+        [Category("File System Usage")]
         [Description("Elasticsearch node uris to connect")]
         public List<string> NodeUris { get; set; }
 
-        [Category("Cluster File System Usage")]
+        [Category("File System Usage")]
         [Description("Use Basic Authentication to connect Elasticsearch Cluster")]
         public bool UseBasicAuthentication { get; set; }
 
-        [Category("Cluster File System Usage")]
+        [Category("File System Usage")]
         [Description("Username to connect Elasticsearch Cluster")]
         public string Username { get; set; }
 
-        [Category("Cluster File System Usage")]
+        [Category("File System Usage")]
         [Description("Password to connect Elasticsearch Cluster")]
         public string Password { get; set; }
 
-        [Category("Cluster File System Usage")]
+        [Category("File System Usage")]
         [Description("Always trust server certificate")]
         public bool TrustCertificate { get; set; }
 
+        [Category("File System Usage")]
+        [Description("Elasticsearch node id. Leave empty to watch cluster CPU usage")]
+        public string NodeId { get; set; }
+
         [Required]
-        [Category("Cluster File System Usage")]
+        [Category("File System Usage")]
         [DisplayName("Percentage Type")]
         public FileSystemPercentageType PercentageType { get; set; }
 
-        [Category("Cluster File System Usage")]
+        [Category("File System Usage")]
         [DisplayName("Show progress bar")]
         [Description("Should the status show a bar displaying how full the drive is?")]
         public bool ShowProgress { get; set; } = true;
 
-        [Category("Cluster File System Usage")]
+        [Category("File System Usage")]
         [DisplayName("Error percentage")]
         [Description("At what percentage should this Node error?")]
         public int ErrorPercentage { get; set; }
@@ -67,7 +71,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Cluster.FileSystemUsage
             ErrorPercentage = 85;
             PercentageType = FileSystemPercentageType.PercentageUsed;
 
-            Name = "Cluster File System Usage";
+            Name = "File System Usage";
             Symbol = "%";
             Interval = 1;
             Units = IntervalUnits.Minutes;

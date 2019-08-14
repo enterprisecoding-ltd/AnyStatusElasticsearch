@@ -63,14 +63,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cluster\CPU\ClusterCPUUsageHandler.cs" />
-    <Compile Include="Cluster\CPU\ClusterCPUUsageWidget.cs" />
-    <Compile Include="Cluster\FileSystemUsage\FileSystemUsageHandler.cs" />
-    <Compile Include="Cluster\FileSystemUsage\FileSystemUsageWidget.cs" />
+    <Compile Include="CPUUsage\CPUUsageHandler.cs" />
+    <Compile Include="CPUUsage\CPUUsageWidget.cs" />
+    <Compile Include="FileSystemUsage\FileSystemUsageHandler.cs" />
+    <Compile Include="FileSystemUsage\FileSystemUsageWidget.cs" />
     <Compile Include="Cluster\Health\ClusterHealthCheck.cs" />
     <Compile Include="Cluster\Health\ClusterHealthWidget.cs" />
-    <Compile Include="Cluster\Ram\ClusterRamUsageHandler.cs" />
-    <Compile Include="Cluster\Ram\ClusterRamUsageWidget.cs" />
+    <Compile Include="RamUsage\RamUsageHandler.cs" />
+    <Compile Include="RamUsage\RamUsageWidget.cs" />
     <Compile Include="ElasticsearchClient\ElasticsearchSimpleClient.cs" />
     <Compile Include="ElasticsearchClient\Objects\ElasticsearchResponseBase.cs" />
     <Compile Include="ElasticsearchClient\Objects\Health\ClusterHealthResponse.cs" />
@@ -89,18 +89,10 @@
     <Compile Include="Helpers\FileSizeFormatter.cs" />
     <Compile Include="Index\DeletedDocumentCount\DeletedDocumentCountMetricQuery.cs" />
     <Compile Include="Index\DeletedDocumentCount\DeletedDocumentCountWidget.cs" />
-    <Compile Include="Cluster\StoreSize\StoreSizeMetricQuery.cs" />
-    <Compile Include="Cluster\StoreSize\StoreSizeWidget.cs" />
+    <Compile Include="StoreSize\StoreSizeMetricQuery.cs" />
+    <Compile Include="StoreSize\StoreSizeWidget.cs" />
     <Compile Include="Index\DocumentCount\DocumentCountMetricQuery.cs" />
     <Compile Include="Index\DocumentCount\DocumentCountWidget.cs" />
-    <Compile Include="Node\CPU\NodeCPUUsageHandler.cs" />
-    <Compile Include="Node\CPU\NodeCPUUsageWidget.cs" />
-    <Compile Include="Node\FileSystemUsage\FileSystemUsageHandler.cs" />
-    <Compile Include="Node\FileSystemUsage\FileSystemUsageWidget.cs" />
-    <Compile Include="Node\Ram\NodeRamUsageHandler.cs" />
-    <Compile Include="Node\Ram\NodeRamUsageWidget.cs" />
-    <Compile Include="Node\StoreSize\StoreSizeMetricQuery.cs" />
-    <Compile Include="Node\StoreSize\StoreSizeWidget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shared\FileSystemPercentageType.cs" />
     <Compile Include="Shared\IElasticsearchNodeWidget.cs" />

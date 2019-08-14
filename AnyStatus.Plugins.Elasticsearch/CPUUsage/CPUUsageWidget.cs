@@ -4,38 +4,41 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace AnyStatus.Plugins.Elasticsearch.Cluster.Ram
+namespace AnyStatus.Plugins.Elasticsearch.CPUUsage
 {
-    [DisplayName("Cluster RAM Usage")]
+    [DisplayName("CPU Usage")]
     [DisplayColumn("Elasticsearch")]
-    [Description("Shows the percentage of RAM usage for the Elasticsearch Cluster")]
-    public class ClusterRamUsageWidget : Sparkline, IElasticsearchWidget, ISchedulable
+    [Description("Shows the percentage of CPU usage for the Elasticsearch Cluster")]
+    public class CPUUsageWidget : Sparkline, IElasticsearchWidget, ISchedulable
     {
-
         [Required]
-        [Category("Cluster RAM Usage")]
+        [Category("CPU Usage")]
         [Description("Elasticsearch node uris to connect")]
         public List<string> NodeUris { get; set; }
 
-        [Category("Cluster RAM Usage")]
+        [Category("CPU Usage")]
         [Description("Use Basic Authentication to connect Elasticsearch Cluster")]
         public bool UseBasicAuthentication { get; set; }
 
-        [Category("Cluster RAM Usage")]
+        [Category("CPU Usage")]
         [Description("Username to connect Elasticsearch Cluster")]
         public string Username { get; set; }
 
-        [Category("Cluster RAM Usage")]
+        [Category("CPU Usage")]
         [Description("Password to connect Elasticsearch Cluster")]
         public string Password { get; set; }
 
-        [Category("Cluster RAM Usage")]
+        [Category("CPU Usage")]
         [Description("Always trust server certificate")]
         public bool TrustCertificate { get; set; }
 
-        public ClusterRamUsageWidget()
+        [Category("CPU Usage")]
+        [Description("Elasticsearch node id. Leave empty to watch cluster CPU usage")]
+        public string NodeId { get; set; }
+
+        public CPUUsageWidget()
         {
-            Name = "Cluster RAM Usage";
+            Name = "CPU Usage";
             Symbol = "%";
             MaxValue = 100;
             Interval = 1;

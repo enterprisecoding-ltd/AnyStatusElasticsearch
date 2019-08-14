@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AnyStatus.Plugins.Elasticsearch.Helpers;
 
-namespace AnyStatus.Plugins.Elasticsearch.Node.StoreSize
+namespace AnyStatus.Plugins.Elasticsearch.StoreSize
 {
     public class StoreSizeMetricQuery : IMetricQuery<StoreSizeWidget>
     {
@@ -22,7 +22,15 @@ namespace AnyStatus.Plugins.Elasticsearch.Node.StoreSize
 
             var client = elasticsearchHelper.GetElasticClient(storeSizeWidget);
 
-            var clusterStatsResponse = await client.StatsAsync("indices.store.size_in_bytes", storeSizeWidget.NodeId, cancellationToken);
+            ElasticsearchClient.Objects.Stats.ClusterStatsResponse clusterStatsResponse;
+            if (string.IsNullOrWhiteSpace(storeSizeWidget.NodeId))
+            {
+                clusterStatsResponse = await client.StatsAsync("indices.store.size_in_bytes", cancellationToken);
+            }
+            else
+            {
+                clusterStatsResponse = await client.StatsAsync("indices.store.size_in_bytes", storeSizeWidget.NodeId, cancellationToken);
+            }
 
             if (clusterStatsResponse.IsValid)
             {

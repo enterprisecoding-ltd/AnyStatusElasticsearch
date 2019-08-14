@@ -4,43 +4,42 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace AnyStatus.Plugins.Elasticsearch.Node.StoreSize
+namespace AnyStatus.Plugins.Elasticsearch.StoreSize
 {
-    [DisplayName("Node Store Size")]
+    [DisplayName("Store Size")]
     [DisplayColumn("Elasticsearch")]
-    [Description("Shows store size taken by primary & replica shards for given Elasticsearch Node")]
-    public class StoreSizeWidget : Metric, IElasticsearchNodeWidget, ISchedulable
+    [Description("Shows store size taken by primary & replica shards for the Elasticsearch Cluster")]
+    public class StoreSizeWidget : Metric, IElasticsearchWidget, ISchedulable
     {
 
         [Required]
-        [Category("Node Store Size")]
+        [Category("Store Size")]
         [Description("Elasticsearch node uris to connect")]
         public List<string> NodeUris { get; set; }
 
-        [Category("Node Store Size")]
+        [Category("Store Size")]
         [Description("Use Basic Authentication to connect Elasticsearch Cluster")]
         public bool UseBasicAuthentication { get; set; }
 
-        [Category("Node Store Size")]
+        [Category("Store Size")]
         [Description("Username to connect Elasticsearch Cluster")]
         public string Username { get; set; }
 
-        [Category("Node Store Size")]
+        [Category("Store Size")]
         [Description("Password to connect Elasticsearch Cluster")]
         public string Password { get; set; }
 
-        [Category("Node Store Size")]
+        [Category("Store Size")]
         [Description("Always trust server certificate")]
         public bool TrustCertificate { get; set; }
 
-        [Required]
-        [Category("Node Store Size")]
-        [Description("Elasticsearch node id")]
+        [Category("File System Usage")]
+        [Description("Elasticsearch node id. Leave empty to watch cluster CPU usage")]
         public string NodeId { get; set; }
 
         public StoreSizeWidget()
         {
-            Name = "Node Store Size";
+            Name = "Store Size";
 
             Interval = 1;
             Units = IntervalUnits.Minutes;

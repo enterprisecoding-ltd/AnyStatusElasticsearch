@@ -4,7 +4,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AnyStatus.Plugins.Elasticsearch.Cluster.FileSystemUsage
+namespace AnyStatus.Plugins.Elasticsearch.FileSystemUsage
 {
     public class FileSystemUsageHandler : IRequestHandler<MetricQueryRequest<FileSystemUsageWidget>>
     {
@@ -23,7 +23,15 @@ namespace AnyStatus.Plugins.Elasticsearch.Cluster.FileSystemUsage
 
             var client = elasticsearchHelper.GetElasticClient(fileSystemUsageWidget);
 
-            var clusterStatsResponse = await client.StatsAsync("nodes.fs", cancellationToken);
+            ElasticsearchClient.Objects.Stats.ClusterStatsResponse clusterStatsResponse;
+            if (string.IsNullOrWhiteSpace(fileSystemUsageWidget.NodeId))
+            {
+                clusterStatsResponse = await client.StatsAsync("nodes.fs", cancellationToken);
+            }
+            else
+            {
+                clusterStatsResponse = await client.StatsAsync("nodes.fs", fileSystemUsageWidget.NodeId, cancellationToken);
+            }
 
             if (clusterStatsResponse.IsValid)
             {

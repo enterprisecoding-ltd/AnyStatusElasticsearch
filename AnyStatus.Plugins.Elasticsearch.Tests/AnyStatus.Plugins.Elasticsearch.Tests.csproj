@@ -81,17 +81,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Widgets\Cluster\FileSystemUsageTests.cs" />
+    <Compile Include="Widgets\FileSystemUsageTests.cs" />
     <Compile Include="Widgets\Cluster\HealthTests.cs" />
-    <Compile Include="Widgets\Cluster\CPUUsageTests.cs" />
-    <Compile Include="Widgets\Cluster\RamUsageTests.cs" />
-    <Compile Include="Widgets\Cluster\StoreSizeTests.cs" />
+    <Compile Include="Widgets\CPUUsageTests.cs" />
+    <Compile Include="Widgets\RamUsageTests.cs" />
+    <Compile Include="Widgets\StoreSizeTests.cs" />
     <Compile Include="Widgets\Index\DeletedDocumentCountTests.cs" />
     <Compile Include="Widgets\Index\DocumentCountTests.cs" />
-    <Compile Include="Widgets\Node\CPUUsageTests.cs" />
-    <Compile Include="Widgets\Node\RamUsageTests.cs" />
-    <Compile Include="Widgets\Node\FileSystemUsageTests.cs" />
-    <Compile Include="Widgets\Node\StoreSizeTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
