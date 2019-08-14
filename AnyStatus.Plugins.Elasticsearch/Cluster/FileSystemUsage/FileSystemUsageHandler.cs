@@ -1,6 +1,5 @@
 ﻿using AnyStatus.API;
 using AnyStatus.Plugins.Elasticsearch.Helpers;
-using Nest;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,7 +14,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Cluster.FileSystemUsage
 
             var client = ElasticsearchHelper.GetElasticClient(fileSystemUsageWidget);
 
-            var clusterStatsResponse = await client.Cluster.StatsAsync(new ClusterStatsRequest() { FilterPath = new[] { "nodes.fs" } }, cancellationToken);
+            var clusterStatsResponse = await client.StatsAsync("nodes.fs", cancellationToken);
 
             if (clusterStatsResponse.IsValid)
             {

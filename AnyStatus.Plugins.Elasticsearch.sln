@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29025.244
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnyStatus.Plugins.Elasticsearch", "AnyStatus.Plugins.Elasticsearch\AnyStatus.Plugins.Elasticsearch.csproj", "{B6179D1B-C017-49C8-A596-57072CF8E67C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnyStatus.Plugins.Elasticsearch.Tests", "AnyStatus.Plugins.Elasticsearch.Tests\AnyStatus.Plugins.Elasticsearch.Tests.csproj", "{0E987A0D-E1FB-410B-B7F3-32443AD7EDDA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnyStatus.Plugins.Elasticsearch.Tests", "AnyStatus.Plugins.Elasticsearch.Tests\AnyStatus.Plugins.Elasticsearch.Tests.csproj", "{96B93A07-CF46-4E1D-B07A-D5198F9988B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{B6179D1B-C017-49C8-A596-57072CF8E67C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6179D1B-C017-49C8-A596-57072CF8E67C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6179D1B-C017-49C8-A596-57072CF8E67C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0E987A0D-E1FB-410B-B7F3-32443AD7EDDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0E987A0D-E1FB-410B-B7F3-32443AD7EDDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0E987A0D-E1FB-410B-B7F3-32443AD7EDDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0E987A0D-E1FB-410B-B7F3-32443AD7EDDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96B93A07-CF46-4E1D-B07A-D5198F9988B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96B93A07-CF46-4E1D-B07A-D5198F9988B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96B93A07-CF46-4E1D-B07A-D5198F9988B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96B93A07-CF46-4E1D-B07A-D5198F9988B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -34,21 +34,12 @@
     <Reference Include="AnyStatus.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b52fc05e377030a3, processorArchitecture=MSIL">
       <HintPath>..\packages\AnyStatus.API.2.0.128\lib\net462\AnyStatus.API.dll</HintPath>
     </Reference>
-    <Reference Include="Elasticsearch.Net, Version=7.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
-      <HintPath>..\packages\Elasticsearch.Net.7.1.0\lib\net461\Elasticsearch.Net.dll</HintPath>
-    </Reference>
-    <Reference Include="Nest, Version=7.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
-      <HintPath>..\packages\NEST.7.1.0\lib\net461\Nest.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
-    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.5.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -80,6 +71,20 @@
     <Compile Include="Cluster\Health\ClusterHealthWidget.cs" />
     <Compile Include="Cluster\Ram\ClusterRamUsageHandler.cs" />
     <Compile Include="Cluster\Ram\ClusterRamUsageWidget.cs" />
+    <Compile Include="ElasticsearchClient\ElasticsearchSimpleClient.cs" />
+    <Compile Include="ElasticsearchClient\Objects\ElasticsearchResponseBase.cs" />
+    <Compile Include="ElasticsearchClient\Objects\Health\ClusterHealthResponse.cs" />
+    <Compile Include="ElasticsearchClient\Objects\Health\Health.cs" />
+    <Compile Include="ElasticsearchClient\Objects\Stats\ClusterFileSystem.cs" />
+    <Compile Include="ElasticsearchClient\Objects\Stats\ClusterIndicesStats.cs" />
+    <Compile Include="ElasticsearchClient\Objects\Stats\ClusterNodesStats.cs" />
+    <Compile Include="ElasticsearchClient\Objects\Stats\ClusterOperatingSystemStats.cs" />
+    <Compile Include="ElasticsearchClient\Objects\Stats\ClusterProcess.cs" />
+    <Compile Include="ElasticsearchClient\Objects\Stats\ClusterProcessCpu.cs" />
+    <Compile Include="ElasticsearchClient\Objects\Stats\ClusterStatsResponse.cs" />
+    <Compile Include="ElasticsearchClient\Objects\Stats\DocStats.cs" />
+    <Compile Include="ElasticsearchClient\Objects\Stats\OperatingSystemMemoryInfo.cs" />
+    <Compile Include="ElasticsearchClient\Objects\Stats\StoreStats.cs" />
     <Compile Include="Helpers\ElasticsearchHelper.cs" />
     <Compile Include="Helpers\FileSizeFormatter.cs" />
     <Compile Include="Index\DeletedDocumentCount\DeletedDocumentCountMetricQuery.cs" />
@@ -105,5 +110,6 @@
     <None Include="AnyStatus.Plugins.Elasticsearch.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

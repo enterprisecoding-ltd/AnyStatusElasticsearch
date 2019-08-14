@@ -1,6 +1,5 @@
 ﻿using AnyStatus.API;
 using AnyStatus.Plugins.Elasticsearch.Helpers;
-using Nest;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,9 +12,8 @@ namespace AnyStatus.Plugins.Elasticsearch.Node.CPU
             var clusterHealthWidget = request.DataContext;
 
             var client = ElasticsearchHelper.GetElasticClient(clusterHealthWidget);
-            var nodeId = new NodeIds(new[] { clusterHealthWidget.NodeId });
 
-            var clusterStatsResponse = await client.Cluster.StatsAsync(new ClusterStatsRequest(nodeId) { FilterPath= new[] { "nodes.process.cpu.percent" } }, cancellationToken);
+            var clusterStatsResponse = await client.StatsAsync("nodes.process.cpu.percent", clusterHealthWidget.NodeId, cancellationToken);
 
             if (clusterStatsResponse.IsValid)
             {

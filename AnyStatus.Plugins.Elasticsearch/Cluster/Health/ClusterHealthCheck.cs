@@ -1,6 +1,5 @@
 ﻿using AnyStatus.API;
 using AnyStatus.Plugins.Elasticsearch.Helpers;
-using Nest;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,16 +13,16 @@ namespace AnyStatus.Plugins.Elasticsearch.Cluster.Health
 
             var client = ElasticsearchHelper.GetElasticClient(clusterHealthWidget);
 
-            var clusterHealthResponse = await client.Cluster.HealthAsync(new ClusterHealthRequest(), cancellationToken);
+            var clusterHealthResponse = await client.HealthAsync(cancellationToken);
 
             if (clusterHealthResponse.IsValid)
             {
                 switch (clusterHealthResponse.Status)
                 {
-                    case global::Elasticsearch.Net.Health.Green:
+                    case ElasticsearchClient.Objects.Health.Health.Green:
                         clusterHealthWidget.State = State.Ok;
                         break;
-                    case global::Elasticsearch.Net.Health.Yellow:
+                    case ElasticsearchClient.Objects.Health.Health.Yellow:
                         clusterHealthWidget.State = State.PartiallySucceeded;
                         break;
                     default:

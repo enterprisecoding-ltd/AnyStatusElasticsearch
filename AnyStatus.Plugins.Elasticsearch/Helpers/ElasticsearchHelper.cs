@@ -1,28 +1,14 @@
-﻿using AnyStatus.Plugins.Elasticsearch.Shared;
-using Elasticsearch.Net;
-using Nest;
-using System;
-using System.Linq;
+﻿using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient;
+using AnyStatus.Plugins.Elasticsearch.Shared;
 
 namespace AnyStatus.Plugins.Elasticsearch.Helpers
 {
     public static class ElasticsearchHelper
     {
-        public static ElasticClient GetElasticClient(IElasticsearchWidget elasticsearchWidget) {
-            var connectionPool = new StaticConnectionPool(elasticsearchWidget.NodeUris.Select(nodeUri => new Uri(nodeUri)).ToArray());
-
-            var settings = new ConnectionSettings(connectionPool);
-            if (elasticsearchWidget.UseBasicAuthentication)
-            {
-                settings.BasicAuthentication(elasticsearchWidget.Username, elasticsearchWidget.Password); 
-            }
-
-            if (elasticsearchWidget.TrustCertificate)
-            {
-                settings.ServerCertificateValidationCallback((sender, certificate, chain, sslPolicyErrors) => true);
-            }
-
-            return new ElasticClient(settings);
+        public static ElasticsearchSimpleClient GetElasticClient(IElasticsearchWidget elasticsearchWidget)
+        {
+            var client = new ElasticsearchSimpleClient(elasticsearchWidget.NodeUris, elasticsearchWidget.Username, elasticsearchWidget.Password, elasticsearchWidget.TrustCertificate);
+            return client;
         }
     }
 }

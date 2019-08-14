@@ -1,6 +1,5 @@
 ﻿using AnyStatus.API;
 using AnyStatus.Plugins.Elasticsearch.Helpers;
-using Nest;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,7 +13,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.DeletedDocumentCount
 
             var client = ElasticsearchHelper.GetElasticClient(deleteDocumentCountWidget);
 
-            var clusterStatsResponse = await client.Cluster.StatsAsync(new ClusterStatsRequest { FilterPath = new[] { "indices.docs.deleted" } }, cancellationToken);
+            var clusterStatsResponse = await client.StatsAsync("indices.docs.deleted", cancellationToken);
 
             if (clusterStatsResponse.IsValid)
             {
