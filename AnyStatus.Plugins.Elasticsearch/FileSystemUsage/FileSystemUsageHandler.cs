@@ -8,11 +8,18 @@ namespace AnyStatus.Plugins.Elasticsearch.FileSystemUsage
 {
     public class FileSystemUsageHandler : IRequestHandler<MetricQueryRequest<FileSystemUsageWidget>>
     {
+        /// <summary>
+        /// Elasticsearch Helper to retrieve elastic client
+        /// </summary>
         private readonly ElasticsearchHelper elasticsearchHelper;
 
         public FileSystemUsageHandler() : this(new ElasticsearchHelper()) { }
 
-        public FileSystemUsageHandler(ElasticsearchHelper elasticsearchHelper)
+        /// <summary>
+        /// Constructer used by unit tests
+        /// </summary>
+        /// <param name="elasticsearchHelper">Elasticsearch Helper class instance to use</param>
+        internal FileSystemUsageHandler(ElasticsearchHelper elasticsearchHelper)
         {
             this.elasticsearchHelper = elasticsearchHelper;
         }

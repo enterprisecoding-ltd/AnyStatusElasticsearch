@@ -9,7 +9,7 @@ namespace AnyStatus.Plugins.Elasticsearch.FileSystemUsage
 {
     [DisplayName("File System Usage")]
     [DisplayColumn("Elasticsearch")]
-    [Description("Shows file system usage for the Elasticsearch Cluster")]
+    [Description("Shows file system usage for the Elasticsearch Node/Cluster")]
     public class FileSystemUsageWidget : Metric, IElasticsearchWidget, ISchedulable, IReportProgress
     {
 
@@ -35,7 +35,7 @@ namespace AnyStatus.Plugins.Elasticsearch.FileSystemUsage
         public bool TrustCertificate { get; set; }
 
         [Category("File System Usage")]
-        [Description("Elasticsearch node id. Leave empty to watch cluster CPU usage")]
+        [Description("Elasticsearch node id. Leave empty to watch Cluster File System usage")]
         public string NodeId { get; set; }
 
         [Required]

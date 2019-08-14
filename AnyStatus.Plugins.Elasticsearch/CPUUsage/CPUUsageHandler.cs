@@ -7,11 +7,18 @@ namespace AnyStatus.Plugins.Elasticsearch.CPUUsage
 {
     public class CPUUsageHandler : IRequestHandler<MetricQueryRequest<CPUUsageWidget>>
     {
+        /// <summary>
+        /// Elasticsearch Helper to retrieve elastic client
+        /// </summary>
         private readonly ElasticsearchHelper elasticsearchHelper;
 
         public CPUUsageHandler() :this(new ElasticsearchHelper()) { }
 
-        public CPUUsageHandler(ElasticsearchHelper elasticsearchHelper) {
+        /// <summary>
+        /// Constructer used by unit tests
+        /// </summary>
+        /// <param name="elasticsearchHelper">Elasticsearch Helper class instance to use</param>
+        internal CPUUsageHandler(ElasticsearchHelper elasticsearchHelper) {
             this.elasticsearchHelper = elasticsearchHelper;
         }
 

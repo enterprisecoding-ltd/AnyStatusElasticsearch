@@ -8,7 +8,7 @@ namespace AnyStatus.Plugins.Elasticsearch.RamUsage
 {
     [DisplayName("RAM Usage")]
     [DisplayColumn("Elasticsearch")]
-    [Description("Shows the percentage of RAM usage for the Elasticsearch Cluster")]
+    [Description("Shows the percentage of RAM usage for the Elasticsearch Node/Cluster")]
     public class RamUsageWidget : Sparkline, IElasticsearchWidget, ISchedulable
     {
 
@@ -33,8 +33,8 @@ namespace AnyStatus.Plugins.Elasticsearch.RamUsage
         [Description("Always trust server certificate")]
         public bool TrustCertificate { get; set; }
 
-        [Category("File System Usage")]
-        [Description("Elasticsearch node id. Leave empty to watch cluster CPU usage")]
+        [Category("RAM Usage")]
+        [Description("Elasticsearch node id. Leave empty to watch Cluster RAM usage")]
         public string NodeId { get; set; }
 
         public RamUsageWidget()

@@ -7,11 +7,18 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.DeletedDocumentCount
 {
     public class DeletedDocumentCountMetricQuery : IMetricQuery<DeletedDocumentCountWidget>
     {
+        /// <summary>
+        /// Elasticsearch Helper to retrieve elastic client
+        /// </summary>
         private readonly ElasticsearchHelper elasticsearchHelper;
 
         public DeletedDocumentCountMetricQuery() : this(new ElasticsearchHelper()) { }
 
-        public DeletedDocumentCountMetricQuery(ElasticsearchHelper elasticsearchHelper)
+        /// <summary>
+        /// Constructer used by unit tests
+        /// </summary>
+        /// <param name="elasticsearchHelper">Elasticsearch Helper class instance to use</param>
+        internal DeletedDocumentCountMetricQuery(ElasticsearchHelper elasticsearchHelper)
         {
             this.elasticsearchHelper = elasticsearchHelper;
         }

@@ -7,11 +7,18 @@ namespace AnyStatus.Plugins.Elasticsearch.RamUsage
 {
     public class RamUsageHandler : IRequestHandler<MetricQueryRequest<RamUsageWidget>>
     {
+        /// <summary>
+        /// Elasticsearch Helper to retrieve elastic client
+        /// </summary>
         private readonly ElasticsearchHelper elasticsearchHelper;
 
         public RamUsageHandler() : this(new ElasticsearchHelper()) { }
 
-        public RamUsageHandler(ElasticsearchHelper elasticsearchHelper)
+        /// <summary>
+        /// Constructer used by unit tests
+        /// </summary>
+        /// <param name="elasticsearchHelper">Elasticsearch Helper class instance to use</param>
+        internal RamUsageHandler(ElasticsearchHelper elasticsearchHelper)
         {
             this.elasticsearchHelper = elasticsearchHelper;
         }

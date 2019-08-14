@@ -8,7 +8,7 @@ namespace AnyStatus.Plugins.Elasticsearch.CPUUsage
 {
     [DisplayName("CPU Usage")]
     [DisplayColumn("Elasticsearch")]
-    [Description("Shows the percentage of CPU usage for the Elasticsearch Cluster")]
+    [Description("Shows the percentage of CPU usage for the Elasticsearch Node/Cluster")]
     public class CPUUsageWidget : Sparkline, IElasticsearchWidget, ISchedulable
     {
         [Required]

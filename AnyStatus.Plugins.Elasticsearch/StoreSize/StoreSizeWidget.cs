@@ -8,7 +8,7 @@ namespace AnyStatus.Plugins.Elasticsearch.StoreSize
 {
     [DisplayName("Store Size")]
     [DisplayColumn("Elasticsearch")]
-    [Description("Shows store size taken by primary & replica shards for the Elasticsearch Cluster")]
+    [Description("Shows store size taken by primary & replica shards for the Elasticsearch Node/Cluster")]
     public class StoreSizeWidget : Metric, IElasticsearchWidget, ISchedulable
     {
 
@@ -33,8 +33,8 @@ namespace AnyStatus.Plugins.Elasticsearch.StoreSize
         [Description("Always trust server certificate")]
         public bool TrustCertificate { get; set; }
 
-        [Category("File System Usage")]
-        [Description("Elasticsearch node id. Leave empty to watch cluster CPU usage")]
+        [Category("Store Size")]
+        [Description("Elasticsearch node id. Leave empty to watch Cluster Store Size")]
         public string NodeId { get; set; }
 
         public StoreSizeWidget()

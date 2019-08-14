@@ -7,11 +7,18 @@ namespace AnyStatus.Plugins.Elasticsearch.StoreSize
 {
     public class StoreSizeMetricQuery : IMetricQuery<StoreSizeWidget>
     {
+        /// <summary>
+        /// Elasticsearch Helper to retrieve elastic client
+        /// </summary>
         private readonly ElasticsearchHelper elasticsearchHelper;
 
         public StoreSizeMetricQuery() : this(new ElasticsearchHelper()) { }
 
-        public StoreSizeMetricQuery(ElasticsearchHelper elasticsearchHelper)
+        /// <summary>
+        /// Constructer used by unit tests
+        /// </summary>
+        /// <param name="elasticsearchHelper">Elasticsearch Helper class instance to use</param>
+        internal StoreSizeMetricQuery(ElasticsearchHelper elasticsearchHelper)
         {
             this.elasticsearchHelper = elasticsearchHelper;
         }

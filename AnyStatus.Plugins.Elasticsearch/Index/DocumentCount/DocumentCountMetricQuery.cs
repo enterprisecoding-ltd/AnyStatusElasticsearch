@@ -7,11 +7,18 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.DocumentCount
 {
     public class DocumentCountMetricQuery : IMetricQuery<DocumentCountWidget>
     {
+        /// <summary>
+        /// Elasticsearch Helper to retrieve elastic client
+        /// </summary>
         private readonly ElasticsearchHelper elasticsearchHelper;
 
         public DocumentCountMetricQuery() : this(new ElasticsearchHelper()) { }
 
-        public DocumentCountMetricQuery(ElasticsearchHelper elasticsearchHelper)
+        /// <summary>
+        /// Constructer used by unit tests
+        /// </summary>
+        /// <param name="elasticsearchHelper">Elasticsearch Helper class instance to use</param>
+        internal DocumentCountMetricQuery(ElasticsearchHelper elasticsearchHelper)
         {
             this.elasticsearchHelper = elasticsearchHelper;
         }
