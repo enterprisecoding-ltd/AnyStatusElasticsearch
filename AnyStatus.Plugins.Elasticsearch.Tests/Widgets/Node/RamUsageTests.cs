@@ -16,7 +16,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Node
     public class RamUsageTests
     {
         [TestMethod]
-        public async Task ShouldValid()
+        public async Task NodeRamUsageShouldValid()
         {
             var clusterStatsResponseMock = new Mock<ClusterStatsResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();
@@ -52,7 +52,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Node
         }
 
         [TestMethod]
-        public async Task ShouldInvalidWhenResponseIsInvalid()
+        public async Task NodeRamUsageShouldInvalidWhenResponseIsInvalid()
         {
             var clusterStatsResponseMock = new Mock<ClusterStatsResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();

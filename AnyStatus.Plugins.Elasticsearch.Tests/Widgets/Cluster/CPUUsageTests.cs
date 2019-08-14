@@ -16,7 +16,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Cluster
     public class CPUUsageTests
     {
         [TestMethod]
-        public async Task ShouldValid()
+        public async Task ClusterCPUUsageShouldValid()
         {
             var clusterStatsResponseMock = new Mock<ClusterStatsResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();
@@ -52,7 +52,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Cluster
         }
 
         [TestMethod]
-        public async Task ShouldInvalidWhenResponseIsInvalid()
+        public async Task ClusterCPUUsageShouldInvalidWhenResponseIsInvalid()
         {
             var clusterStatsResponseMock = new Mock<ClusterStatsResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();

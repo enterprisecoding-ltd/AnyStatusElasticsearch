@@ -16,7 +16,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Index
     public class DeletedDocumentCountTests
     {
         [TestMethod]
-        public async Task ShouldValid()
+        public async Task DeletedDocumentCountShouldValid()
         {
             var clusterStatsResponseMock = new Mock<ClusterStatsResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();
@@ -52,7 +52,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Index
         }
 
         [TestMethod]
-        public async Task ShouldInvalidWhenResponseIsInvalid()
+        public async Task DeletedDocumentCountShouldInvalidWhenResponseIsInvalid()
         {
             var clusterStatsResponseMock = new Mock<ClusterStatsResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();

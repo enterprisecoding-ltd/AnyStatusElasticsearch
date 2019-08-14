@@ -2,7 +2,6 @@
 using AnyStatus.Plugins.Elasticsearch.Cluster.Health;
 using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient;
 using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Health;
-using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Stats;
 using AnyStatus.Plugins.Elasticsearch.Helpers;
 using AnyStatus.Plugins.Elasticsearch.Shared;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -17,7 +16,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Cluster
     public class HealthTests
     {
         [TestMethod]
-        public async Task ShouldValidWhenClusterStatusGreen()
+        public async Task ClusterHealthShouldValidWhenClusterStatusGreen()
         {
             var clusterHealthResponseMock = new Mock<ClusterHealthResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();
@@ -52,7 +51,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Cluster
         }
 
         [TestMethod]
-        public async Task ShouldPartiallySucceededWhenClusterStatusYellow()
+        public async Task ClusterHealthShouldPartiallySucceededWhenClusterStatusYellow()
         {
             var clusterHealthResponseMock = new Mock<ClusterHealthResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();
@@ -87,7 +86,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Cluster
         }
 
         [TestMethod]
-        public async Task ShouldFailedWhenClusterStatusRed()
+        public async Task ClusterHealthShouldFailedWhenClusterStatusRed()
         {
             var clusterHealthResponseMock = new Mock<ClusterHealthResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();
@@ -122,7 +121,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Cluster
         }
 
         [TestMethod]
-        public async Task ShouldInvalidWhenResponseIsInvalid()
+        public async Task ClusterHealthShouldInvalidWhenResponseIsInvalid()
         {
             var clusterHealthResponseMock = new Mock<ClusterHealthResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();

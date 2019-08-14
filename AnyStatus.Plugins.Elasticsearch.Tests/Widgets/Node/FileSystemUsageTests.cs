@@ -17,7 +17,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Node
     public class FileSystemUsageTests
     {
         [TestMethod]
-        public async Task ShouldValidPercentageUsed()
+        public async Task NodeFileSystemUsageShouldValidPercentageUsed()
         {
             var clusterStatsResponseMock = new Mock<ClusterStatsResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();
@@ -60,7 +60,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Node
         }
 
         [TestMethod]
-        public async Task ShouldValidPercentageRemaining()
+        public async Task NodeFileSystemUsageShouldValidPercentageRemaining()
         {
             var clusterStatsResponseMock = new Mock<ClusterStatsResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();
@@ -104,7 +104,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Node
         }
 
         [TestMethod]
-        public async Task ShouldInvalidWhenPercentageRemainingLessThenErrorPercentage()
+        public async Task NodeFileSystemUsageShouldInvalidWhenPercentageRemainingLessThenErrorPercentage()
         {
             var clusterStatsResponseMock = new Mock<ClusterStatsResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();
@@ -148,7 +148,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Node
         }
 
         [TestMethod]
-        public async Task ShouldInvalidWhenPercentageUsedHighThenErrorPercentage()
+        public async Task NodeFileSystemUsageShouldInvalidWhenPercentageUsedHighThenErrorPercentage()
         {
             var clusterStatsResponseMock = new Mock<ClusterStatsResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();
@@ -192,7 +192,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Node
         }
 
         [TestMethod]
-        public async Task ShouldInvalidWhenResponseIsInvalid()
+        public async Task NodeFileSystemUsageShouldInvalidWhenResponseIsInvalid()
         {
             var clusterStatsResponseMock = new Mock<ClusterStatsResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();
