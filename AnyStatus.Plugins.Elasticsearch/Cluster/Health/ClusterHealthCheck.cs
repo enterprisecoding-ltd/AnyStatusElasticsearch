@@ -7,11 +7,20 @@ namespace AnyStatus.Plugins.Elasticsearch.Cluster.Health
 {
     public class ClusterHealthCheck : ICheckHealth<ClusterHealthWidget>
     {
+        private readonly ElasticsearchHelper elasticsearchHelper;
+
+        public ClusterHealthCheck() : this(new ElasticsearchHelper()) { }
+
+        public ClusterHealthCheck(ElasticsearchHelper elasticsearchHelper)
+        {
+            this.elasticsearchHelper = elasticsearchHelper;
+        }
+
         public async Task Handle(HealthCheckRequest<ClusterHealthWidget> request, CancellationToken cancellationToken)
         {
             var clusterHealthWidget = request.DataContext;
 
-            var client = ElasticsearchHelper.GetElasticClient(clusterHealthWidget);
+            var client = elasticsearchHelper.GetElasticClient(clusterHealthWidget);
 
             var clusterHealthResponse = await client.HealthAsync(cancellationToken);
 

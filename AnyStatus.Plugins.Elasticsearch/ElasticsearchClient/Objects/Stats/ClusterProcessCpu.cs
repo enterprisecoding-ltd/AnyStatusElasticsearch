@@ -5,6 +5,6 @@ namespace AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Stats
     public class ClusterProcessCpu
     {
         [JsonProperty("percent")]
-        public int Percent { get; set; }
+        public virtual int Percent { get; internal set; }
     }
 }

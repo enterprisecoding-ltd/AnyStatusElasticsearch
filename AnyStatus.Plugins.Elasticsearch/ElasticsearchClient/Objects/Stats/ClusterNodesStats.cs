@@ -5,12 +5,12 @@ namespace AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Stats
     public class ClusterNodesStats
     {
         [JsonProperty("fs")]
-        public ClusterFileSystem FileSystem { get; set; }
+        public virtual ClusterFileSystem FileSystem { get; internal set; }
 
         [JsonProperty("process")]
-        public ClusterProcess Process { get; set; }
+        public virtual ClusterProcess Process { get; internal set; }
 
         [JsonProperty("os")]
-        public ClusterOperatingSystemStats OperatingSystem { get; set; }
+        public virtual ClusterOperatingSystemStats OperatingSystem { get; internal set; }
     }
 }

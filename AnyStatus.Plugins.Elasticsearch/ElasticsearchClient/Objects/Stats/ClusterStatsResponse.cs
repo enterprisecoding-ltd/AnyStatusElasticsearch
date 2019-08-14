@@ -5,9 +5,9 @@ namespace AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Stats
     public class ClusterStatsResponse : ElasticsearchResponseBase
     {
         [JsonProperty("nodes")]
-        public ClusterNodesStats Nodes { get; set; }
+        public virtual ClusterNodesStats Nodes { get; internal set; }
 
         [JsonProperty("indices")]
-        public ClusterIndicesStats Indices { get; internal set; }
+        public virtual ClusterIndicesStats Indices { get; internal set; }
     }
 }

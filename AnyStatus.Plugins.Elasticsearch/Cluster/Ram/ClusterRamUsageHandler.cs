@@ -7,11 +7,20 @@ namespace AnyStatus.Plugins.Elasticsearch.Cluster.Ram
 {
     public class ClusterRamUsageHandler : IRequestHandler<MetricQueryRequest<ClusterRamUsageWidget>>
     {
+        private readonly ElasticsearchHelper elasticsearchHelper;
+
+        public ClusterRamUsageHandler() : this(new ElasticsearchHelper()) { }
+
+        public ClusterRamUsageHandler(ElasticsearchHelper elasticsearchHelper)
+        {
+            this.elasticsearchHelper = elasticsearchHelper;
+        }
+
         public async Task Handle(MetricQueryRequest<ClusterRamUsageWidget> request, CancellationToken cancellationToken)
         {
             var clusterHealthWidget = request.DataContext;
 
-            var client = ElasticsearchHelper.GetElasticClient(clusterHealthWidget);
+            var client = elasticsearchHelper.GetElasticClient(clusterHealthWidget);
 
             var clusterStatsResponse = await client.StatsAsync("nodes.os.mem.used_percent", cancellationToken);
 

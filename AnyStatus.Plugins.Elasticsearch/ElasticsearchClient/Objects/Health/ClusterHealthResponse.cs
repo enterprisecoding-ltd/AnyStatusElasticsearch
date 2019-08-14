@@ -7,6 +7,6 @@ namespace AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Health
     {
         [JsonProperty("status")]
         [JsonConverter(typeof(StringEnumConverter))]
-        public Health Status { get; internal set; }
+        public virtual Health Status { get; internal set; }
     }
 }

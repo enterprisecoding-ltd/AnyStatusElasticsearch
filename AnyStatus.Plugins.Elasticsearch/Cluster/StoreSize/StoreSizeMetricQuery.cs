@@ -7,11 +7,20 @@ namespace AnyStatus.Plugins.Elasticsearch.Cluster.StoreSize
 {
     public class StoreSizeMetricQuery : IMetricQuery<StoreSizeWidget>
     {
+        private readonly ElasticsearchHelper elasticsearchHelper;
+
+        public StoreSizeMetricQuery() : this(new ElasticsearchHelper()) { }
+
+        public StoreSizeMetricQuery(ElasticsearchHelper elasticsearchHelper)
+        {
+            this.elasticsearchHelper = elasticsearchHelper;
+        }
+
         public async Task Handle(MetricQueryRequest<StoreSizeWidget> request, CancellationToken cancellationToken)
         {
             var storeSizeWidget = request.DataContext;
 
-            var client = ElasticsearchHelper.GetElasticClient(storeSizeWidget);
+            var client = elasticsearchHelper.GetElasticClient(storeSizeWidget);
 
             var clusterStatsResponse = await client.StatsAsync("indices.store.size_in_bytes", cancellationToken);
 

@@ -7,11 +7,19 @@ namespace AnyStatus.Plugins.Elasticsearch.Cluster.CPU
 {
     public class ClusterCPUUsageHandler : IRequestHandler<MetricQueryRequest<ClusterCPUUsageWidget>>
     {
+        private readonly ElasticsearchHelper elasticsearchHelper;
+
+        public ClusterCPUUsageHandler() :this(new ElasticsearchHelper()) { }
+
+        public ClusterCPUUsageHandler(ElasticsearchHelper elasticsearchHelper) {
+            this.elasticsearchHelper = elasticsearchHelper;
+        }
+
         public async Task Handle(MetricQueryRequest<ClusterCPUUsageWidget> request, CancellationToken cancellationToken)
         {
             var clusterHealthWidget = request.DataContext;
 
-            var client = ElasticsearchHelper.GetElasticClient(clusterHealthWidget);
+            var client = elasticsearchHelper.GetElasticClient(clusterHealthWidget);
 
             var clusterStatsResponse = await client.StatsAsync("nodes.process.cpu.percent", cancellationToken);
 

@@ -6,7 +6,7 @@ namespace AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects
     public class ElasticsearchResponseBase
     {
         [JsonIgnore]
-        public bool IsValid { get; set; }
+        public virtual bool IsValid { get; internal set; }
 
         [JsonIgnore]
         public Exception OriginalException;

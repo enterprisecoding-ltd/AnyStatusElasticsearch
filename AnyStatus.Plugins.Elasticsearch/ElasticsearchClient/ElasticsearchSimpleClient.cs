@@ -40,7 +40,7 @@ namespace AnyStatus.Plugins.Elasticsearch.ElasticsearchClient
             }
         }
 
-        internal async Task<ClusterHealthResponse> HealthAsync(CancellationToken cancellationToken)
+        public virtual async Task<ClusterHealthResponse> HealthAsync(CancellationToken cancellationToken)
         {
             ClusterHealthResponse result;
             try
@@ -65,11 +65,11 @@ namespace AnyStatus.Plugins.Elasticsearch.ElasticsearchClient
             return true;
         }
 
-        public async Task<ClusterStatsResponse> StatsAsync(string filterPath, CancellationToken cancellationToken) {
+        public virtual async Task<ClusterStatsResponse> StatsAsync(string filterPath, CancellationToken cancellationToken) {
             return await StatsAsync(filterPath, null, cancellationToken);
         }
 
-        public async Task<ClusterStatsResponse> StatsAsync(string filterPath, string nodeId, CancellationToken cancellationToken)
+        public virtual async Task<ClusterStatsResponse> StatsAsync(string filterPath, string nodeId, CancellationToken cancellationToken)
         {
             ClusterStatsResponse result;
             try

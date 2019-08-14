@@ -5,12 +5,12 @@ namespace AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Stats
     public class ClusterFileSystem
     {
         [JsonProperty("total_in_bytes")]
-        public long TotalInBytes { get; set; }
+        public virtual long TotalInBytes { get; internal set; }
 
         [JsonProperty("free_in_bytes")]
-        public long FreeInBytes { get; set; }
+        public virtual long FreeInBytes { get; internal set; }
 
         [JsonProperty("available_in_bytes")]
-        public long AvailableInBytes { get; set; }
+        public virtual long AvailableInBytes { get; internal set; }
     }
 }

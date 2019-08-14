@@ -7,11 +7,20 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.DocumentCount
 {
     public class DocumentCountMetricQuery : IMetricQuery<DocumentCountWidget>
     {
+        private readonly ElasticsearchHelper elasticsearchHelper;
+
+        public DocumentCountMetricQuery() : this(new ElasticsearchHelper()) { }
+
+        public DocumentCountMetricQuery(ElasticsearchHelper elasticsearchHelper)
+        {
+            this.elasticsearchHelper = elasticsearchHelper;
+        }
+
         public async Task Handle(MetricQueryRequest<DocumentCountWidget> request, CancellationToken cancellationToken)
         {
             var documentCountWidget = request.DataContext;
 
-            var client = ElasticsearchHelper.GetElasticClient(documentCountWidget);
+            var client = elasticsearchHelper.GetElasticClient(documentCountWidget);
 
             var clusterStatsResponse = await client.StatsAsync("indices.docs.count", cancellationToken);
 
