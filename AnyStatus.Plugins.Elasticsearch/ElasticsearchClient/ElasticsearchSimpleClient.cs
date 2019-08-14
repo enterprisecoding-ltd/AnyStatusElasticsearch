@@ -1,4 +1,21 @@
-﻿using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Health;
+﻿/*
+Anystatus Elasticsearch plugin
+Copyright (C) 2019  Enterprisecoding (Fatih Boy)
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Health;
 using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Stats;
 using Newtonsoft.Json;
 using System;
@@ -15,8 +32,18 @@ using System.Threading.Tasks;
 
 namespace AnyStatus.Plugins.Elasticsearch.ElasticsearchClient
 {
+    /// <summary>
+    /// Simple Elasticsearch client
+    /// </summary>
+    /// <remarks>
+    /// This class only implements limited Elasticsearch client functionality required 
+    /// by Anystatus elasticsearch plugin.
+    /// </remarks>
     public class ElasticsearchSimpleClient
     {
+        /// <summary>
+        /// List of http clients used to connect Elasticsearch cluster members
+        /// </summary>
         private readonly List<HttpClient> httpClients;
 
         public ElasticsearchSimpleClient(IEnumerable<string> uris, string username = null, string password = null, bool trustCertificate = false)
