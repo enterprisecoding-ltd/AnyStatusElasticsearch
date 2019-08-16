@@ -84,6 +84,7 @@
     <Compile Include="Widgets\FileSystemUsageTests.cs" />
     <Compile Include="Widgets\Cluster\HealthTests.cs" />
     <Compile Include="Widgets\CPUUsageTests.cs" />
+    <Compile Include="Widgets\Index\IndexCountTests.cs" />
     <Compile Include="Widgets\Index\IndexHealthTests.cs" />
     <Compile Include="Widgets\RamUsageTests.cs" />
     <Compile Include="Widgets\StoreSizeTests.cs" />
