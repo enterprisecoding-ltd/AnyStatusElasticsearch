@@ -16,7 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 using AnyStatus.API;
+using AnyStatus.API.Common.Services;
+using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Cat;
+using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Shared;
 using AnyStatus.Plugins.Elasticsearch.Helpers;
+using AnyStatus.Plugins.Elasticsearch.Index.IndexHealth;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -29,7 +34,11 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexCount
         /// </summary>
         private readonly ElasticsearchHelper elasticsearchHelper;
 
-        public IndexCountMetricQuery() : this(new ElasticsearchHelper()) { }
+        private readonly IUiAction uiAction;
+
+        public IndexCountMetricQuery(IUiAction uiAction) : this(new ElasticsearchHelper()) {
+            this.uiAction = uiAction;
+        }
 
         /// <summary>
         /// Constructer used by unit tests
@@ -51,12 +60,63 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexCount
             if (indexCountResponse.IsValid)
             {
                 request.DataContext.Value = indexCountResponse.Indices.Length;
+
+                if (uiAction!=null) //uiAction is null on unit tests...
+                {
+                    CollectionSynchronizer<IndexEntry, Item> synchronizer = null;
+                    switch (indexCountWidget.IndexDetails)
+                    {
+                        case IndexDetail.None:
+                            synchronizer = GetNoneSynchronizer(request);
+                            break;
+                        case IndexDetail.Health:
+                            synchronizer = GetHealthSynchronizer(request);
+                            break;
+                    }
+
+                    uiAction.Invoke(() => synchronizer.Synchronize(indexCountResponse.Indices, request.DataContext.Items)); 
+                }
+
                 request.DataContext.State = State.Ok;
             }
             else
             {
                 indexCountWidget.State = State.Invalid;
             }
+        }
+
+        private static CollectionSynchronizer<IndexEntry, Item> GetNoneSynchronizer(MetricQueryRequest<IndexCountWidget> request)
+        {
+            return new CollectionSynchronizer<IndexEntry, Item>
+            {
+                Compare = (indexEntry, item) => false,
+                Remove = item => request.DataContext.Remove(item),
+                Update = (indexEntry, item) => item.Name = indexEntry.Index,
+                Add = indexEntry => { }
+            };
+        }
+
+        private static CollectionSynchronizer<IndexEntry, Item> GetHealthSynchronizer(MetricQueryRequest<IndexCountWidget> request)
+        {
+            return new CollectionSynchronizer<IndexEntry, Item>
+            {
+                Compare = (indexEntry, item) => item is IndexHealthWidget indexHealthWidget && indexEntry.Uuid == indexHealthWidget.IndexUuid,
+                Remove = item => request.DataContext.Remove(item),
+                Update = (indexEntry, item) => ((IndexHealthWidget)item).IndexUuid = indexEntry.Uuid,
+                Add = indexEntry => request.DataContext.Add(new IndexHealthWidget
+                {
+                    Name = indexEntry.Index,
+                    IndexName = indexEntry.Index,
+                    IndexUuid = indexEntry.Uuid,
+                    NodeUris = request.DataContext.NodeUris,
+                    UseBasicAuthentication = request.DataContext.UseBasicAuthentication,
+                    Username = request.DataContext.Username,
+                    Password = request.DataContext.Password,
+                    TrustCertificate = request.DataContext.TrustCertificate,
+                    State = indexEntry.Health == Health.Green ? State.Ok : indexEntry.Health == Health.Yellow ? State.PartiallySucceeded : State.Failed,
+                    Interval = 0 //bypass scheduler
+                })
+            };
         }
     }
 }

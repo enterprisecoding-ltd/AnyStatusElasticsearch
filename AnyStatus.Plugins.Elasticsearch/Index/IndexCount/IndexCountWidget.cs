@@ -39,22 +39,28 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexCount
 
         [Category("Index Count")]
         [PropertyOrder(20)]
+        [DisplayName("Index Details")]
+        [Description("Index detail type to show for each discovered index")]
+        public IndexDetail IndexDetails { get; set; }
+
+        [Category("Index Count")]
+        [PropertyOrder(30)]
         [DisplayName("Use Basic Authentication")]
         [Description("Use Basic Authentication to connect Elasticsearch Cluster")]
         public bool UseBasicAuthentication { get; set; }
 
         [Category("Index Count")]
-        [PropertyOrder(30)]
+        [PropertyOrder(40)]
         [Description("Username to connect Elasticsearch Cluster")]
         public string Username { get; set; }
 
         [Category("Index Count")]
-        [PropertyOrder(40)]
+        [PropertyOrder(50)]
         [Description("Password to connect Elasticsearch Cluster")]
         public string Password { get; set; }
 
         [Category("Index Count")]
-        [PropertyOrder(50)]
+        [PropertyOrder(60)]
         [DisplayName("Trust Certificate")]
         [Description("Always trust server certificate")]
         public bool TrustCertificate { get; set; }
@@ -62,6 +68,8 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexCount
         public IndexCountWidget()
         {
             Name = "Index Count";
+
+            IndexDetails = IndexDetail.None;
 
             Interval = 1;
             Units = IntervalUnits.Minutes;

@@ -2,6 +2,6 @@
 {
     public class IndexListResponse : ElasticsearchResponseBase
     {
-        public virtual string[] Indices { get; internal set; }
+        public virtual IndexEntry[] Indices { get; internal set; }
     }
 }

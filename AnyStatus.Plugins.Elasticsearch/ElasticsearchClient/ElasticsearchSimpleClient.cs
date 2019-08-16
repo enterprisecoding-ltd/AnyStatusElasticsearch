@@ -94,16 +94,13 @@ namespace AnyStatus.Plugins.Elasticsearch.ElasticsearchClient
             IndexListResponse result;
             try
             {
-                var responseMessage = await GetAsync($"/_cat/indices?h=index", null, cancellationToken);
+                var responseMessage = await GetAsync($"/_cat/indices?format=json", null, cancellationToken);
 
                 var response = await responseMessage.Content.ReadAsStringAsync();
 
                 result = new IndexListResponse
                 {
-                    Indices = response.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None)
-                                      .Where(indexName => !string.IsNullOrWhiteSpace(indexName))
-                                      .Select(indexName => indexName)
-                                      .ToArray(),
+                    Indices = JsonConvert.DeserializeObject<IndexEntry[]>(response),
                     IsValid = true
                 };
             }

@@ -44,7 +44,12 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Index
                 false
             });
 
-            indexListResponseMock.Setup(response => response.Indices).Returns(new[] { "index1", "index2", "index3", "index3"});
+            indexListResponseMock.Setup(response => response.Indices).Returns(new[] {
+                new IndexEntry{ Index = "index1" },
+                new IndexEntry{ Index = "index2" },
+                new IndexEntry{ Index = "index3" },
+                new IndexEntry{ Index = "index4" }
+            });
             indexListResponseMock.Setup(response => response.IsValid).Returns(true);
 
             elasticsearchHelperMock.Setup(helper => helper.GetElasticClient(It.IsAny<IElasticsearchWidget>()))

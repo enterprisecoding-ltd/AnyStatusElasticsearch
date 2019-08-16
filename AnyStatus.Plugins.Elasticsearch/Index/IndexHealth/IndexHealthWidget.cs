@@ -20,6 +20,7 @@ using AnyStatus.Plugins.Elasticsearch.Shared;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Xml.Serialization;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace AnyStatus.Plugins.Elasticsearch.Index.IndexHealth
@@ -65,6 +66,10 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexHealth
         [DisplayName("Trust Certificate")]
         [Description("Always trust server certificate")]
         public bool TrustCertificate { get; set; }
+
+        [XmlIgnore]
+        [Browsable(false)]
+        public string IndexUuid;
 
         public IndexHealthWidget()
         {
