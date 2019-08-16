@@ -27,7 +27,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Cluster
+namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets
 {
     [TestClass]
     public class StoreSizeTests

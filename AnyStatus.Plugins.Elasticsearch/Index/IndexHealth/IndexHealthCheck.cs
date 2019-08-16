@@ -20,51 +20,52 @@ using AnyStatus.Plugins.Elasticsearch.Helpers;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AnyStatus.Plugins.Elasticsearch.Cluster.Health
+namespace AnyStatus.Plugins.Elasticsearch.Index.IndexHealth
 {
-    public class ClusterHealthCheck : ICheckHealth<ClusterHealthWidget>
+    public class IndexHealthCheck : ICheckHealth<IndexHealthWidget>
     {
         /// <summary>
         /// Elasticsearch Helper to retrieve elastic client
         /// </summary>
         private readonly ElasticsearchHelper elasticsearchHelper;
 
-        public ClusterHealthCheck() : this(new ElasticsearchHelper()) { }
+        public IndexHealthCheck() : this(new ElasticsearchHelper()) { }
 
         /// <summary>
         /// Constructer used by unit tests
         /// </summary>
         /// <param name="elasticsearchHelper">Elasticsearch Helper class instance to use</param>
-        internal ClusterHealthCheck(ElasticsearchHelper elasticsearchHelper)
+        internal IndexHealthCheck(ElasticsearchHelper elasticsearchHelper)
         {
             this.elasticsearchHelper = elasticsearchHelper;
         }
 
-        public async Task Handle(HealthCheckRequest<ClusterHealthWidget> request, CancellationToken cancellationToken)
+        public async Task Handle(HealthCheckRequest<IndexHealthWidget> request, CancellationToken cancellationToken)
         {
-            var clusterHealthWidget = request.DataContext;
+            var indexHealthWidget = request.DataContext;
 
-            var client = elasticsearchHelper.GetElasticClient(clusterHealthWidget);
+            var client = elasticsearchHelper.GetElasticClient(indexHealthWidget);
 
-            var clusterHealthResponse = await client.HealthAsync(cancellationToken);
+            var indexHealthResponse = await client.IndexHealthAsync(indexHealthWidget.IndexName, cancellationToken);
 
-            if (clusterHealthResponse.IsValid)
+            if (indexHealthResponse.IsValid)
             {
-                switch (clusterHealthResponse.Status)
+                switch (indexHealthResponse.Status)
                 {
                     case ElasticsearchClient.Objects.Shared.Health.Green:
-                        clusterHealthWidget.State = State.Ok;
+                        indexHealthWidget.State = State.Ok;
                         break;
                     case ElasticsearchClient.Objects.Shared.Health.Yellow:
-                        clusterHealthWidget.State = State.PartiallySucceeded;
+                        indexHealthWidget.State = State.PartiallySucceeded;
                         break;
                     default:
-                        clusterHealthWidget.State = State.Failed;
+                        indexHealthWidget.State = State.Failed;
                         break;
                 }
             }
-            else {
-                clusterHealthWidget.State = State.Invalid;
+            else
+            {
+                indexHealthWidget.State = State.Invalid;
             }
         }
     }

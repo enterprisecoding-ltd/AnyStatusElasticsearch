@@ -15,6 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Cluster;
 using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Health;
 using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Stats;
 using Newtonsoft.Json;
@@ -82,6 +83,26 @@ namespace AnyStatus.Plugins.Elasticsearch.ElasticsearchClient
             catch (Exception ex)
             {
                 result = new ClusterHealthResponse { IsValid = false, OriginalException = ex };
+            }
+
+            return result;
+        }
+
+        public virtual async Task<IndexHealthResponse> IndexHealthAsync(string indexName, CancellationToken cancellationToken)
+        {
+            IndexHealthResponse result;
+            try
+            {
+                var responseMessage = await GetAsync($"/_cluster/health/{indexName}", null, cancellationToken);
+
+                var response = await responseMessage.Content.ReadAsStringAsync();
+
+                result = JsonConvert.DeserializeObject<IndexHealthResponse>(response);
+                result.IsValid = true;
+            }
+            catch (Exception ex)
+            {
+                result = new IndexHealthResponse { IsValid = false, OriginalException = ex };
             }
 
             return result;

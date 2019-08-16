@@ -19,6 +19,7 @@ using AnyStatus.API;
 using AnyStatus.Plugins.Elasticsearch.Cluster.Health;
 using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient;
 using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Health;
+using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Shared;
 using AnyStatus.Plugins.Elasticsearch.Helpers;
 using AnyStatus.Plugins.Elasticsearch.Shared;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
