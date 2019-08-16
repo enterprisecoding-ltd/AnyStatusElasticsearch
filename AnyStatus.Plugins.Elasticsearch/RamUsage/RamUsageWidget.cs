@@ -33,16 +33,19 @@ namespace AnyStatus.Plugins.Elasticsearch.RamUsage
         [Required]
         [PropertyOrder(10)]
         [Category("RAM Usage")]
+        [DisplayName("Node Uris")]
         [Description("Elasticsearch node uris to connect")]
         public List<string> NodeUris { get; set; }
 
         [Category("RAM Usage")]
         [PropertyOrder(20)]
+        [DisplayName("Node Id")]
         [Description("Elasticsearch node id. Leave empty to watch Cluster RAM usage")]
         public string NodeId { get; set; }
 
         [Category("RAM Usage")]
         [PropertyOrder(30)]
+        [DisplayName("Use Basic Authentication")]
         [Description("Use Basic Authentication to connect Elasticsearch Cluster")]
         public bool UseBasicAuthentication { get; set; }
 
@@ -58,6 +61,7 @@ namespace AnyStatus.Plugins.Elasticsearch.RamUsage
 
         [Category("RAM Usage")]
         [PropertyOrder(60)]
+        [DisplayName("Trust Certificate")]
         [Description("Always trust server certificate")]
         public bool TrustCertificate { get; set; }
 

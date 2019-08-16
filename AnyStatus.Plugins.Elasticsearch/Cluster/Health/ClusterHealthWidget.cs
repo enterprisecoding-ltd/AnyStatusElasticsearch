@@ -33,12 +33,14 @@ namespace AnyStatus.Plugins.Elasticsearch.Cluster.Health
         [Required]
         [Url]
         [PropertyOrder(10)]
+        [DisplayName("Node Uris")]
         [Category("Cluster Health")]
         [Description("Elasticsearch node uris to connect")]
         public List<string> NodeUris { get; set; }
 
         [PropertyOrder(20)]
         [Category("Cluster Health")]
+        [DisplayName("Use Basic Authentication")]
         [Description("Use Basic Authentication to connect Elasticsearch Cluster")]
         public bool UseBasicAuthentication { get; set; }
 
@@ -54,6 +56,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Cluster.Health
 
         [PropertyOrder(50)]
         [Category("Cluster Health")]
+        [DisplayName("Trust Certificate")]
         [Description("Always trust server certificate")]
         public bool TrustCertificate { get; set; }
 

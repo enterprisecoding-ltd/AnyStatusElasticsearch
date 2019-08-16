@@ -33,16 +33,19 @@ namespace AnyStatus.Plugins.Elasticsearch.StoreSize
         [Required]
         [PropertyOrder(10)]
         [Category("Store Size")]
+        [DisplayName("Node Uris")]
         [Description("Elasticsearch node uris to connect")]
         public List<string> NodeUris { get; set; }
 
         [Category("Store Size")]
         [PropertyOrder(20)]
+        [DisplayName("Node Id")]
         [Description("Elasticsearch node id. Leave empty to watch Cluster Store Size")]
         public string NodeId { get; set; }
 
         [Category("Store Size")]
         [PropertyOrder(30)]
+        [DisplayName("Use Basic Authentication")]
         [Description("Use Basic Authentication to connect Elasticsearch Cluster")]
         public bool UseBasicAuthentication { get; set; }
 
@@ -58,6 +61,7 @@ namespace AnyStatus.Plugins.Elasticsearch.StoreSize
 
         [Category("Store Size")]
         [PropertyOrder(60)]
+        [DisplayName("Trust Certificate")]
         [Description("Always trust server certificate")]
         public bool TrustCertificate { get; set; }
 

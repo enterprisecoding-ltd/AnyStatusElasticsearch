@@ -33,11 +33,13 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.DocumentCount
         [Required]
         [PropertyOrder(10)]
         [Category("Document Count")]
+        [DisplayName("Node Uris")]
         [Description("Elasticsearch node uris to connect")]
         public List<string> NodeUris { get; set; }
 
         [Category("Document Count")]
         [PropertyOrder(20)]
+        [DisplayName("Use Basic Authentication")]
         [Description("Use Basic Authentication to connect Elasticsearch Cluster")]
         public bool UseBasicAuthentication { get; set; }
 
@@ -53,6 +55,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.DocumentCount
 
         [Category("Document Count")]
         [PropertyOrder(50)]
+        [DisplayName("Trust Certificate")]
         [Description("Always trust server certificate")]
         public bool TrustCertificate { get; set; }
 

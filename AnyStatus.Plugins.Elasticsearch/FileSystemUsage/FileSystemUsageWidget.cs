@@ -34,11 +34,13 @@ namespace AnyStatus.Plugins.Elasticsearch.FileSystemUsage
         [Required]
         [PropertyOrder(10)]
         [Category("File System Usage")]
+        [DisplayName("Node Uris")]
         [Description("Elasticsearch node uris to connect")]
         public List<string> NodeUris { get; set; }
 
         [Category("File System Usage")]
         [PropertyOrder(30)]
+        [DisplayName("Use Basic Authentication")]
         [Description("Use Basic Authentication to connect Elasticsearch Cluster")]
         public bool UseBasicAuthentication { get; set; }
 
@@ -54,6 +56,7 @@ namespace AnyStatus.Plugins.Elasticsearch.FileSystemUsage
 
         [Category("File System Usage")]
         [PropertyOrder(60)]
+        [DisplayName("Trust Certificate")]
         [Description("Always trust server certificate")]
         public bool TrustCertificate { get; set; }
 
