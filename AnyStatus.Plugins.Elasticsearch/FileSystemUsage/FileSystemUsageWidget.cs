@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Serialization;
+using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace AnyStatus.Plugins.Elasticsearch.FileSystemUsage
 {
@@ -31,41 +32,50 @@ namespace AnyStatus.Plugins.Elasticsearch.FileSystemUsage
     {
 
         [Required]
+        [PropertyOrder(10)]
         [Category("File System Usage")]
         [Description("Elasticsearch node uris to connect")]
         public List<string> NodeUris { get; set; }
 
         [Category("File System Usage")]
+        [PropertyOrder(30)]
         [Description("Use Basic Authentication to connect Elasticsearch Cluster")]
         public bool UseBasicAuthentication { get; set; }
 
         [Category("File System Usage")]
+        [PropertyOrder(40)]
         [Description("Username to connect Elasticsearch Cluster")]
         public string Username { get; set; }
 
         [Category("File System Usage")]
+        [PropertyOrder(50)]
         [Description("Password to connect Elasticsearch Cluster")]
         public string Password { get; set; }
 
         [Category("File System Usage")]
+        [PropertyOrder(60)]
         [Description("Always trust server certificate")]
         public bool TrustCertificate { get; set; }
 
         [Category("File System Usage")]
+        [PropertyOrder(20)]
         [Description("Elasticsearch node id. Leave empty to watch Cluster File System usage")]
         public string NodeId { get; set; }
 
         [Required]
+        [PropertyOrder(70)]
         [Category("File System Usage")]
         [DisplayName("Percentage Type")]
         public FileSystemPercentageType PercentageType { get; set; }
 
         [Category("File System Usage")]
+        [PropertyOrder(90)]
         [DisplayName("Show progress bar")]
         [Description("Should the status show a bar displaying how full the drive is?")]
         public bool ShowProgress { get; set; } = true;
 
         [Category("File System Usage")]
+        [PropertyOrder(80)]
         [DisplayName("Error percentage")]
         [Description("At what percentage should this Node error?")]
         public int ErrorPercentage { get; set; }

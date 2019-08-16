@@ -20,6 +20,7 @@ using AnyStatus.Plugins.Elasticsearch.Shared;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace AnyStatus.Plugins.Elasticsearch.Index.DeletedDocumentCount
 {
@@ -30,23 +31,28 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.DeletedDocumentCount
     {
 
         [Required]
+        [PropertyOrder(10)]
         [Category("Deleted Document Count")]
         [Description("Elasticsearch node uris to connect")]
         public List<string> NodeUris { get; set; }
 
         [Category("Deleted Document Count")]
+        [PropertyOrder(20)]
         [Description("Use Basic Authentication to connect Elasticsearch Cluster")]
         public bool UseBasicAuthentication { get; set; }
 
         [Category("Deleted Document Count")]
+        [PropertyOrder(30)]
         [Description("Username to connect Elasticsearch Cluster")]
         public string Username { get; set; }
 
         [Category("Deleted Document Count")]
+        [PropertyOrder(40)]
         [Description("Password to connect Elasticsearch Cluster")]
         public string Password { get; set; }
 
         [Category("Deleted Document Count")]
+        [PropertyOrder(50)]
         [Description("Always trust server certificate")]
         public bool TrustCertificate { get; set; }
 

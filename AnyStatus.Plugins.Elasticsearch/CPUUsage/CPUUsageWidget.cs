@@ -20,6 +20,7 @@ using AnyStatus.Plugins.Elasticsearch.Shared;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace AnyStatus.Plugins.Elasticsearch.CPUUsage
 {
@@ -29,29 +30,35 @@ namespace AnyStatus.Plugins.Elasticsearch.CPUUsage
     public class CPUUsageWidget : Sparkline, IElasticsearchWidget, ISchedulable
     {
         [Required]
+        [PropertyOrder(10)]
         [Category("CPU Usage")]
         [Description("Elasticsearch node uris to connect")]
         public List<string> NodeUris { get; set; }
 
+        [PropertyOrder(20)]
         [Category("CPU Usage")]
+        [Description("Elasticsearch node id. Leave empty to watch cluster CPU usage")]
+        public string NodeId { get; set; }
+
+        [Category("CPU Usage")]
+        [PropertyOrder(30)]
         [Description("Use Basic Authentication to connect Elasticsearch Cluster")]
         public bool UseBasicAuthentication { get; set; }
 
         [Category("CPU Usage")]
+        [PropertyOrder(40)]
         [Description("Username to connect Elasticsearch Cluster")]
         public string Username { get; set; }
 
         [Category("CPU Usage")]
+        [PropertyOrder(50)]
         [Description("Password to connect Elasticsearch Cluster")]
         public string Password { get; set; }
 
         [Category("CPU Usage")]
+        [PropertyOrder(60)]
         [Description("Always trust server certificate")]
         public bool TrustCertificate { get; set; }
-
-        [Category("CPU Usage")]
-        [Description("Elasticsearch node id. Leave empty to watch cluster CPU usage")]
-        public string NodeId { get; set; }
 
         public CPUUsageWidget()
         {

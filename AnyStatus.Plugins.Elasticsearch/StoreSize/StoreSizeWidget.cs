@@ -20,6 +20,7 @@ using AnyStatus.Plugins.Elasticsearch.Shared;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace AnyStatus.Plugins.Elasticsearch.StoreSize
 {
@@ -30,29 +31,35 @@ namespace AnyStatus.Plugins.Elasticsearch.StoreSize
     {
 
         [Required]
+        [PropertyOrder(10)]
         [Category("Store Size")]
         [Description("Elasticsearch node uris to connect")]
         public List<string> NodeUris { get; set; }
 
         [Category("Store Size")]
+        [PropertyOrder(20)]
+        [Description("Elasticsearch node id. Leave empty to watch Cluster Store Size")]
+        public string NodeId { get; set; }
+
+        [Category("Store Size")]
+        [PropertyOrder(30)]
         [Description("Use Basic Authentication to connect Elasticsearch Cluster")]
         public bool UseBasicAuthentication { get; set; }
 
         [Category("Store Size")]
+        [PropertyOrder(40)]
         [Description("Username to connect Elasticsearch Cluster")]
         public string Username { get; set; }
 
         [Category("Store Size")]
+        [PropertyOrder(50)]
         [Description("Password to connect Elasticsearch Cluster")]
         public string Password { get; set; }
 
         [Category("Store Size")]
+        [PropertyOrder(60)]
         [Description("Always trust server certificate")]
         public bool TrustCertificate { get; set; }
-
-        [Category("Store Size")]
-        [Description("Elasticsearch node id. Leave empty to watch Cluster Store Size")]
-        public string NodeId { get; set; }
 
         public StoreSizeWidget()
         {
