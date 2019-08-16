@@ -29,7 +29,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.DocumentCount
     [Description("Shows total document count for the Elasticsearch Cluster")]
     public class DocumentCountWidget : Metric, IElasticsearchWidget, ISchedulable
     {
-
+        [Url]
         [Required]
         [PropertyOrder(10)]
         [Category("Document Count")]

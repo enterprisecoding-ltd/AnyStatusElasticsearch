@@ -29,7 +29,7 @@ namespace AnyStatus.Plugins.Elasticsearch.RamUsage
     [Description("Shows the percentage of RAM usage for the Elasticsearch Node/Cluster")]
     public class RamUsageWidget : Sparkline, IElasticsearchWidget, ISchedulable
     {
-
+        [Url]
         [Required]
         [PropertyOrder(10)]
         [Category("RAM Usage")]

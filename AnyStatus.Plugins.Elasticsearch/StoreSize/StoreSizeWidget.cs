@@ -29,7 +29,7 @@ namespace AnyStatus.Plugins.Elasticsearch.StoreSize
     [Description("Shows store size taken by primary & replica shards for the Elasticsearch Node/Cluster")]
     public class StoreSizeWidget : Metric, IElasticsearchWidget, ISchedulable
     {
-
+        [Url]
         [Required]
         [PropertyOrder(10)]
         [Category("Store Size")]

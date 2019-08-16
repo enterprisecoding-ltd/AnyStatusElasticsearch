@@ -31,6 +31,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Cluster.Health
     {
 
         [Required]
+        [Url]
         [PropertyOrder(10)]
         [Category("Cluster Health")]
         [Description("Elasticsearch node uris to connect")]

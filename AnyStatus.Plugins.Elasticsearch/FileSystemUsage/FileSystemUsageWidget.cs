@@ -30,7 +30,7 @@ namespace AnyStatus.Plugins.Elasticsearch.FileSystemUsage
     [Description("Shows file system usage for the Elasticsearch Node/Cluster")]
     public class FileSystemUsageWidget : Metric, IElasticsearchWidget, ISchedulable, IReportProgress
     {
-
+        [Url]
         [Required]
         [PropertyOrder(10)]
         [Category("File System Usage")]
