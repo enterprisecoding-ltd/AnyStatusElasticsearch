@@ -23,6 +23,7 @@ using AnyStatus.Plugins.Elasticsearch.Helpers;
 using AnyStatus.Plugins.Elasticsearch.Index.DeletedDocumentCount;
 using AnyStatus.Plugins.Elasticsearch.Index.DocumentCount;
 using AnyStatus.Plugins.Elasticsearch.Index.IndexHealth;
+using AnyStatus.Plugins.Elasticsearch.Index.StoreSize;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -78,6 +79,12 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexCount
                             break;
                         case IndexDetail.DeletedDocumentsCount:
                             synchronizer = GetDeletedDocumentsCountSynchronizer(request);
+                            break;
+                        case IndexDetail.TotalStoreSize:
+                            synchronizer = GetTotalStoreSizeSynchronizer(request);
+                            break;
+                        case IndexDetail.PrimaryStoreSize:
+                            synchronizer = GetPrimaryStoreSizeSynchronizer(request);
                             break;
                     }
 
@@ -147,6 +154,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexCount
                 })
             };
         }
+
         private static CollectionSynchronizer<IndexEntry, Item> GetDeletedDocumentsCountSynchronizer(MetricQueryRequest<IndexCountWidget> request)
         {
             return new CollectionSynchronizer<IndexEntry, Item>
@@ -158,6 +166,52 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexCount
                 {
                     Name = indexEntry.Index,
                     IndexName = indexEntry.Index,
+                    IndexUuid = indexEntry.Uuid,
+                    NodeUris = request.DataContext.NodeUris,
+                    UseBasicAuthentication = request.DataContext.UseBasicAuthentication,
+                    Username = request.DataContext.Username,
+                    Password = request.DataContext.Password,
+                    TrustCertificate = request.DataContext.TrustCertificate,
+                    Interval = 0 //bypass scheduler
+                })
+            };
+        }
+
+        private static CollectionSynchronizer<IndexEntry, Item> GetTotalStoreSizeSynchronizer(MetricQueryRequest<IndexCountWidget> request)
+        {
+            return new CollectionSynchronizer<IndexEntry, Item>
+            {
+                Compare = (indexEntry, item) => item is StoreSizeWidget storeSizeWidget && indexEntry.Uuid == storeSizeWidget.IndexUuid && storeSizeWidget.SizeType == StoreSizeType.Total,
+                Remove = item => request.DataContext.Remove(item),
+                Update = (indexEntry, item) => ((StoreSizeWidget)item).IndexUuid = indexEntry.Uuid,
+                Add = indexEntry => request.DataContext.Add(new StoreSizeWidget
+                {
+                    Name = indexEntry.Index,
+                    IndexName = indexEntry.Index,
+                    SizeType = StoreSizeType.Total,
+                    IndexUuid = indexEntry.Uuid,
+                    NodeUris = request.DataContext.NodeUris,
+                    UseBasicAuthentication = request.DataContext.UseBasicAuthentication,
+                    Username = request.DataContext.Username,
+                    Password = request.DataContext.Password,
+                    TrustCertificate = request.DataContext.TrustCertificate,
+                    Interval = 0 //bypass scheduler
+                })
+            };
+        }
+
+        private static CollectionSynchronizer<IndexEntry, Item> GetPrimaryStoreSizeSynchronizer(MetricQueryRequest<IndexCountWidget> request)
+        {
+            return new CollectionSynchronizer<IndexEntry, Item>
+            {
+                Compare = (indexEntry, item) => item is StoreSizeWidget storeSizeWidget && indexEntry.Uuid == storeSizeWidget.IndexUuid && storeSizeWidget.SizeType == StoreSizeType.Primary,
+                Remove = item => request.DataContext.Remove(item),
+                Update = (indexEntry, item) => ((StoreSizeWidget)item).IndexUuid = indexEntry.Uuid,
+                Add = indexEntry => request.DataContext.Add(new StoreSizeWidget
+                {
+                    Name = indexEntry.Index,
+                    IndexName = indexEntry.Index,
+                    SizeType = StoreSizeType.Primary,
                     IndexUuid = indexEntry.Uuid,
                     NodeUris = request.DataContext.NodeUris,
                     UseBasicAuthentication = request.DataContext.UseBasicAuthentication,

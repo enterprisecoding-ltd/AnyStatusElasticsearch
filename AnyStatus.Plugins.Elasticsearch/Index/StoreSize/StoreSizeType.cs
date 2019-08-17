@@ -15,10 +15,18 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-namespace AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Cat
+namespace AnyStatus.Plugins.Elasticsearch.Index.StoreSize
 {
-    public class IndexListResponse : ElasticsearchResponseBase
+    public enum StoreSizeType
     {
-        public virtual IndexEntry[] Indices { get; internal set; }
+        /// <summary>
+        /// Indicates calculations should be done against primary store
+        /// </summary>
+        Primary,
+
+        /// <summary>
+        /// Indicates calculations should be done against primary and secondary stores
+        /// </summary>
+        Total
     }
 }

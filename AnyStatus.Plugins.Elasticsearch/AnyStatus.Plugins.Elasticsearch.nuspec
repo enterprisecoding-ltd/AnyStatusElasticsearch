@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>AnyStatus.Plugins.Elasticsearch</id>
-    <version>0.3</version>
+    <version>0.4</version>
     <authors>Enterprisecoding</authors>
     <owners>fatihboy</owners>
     <licenseUrl>https://github.com/fatihboy/AnyStatusElasticsearch/blob/master/LICENSE</licenseUrl>

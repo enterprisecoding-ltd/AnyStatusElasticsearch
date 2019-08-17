@@ -18,6 +18,7 @@ Widgets for AnyStatus to provide capability to check various Elasticsearch metri
 -  [x] Cluster/Index Document Count
 -  [x] Cluster/Index Deleted Document Count
 -  [x] Index Count
+-  [x] Index Primary/Total Store Size
 
 ## Contribute
 

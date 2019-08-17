@@ -15,10 +15,13 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-namespace AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Cat
+using Newtonsoft.Json;
+
+namespace AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Index
 {
-    public class IndexListResponse : ElasticsearchResponseBase
+    public class StoreStats
     {
-        public virtual IndexEntry[] Indices { get; internal set; }
+        [JsonProperty("size_in_bytes")]
+        public double SizeInBytes { get; set; }
     }
 }
