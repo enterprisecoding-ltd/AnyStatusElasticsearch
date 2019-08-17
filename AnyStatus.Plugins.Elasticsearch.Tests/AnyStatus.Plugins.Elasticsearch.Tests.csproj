@@ -89,7 +89,7 @@
     <Compile Include="Widgets\RamUsageTests.cs" />
     <Compile Include="Widgets\StoreSizeTests.cs" />
     <Compile Include="Widgets\Index\DeletedDocumentCountTests.cs" />
-    <Compile Include="Widgets\Index\DocumentCountTests.cs" />
+    <Compile Include="Widgets\Cluster\DocumentCountTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

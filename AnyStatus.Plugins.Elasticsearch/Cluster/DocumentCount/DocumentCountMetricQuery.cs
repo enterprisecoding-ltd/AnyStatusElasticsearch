@@ -20,7 +20,7 @@ using AnyStatus.Plugins.Elasticsearch.Helpers;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AnyStatus.Plugins.Elasticsearch.Index.DocumentCount
+namespace AnyStatus.Plugins.Elasticsearch.Cluster.DocumentCount
 {
     public class DocumentCountMetricQuery : IMetricQuery<DocumentCountWidget>
     {

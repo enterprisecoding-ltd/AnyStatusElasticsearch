@@ -19,7 +19,7 @@ using AnyStatus.API;
 using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient;
 using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Stats;
 using AnyStatus.Plugins.Elasticsearch.Helpers;
-using AnyStatus.Plugins.Elasticsearch.Index.DocumentCount;
+using AnyStatus.Plugins.Elasticsearch.Cluster.DocumentCount;
 using AnyStatus.Plugins.Elasticsearch.Shared;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -27,7 +27,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Index
+namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Cluster
 {
     [TestClass]
     public class DocumentCountTests

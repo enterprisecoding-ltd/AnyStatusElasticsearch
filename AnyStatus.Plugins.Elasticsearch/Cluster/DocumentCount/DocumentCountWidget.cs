@@ -22,9 +22,9 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
-namespace AnyStatus.Plugins.Elasticsearch.Index.DocumentCount
+namespace AnyStatus.Plugins.Elasticsearch.Cluster.DocumentCount
 {
-    [DisplayName("Document Count")]
+    [DisplayName("Cluster Document Count")]
     [DisplayColumn("Elasticsearch")]
     [Description("Shows total document count for the Elasticsearch Cluster")]
     public class DocumentCountWidget : Metric, IElasticsearchWidget, ISchedulable
@@ -32,28 +32,28 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.DocumentCount
         [Url]
         [Required]
         [PropertyOrder(10)]
-        [Category("Document Count")]
+        [Category("Cluster Document Count")]
         [DisplayName("Node Uris")]
         [Description("Elasticsearch node uris to connect")]
         public List<string> NodeUris { get; set; }
 
-        [Category("Document Count")]
+        [Category("Cluster Document Count")]
         [PropertyOrder(20)]
         [DisplayName("Use Basic Authentication")]
         [Description("Use Basic Authentication to connect Elasticsearch Cluster")]
         public bool UseBasicAuthentication { get; set; }
 
-        [Category("Document Count")]
+        [Category("Cluster Document Count")]
         [PropertyOrder(30)]
         [Description("Username to connect Elasticsearch Cluster")]
         public string Username { get; set; }
 
-        [Category("Document Count")]
+        [Category("Cluster Document Count")]
         [PropertyOrder(40)]
         [Description("Password to connect Elasticsearch Cluster")]
         public string Password { get; set; }
 
-        [Category("Document Count")]
+        [Category("Cluster Document Count")]
         [PropertyOrder(50)]
         [DisplayName("Trust Certificate")]
         [Description("Always trust server certificate")]
@@ -61,7 +61,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.DocumentCount
 
         public DocumentCountWidget()
         {
-            Name = "Document Count";
+            Name = "Cluster Document Count";
 
             Interval = 1;
             Units = IntervalUnits.Minutes;
