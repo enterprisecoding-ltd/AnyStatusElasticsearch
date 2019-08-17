@@ -68,7 +68,9 @@
     <Compile Include="ElasticsearchClient\Objects\Cat\IndexEntry.cs" />
     <Compile Include="ElasticsearchClient\Objects\Cat\IndexListResponse.cs" />
     <Compile Include="ElasticsearchClient\Objects\Cluster\IndexHealthResponse.cs" />
-    <Compile Include="ElasticsearchClient\Objects\Index\IndexCountResponse.cs" />
+    <Compile Include="ElasticsearchClient\Objects\Index\IndexStats.cs" />
+    <Compile Include="ElasticsearchClient\Objects\Index\IndicesStatsResponse.cs" />
+    <Compile Include="ElasticsearchClient\Objects\Index\IndicesStats.cs" />
     <Compile Include="FileSystemUsage\FileSystemUsageHandler.cs" />
     <Compile Include="FileSystemUsage\FileSystemUsageWidget.cs" />
     <Compile Include="Cluster\Health\ClusterHealthCheck.cs" />
@@ -93,7 +95,7 @@
     <Compile Include="ElasticsearchClient\Objects\Stats\ClusterProcess.cs" />
     <Compile Include="ElasticsearchClient\Objects\Stats\ClusterProcessCpu.cs" />
     <Compile Include="ElasticsearchClient\Objects\Stats\ClusterStatsResponse.cs" />
-    <Compile Include="ElasticsearchClient\Objects\Stats\DocStats.cs" />
+    <Compile Include="ElasticsearchClient\Objects\Shared\DocStats.cs" />
     <Compile Include="ElasticsearchClient\Objects\Stats\OperatingSystemMemoryInfo.cs" />
     <Compile Include="ElasticsearchClient\Objects\Stats\StoreStats.cs" />
     <Compile Include="Helpers\ElasticsearchHelper.cs" />

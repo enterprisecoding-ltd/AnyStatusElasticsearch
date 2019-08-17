@@ -35,7 +35,8 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Index
         [TestMethod]
         public async Task DocumentCountShouldValid()
         {
-            var indexCountResponseMock = new Mock<IndexCountResponse>();
+            var indicesStatsMock = new Mock<IndicesStats>();
+            var indexCountResponseMock = new Mock<IndicesStatsResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();
             var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] {
                 new List<string>(),
@@ -44,13 +45,16 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Index
                 false
             });
 
-            indexCountResponseMock.Setup(response => response.Count).Returns(500);
+            var indicesDisctionaryMock = new Dictionary<string, IndicesStats>{ { "index1", indicesStatsMock.Object} };
+
+            indicesStatsMock.Setup(response => response.Primaries.Documents.Count).Returns(500);
+            indexCountResponseMock.SetupGet(response => response.Indices).Returns(indicesDisctionaryMock);
             indexCountResponseMock.Setup(response => response.IsValid).Returns(true);
 
             elasticsearchHelperMock.Setup(helper => helper.GetElasticClient(It.IsAny<IElasticsearchWidget>()))
                 .Returns(elasticsearchSimpleClientMock.Object);
 
-            elasticsearchSimpleClientMock.Setup(client => client.IndexDocsCountAsync("index1", It.IsAny<CancellationToken>()))
+            elasticsearchSimpleClientMock.Setup(client => client.IndexStatsAsync("index1", "indices.*.primaries.docs", It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult(indexCountResponseMock.Object));
 
             var widget = new DocumentCountWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" }, IndexName = "index1" };
@@ -65,13 +69,13 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Index
             Assert.AreEqual((long)500, widget.Value);
 
             elasticsearchHelperMock.Verify(client => client.GetElasticClient(It.IsAny<IElasticsearchWidget>()), Times.Once());
-            elasticsearchSimpleClientMock.Verify(client => client.IndexDocsCountAsync("index1", It.IsAny<CancellationToken>()), Times.Once());
+            elasticsearchSimpleClientMock.Verify(client => client.IndexStatsAsync("index1", "indices.*.primaries.docs", It.IsAny<CancellationToken>()), Times.Once());
         }
 
         [TestMethod]
         public async Task DocumentCountShouldInvalidWhenResponseIsInvalid()
         {
-            var indexCountResponseMock = new Mock<IndexCountResponse>();
+            var indexCountResponseMock = new Mock<IndicesStatsResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();
             var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] {
                 new List<string>(),
@@ -85,7 +89,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Index
             elasticsearchHelperMock.Setup(helper => helper.GetElasticClient(It.IsAny<IElasticsearchWidget>()))
                 .Returns(elasticsearchSimpleClientMock.Object);
 
-            elasticsearchSimpleClientMock.Setup(client => client.IndexDocsCountAsync("index1", It.IsAny<CancellationToken>()))
+            elasticsearchSimpleClientMock.Setup(client => client.IndexStatsAsync("index1", "indices.*.primaries.docs", It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult(indexCountResponseMock.Object));
 
             var widget = new DocumentCountWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" }, IndexName = "index1" };
@@ -99,7 +103,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Index
             Assert.AreEqual(State.Invalid, widget.State);
 
             elasticsearchHelperMock.Verify(client => client.GetElasticClient(It.IsAny<IElasticsearchWidget>()), Times.Once());
-            elasticsearchSimpleClientMock.Verify(client => client.IndexDocsCountAsync("index1", It.IsAny<CancellationToken>()), Times.Once());
+            elasticsearchSimpleClientMock.Verify(client => client.IndexStatsAsync("index1", "indices.*.primaries.docs", It.IsAny<CancellationToken>()), Times.Once());
         }
     }
 }

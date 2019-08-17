@@ -15,11 +15,6 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Cat;
-using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Cluster;
-using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Health;
-using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Index;
-using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Stats;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -32,6 +27,12 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+
+using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Cat;
+using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Cluster;
+using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Health;
+using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Index;
+using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Stats;
 
 namespace AnyStatus.Plugins.Elasticsearch.ElasticsearchClient
 {
@@ -113,26 +114,6 @@ namespace AnyStatus.Plugins.Elasticsearch.ElasticsearchClient
             return result;
         }
 
-        public virtual async Task<IndexCountResponse> IndexDocsCountAsync(string indexName, CancellationToken cancellationToken)
-        {
-            IndexCountResponse result;
-            try
-            {
-                var responseMessage = await GetAsync($"/{indexName}/_count", "count", cancellationToken);
-
-                var response = await responseMessage.Content.ReadAsStringAsync();
-
-                result = JsonConvert.DeserializeObject<IndexCountResponse>(response);
-                result.IsValid = true;
-            }
-            catch (Exception ex)
-            {
-                result = new IndexCountResponse { IsValid = false, OriginalException = ex };
-            }
-
-            return result;
-        }
-
         public virtual async Task<IndexHealthResponse> IndexHealthAsync(string indexName, CancellationToken cancellationToken)
         {
             IndexHealthResponse result;
@@ -176,7 +157,7 @@ namespace AnyStatus.Plugins.Elasticsearch.ElasticsearchClient
                 {
                     responseMessage = await GetAsync($"/_cluster/stats/nodes/{nodeId}", filterPath, cancellationToken);
                 }
-                
+
                 var response = await responseMessage.Content.ReadAsStringAsync();
 
                 result = JsonConvert.DeserializeObject<ClusterStatsResponse>(response);
@@ -185,6 +166,25 @@ namespace AnyStatus.Plugins.Elasticsearch.ElasticsearchClient
             catch (Exception ex)
             {
                 result = new ClusterStatsResponse { IsValid = false, OriginalException = ex };
+            }
+
+            return result;
+        }
+        public virtual async Task<IndicesStatsResponse> IndexStatsAsync(string indexName, string filterPath, CancellationToken cancellationToken)
+        {
+            IndicesStatsResponse result;
+            try
+            {
+                HttpResponseMessage  responseMessage = await GetAsync($"/{indexName}/_stats", filterPath, cancellationToken);
+
+                var response = await responseMessage.Content.ReadAsStringAsync();
+
+                result = JsonConvert.DeserializeObject<IndicesStatsResponse>(response);
+                result.IsValid = true;
+            }
+            catch (Exception ex)
+            {
+                result = new IndicesStatsResponse { IsValid = false, OriginalException = ex };
             }
 
             return result;

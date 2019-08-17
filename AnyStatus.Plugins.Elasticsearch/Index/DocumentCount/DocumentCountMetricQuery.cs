@@ -46,11 +46,11 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.DocumentCount
 
             var client = elasticsearchHelper.GetElasticClient(documentCountWidget);
 
-            var clusterStatsResponse = await client.IndexDocsCountAsync(documentCountWidget.IndexName, cancellationToken);
+            var clusterStatsResponse = await client.IndexStatsAsync(documentCountWidget.IndexName, "indices.*.primaries.docs.count", cancellationToken);
 
             if (clusterStatsResponse.IsValid)
             {
-                request.DataContext.Value = clusterStatsResponse.Count;
+                request.DataContext.Value = clusterStatsResponse.Indices[documentCountWidget.IndexName].Primaries.Documents.Count;
                 request.DataContext.State = State.Ok;
             }
             else

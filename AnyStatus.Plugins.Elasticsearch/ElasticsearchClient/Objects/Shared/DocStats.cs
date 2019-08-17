@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 using Newtonsoft.Json;
 
-namespace AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Stats
+namespace AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Shared
 {
     public class DocStats
     {
