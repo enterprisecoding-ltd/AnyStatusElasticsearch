@@ -67,6 +67,7 @@ namespace AnyStatus.Plugins.Elasticsearch.FileSystemUsage
 
         [Required]
         [PropertyOrder(70)]
+        [ItemsSource(typeof(FileSystemPercentageTypeItemsSource))]
         [Category("File System Usage")]
         [DisplayName("Percentage Type")]
         public FileSystemPercentageType PercentageType { get; set; }

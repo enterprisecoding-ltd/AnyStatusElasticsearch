@@ -39,6 +39,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexCount
 
         [Category("Index Count")]
         [PropertyOrder(20)]
+        [ItemsSource(typeof(IndexDetailsItemsSource))]
         [DisplayName("Index Details")]
         [Description("Index detail type to show for each discovered index")]
         public IndexDetail IndexDetails { get; set; }

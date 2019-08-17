@@ -78,6 +78,7 @@
     <Compile Include="Cluster\Health\ClusterHealthWidget.cs" />
     <Compile Include="Index\DeletedDocumentCount\DeletedDocumentCountMetricQuery.cs" />
     <Compile Include="Index\DeletedDocumentCount\DeletedDocumentCountWidget.cs" />
+    <Compile Include="Index\IndexCount\IndexDetailsItemsSource.cs" />
     <Compile Include="Index\StoreSize\StoreSizeMetricQuery.cs" />
     <Compile Include="Index\StoreSize\StoreSizeType.cs" />
     <Compile Include="Index\StoreSize\StoreSizeWidget.cs" />
@@ -108,6 +109,7 @@
     <Compile Include="Helpers\FileSizeFormatter.cs" />
     <Compile Include="Cluster\DeletedDocumentCount\DeletedDocumentCountMetricQuery.cs" />
     <Compile Include="Cluster\DeletedDocumentCount\DeletedDocumentCountWidget.cs" />
+    <Compile Include="Shared\FileSystemPercentageTypeItemsSource.cs" />
     <Compile Include="StoreSize\StoreSizeMetricQuery.cs" />
     <Compile Include="StoreSize\StoreSizeWidget.cs" />
     <Compile Include="Cluster\DocumentCount\DocumentCountMetricQuery.cs" />
