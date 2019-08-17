@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Cat;
 using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Cluster;
 using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Health;
+using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Index;
 using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Stats;
 using Newtonsoft.Json;
 using System;
@@ -107,6 +108,26 @@ namespace AnyStatus.Plugins.Elasticsearch.ElasticsearchClient
             catch (Exception ex)
             {
                 result = new IndexListResponse { IsValid = false, OriginalException = ex };
+            }
+
+            return result;
+        }
+
+        public virtual async Task<IndexCountResponse> IndexDocsCountAsync(string indexName, CancellationToken cancellationToken)
+        {
+            IndexCountResponse result;
+            try
+            {
+                var responseMessage = await GetAsync($"/{indexName}/_count", "count", cancellationToken);
+
+                var response = await responseMessage.Content.ReadAsStringAsync();
+
+                result = JsonConvert.DeserializeObject<IndexCountResponse>(response);
+                result.IsValid = true;
+            }
+            catch (Exception ex)
+            {
+                result = new IndexCountResponse { IsValid = false, OriginalException = ex };
             }
 
             return result;

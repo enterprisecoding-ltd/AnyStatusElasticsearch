@@ -20,8 +20,8 @@ using AnyStatus.API.Common.Services;
 using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Cat;
 using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Shared;
 using AnyStatus.Plugins.Elasticsearch.Helpers;
+using AnyStatus.Plugins.Elasticsearch.Index.DocumentCount;
 using AnyStatus.Plugins.Elasticsearch.Index.IndexHealth;
-using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -72,6 +72,9 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexCount
                         case IndexDetail.Health:
                             synchronizer = GetHealthSynchronizer(request);
                             break;
+                        case IndexDetail.DocumentsCount:
+                            synchronizer = GetDocumentsCountSynchronizer(request);
+                            break;
                     }
 
                     uiAction.Invoke(() => synchronizer.Synchronize(indexCountResponse.Indices, request.DataContext.Items)); 
@@ -114,6 +117,28 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexCount
                     Password = request.DataContext.Password,
                     TrustCertificate = request.DataContext.TrustCertificate,
                     State = indexEntry.Health == Health.Green ? State.Ok : indexEntry.Health == Health.Yellow ? State.PartiallySucceeded : State.Failed,
+                    Interval = 0 //bypass scheduler
+                })
+            };
+        }
+
+        private static CollectionSynchronizer<IndexEntry, Item> GetDocumentsCountSynchronizer(MetricQueryRequest<IndexCountWidget> request)
+        {
+            return new CollectionSynchronizer<IndexEntry, Item>
+            {
+                Compare = (indexEntry, item) => item is DocumentCountWidget documentCountWidget && indexEntry.Uuid == documentCountWidget.IndexUuid,
+                Remove = item => request.DataContext.Remove(item),
+                Update = (indexEntry, item) => ((DocumentCountWidget)item).IndexUuid = indexEntry.Uuid,
+                Add = indexEntry => request.DataContext.Add(new DocumentCountWidget
+                {
+                    Name = indexEntry.Index,
+                    IndexName = indexEntry.Index,
+                    IndexUuid = indexEntry.Uuid,
+                    NodeUris = request.DataContext.NodeUris,
+                    UseBasicAuthentication = request.DataContext.UseBasicAuthentication,
+                    Username = request.DataContext.Username,
+                    Password = request.DataContext.Password,
+                    TrustCertificate = request.DataContext.TrustCertificate,
                     Interval = 0 //bypass scheduler
                 })
             };

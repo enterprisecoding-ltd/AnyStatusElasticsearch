@@ -68,10 +68,13 @@
     <Compile Include="ElasticsearchClient\Objects\Cat\IndexEntry.cs" />
     <Compile Include="ElasticsearchClient\Objects\Cat\IndexListResponse.cs" />
     <Compile Include="ElasticsearchClient\Objects\Cluster\IndexHealthResponse.cs" />
+    <Compile Include="ElasticsearchClient\Objects\Index\IndexCountResponse.cs" />
     <Compile Include="FileSystemUsage\FileSystemUsageHandler.cs" />
     <Compile Include="FileSystemUsage\FileSystemUsageWidget.cs" />
     <Compile Include="Cluster\Health\ClusterHealthCheck.cs" />
     <Compile Include="Cluster\Health\ClusterHealthWidget.cs" />
+    <Compile Include="Index\DocumentCount\DocumentCountMetricQuery.cs" />
+    <Compile Include="Index\DocumentCount\DocumentCountWidget.cs" />
     <Compile Include="Index\IndexCount\IndexCountMetricQuery.cs" />
     <Compile Include="Index\IndexCount\IndexCountWidget.cs" />
     <Compile Include="Index\IndexCount\IndexDetail.cs" />

@@ -3,6 +3,7 @@
     public enum IndexDetail
     {
         None,
-        Health
+        Health,
+        DocumentsCount
     }
 }
