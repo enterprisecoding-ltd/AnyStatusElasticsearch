@@ -20,66 +20,48 @@ using AnyStatus.Plugins.Elasticsearch.Shared;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Xml.Serialization;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
-namespace AnyStatus.Plugins.Elasticsearch.Index.DeletedDocumentCount
+namespace AnyStatus.Plugins.Elasticsearch.Cluster.DeletedDocumentCount
 {
-    [DisplayName("Index Deleted Document Count")]
+    [DisplayName("Deleted Document Count")]
     [DisplayColumn("Elasticsearch")]
-    [Description("Shows total document count for the Elasticsearch Cluster")]
+    [Description("Shows total deleted document count for the Elasticsearch Cluster")]
     public class DeletedDocumentCountWidget : Metric, IElasticsearchWidget, ISchedulable
     {
         [Url]
         [Required]
         [PropertyOrder(10)]
-        [Category("Index Deleted Document Count")]
+        [Category("Deleted Document Count")]
         [DisplayName("Node Uris")]
         [Description("Elasticsearch node uris to connect")]
         public List<string> NodeUris { get; set; }
 
-        [Required]
-        [Category("Index Deleted Document Count")]
+        [Category("Deleted Document Count")]
         [PropertyOrder(20)]
-        [DisplayName("Index Name")]
-        [Description("Index name to check health")]
-        public string IndexName { get; set; }
-
-        [Category("Index Deleted Document Count")]
-        [PropertyOrder(30)]
         [DisplayName("Use Basic Authentication")]
         [Description("Use Basic Authentication to connect Elasticsearch Cluster")]
         public bool UseBasicAuthentication { get; set; }
 
-        [Category("Index Deleted Document Count")]
-        [PropertyOrder(40)]
+        [Category("Deleted Document Count")]
+        [PropertyOrder(30)]
         [Description("Username to connect Elasticsearch Cluster")]
         public string Username { get; set; }
 
-        [Category("Index Deleted Document Count")]
-        [PropertyOrder(50)]
+        [Category("Deleted Document Count")]
+        [PropertyOrder(40)]
         [Description("Password to connect Elasticsearch Cluster")]
         public string Password { get; set; }
 
-        [Category("Index Deleted Document Count")]
-        [PropertyOrder(60)]
+        [Category("Deleted Document Count")]
+        [PropertyOrder(50)]
         [DisplayName("Trust Certificate")]
         [Description("Always trust server certificate")]
         public bool TrustCertificate { get; set; }
 
-        /// <summary>
-        /// Tracked index uuid
-        /// </summary>
-        /// <remarks>
-        /// This field used by Index count widget only...
-        /// </remarks>
-        [XmlIgnore]
-        [Browsable(false)]
-        public string IndexUuid { get; internal set; }
-
         public DeletedDocumentCountWidget()
         {
-            Name = "Index Deleted Document Count";
+            Name = "Deleted Document Count";
 
             Interval = 1;
             Units = IntervalUnits.Minutes;

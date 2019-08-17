@@ -75,6 +75,8 @@
     <Compile Include="FileSystemUsage\FileSystemUsageWidget.cs" />
     <Compile Include="Cluster\Health\ClusterHealthCheck.cs" />
     <Compile Include="Cluster\Health\ClusterHealthWidget.cs" />
+    <Compile Include="Index\DeletedDocumentCount\DeletedDocumentCountMetricQuery.cs" />
+    <Compile Include="Index\DeletedDocumentCount\DeletedDocumentCountWidget.cs" />
     <Compile Include="Index\DocumentCount\DocumentCountMetricQuery.cs" />
     <Compile Include="Index\DocumentCount\DocumentCountWidget.cs" />
     <Compile Include="Index\IndexCount\IndexCountMetricQuery.cs" />
@@ -100,8 +102,8 @@
     <Compile Include="ElasticsearchClient\Objects\Stats\StoreStats.cs" />
     <Compile Include="Helpers\ElasticsearchHelper.cs" />
     <Compile Include="Helpers\FileSizeFormatter.cs" />
-    <Compile Include="Index\DeletedDocumentCount\DeletedDocumentCountMetricQuery.cs" />
-    <Compile Include="Index\DeletedDocumentCount\DeletedDocumentCountWidget.cs" />
+    <Compile Include="Cluster\DeletedDocumentCount\DeletedDocumentCountMetricQuery.cs" />
+    <Compile Include="Cluster\DeletedDocumentCount\DeletedDocumentCountWidget.cs" />
     <Compile Include="StoreSize\StoreSizeMetricQuery.cs" />
     <Compile Include="StoreSize\StoreSizeWidget.cs" />
     <Compile Include="Cluster\DocumentCount\DocumentCountMetricQuery.cs" />

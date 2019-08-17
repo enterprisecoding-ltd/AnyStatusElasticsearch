@@ -4,6 +4,7 @@
     {
         None,
         Health,
-        DocumentsCount
+        DocumentsCount,
+        DeletedDocumentsCount
     }
 }

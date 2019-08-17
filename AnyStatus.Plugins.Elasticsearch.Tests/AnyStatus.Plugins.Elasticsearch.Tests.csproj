@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Widgets\Index\DeletedDocumentCountTests.cs" />
     <Compile Include="Widgets\Index\DocumentCountTests.cs" />
     <Compile Include="Widgets\FileSystemUsageTests.cs" />
     <Compile Include="Widgets\Cluster\HealthTests.cs" />
@@ -89,7 +90,7 @@
     <Compile Include="Widgets\Index\IndexHealthTests.cs" />
     <Compile Include="Widgets\RamUsageTests.cs" />
     <Compile Include="Widgets\StoreSizeTests.cs" />
-    <Compile Include="Widgets\Index\DeletedDocumentCountTests.cs" />
+    <Compile Include="Widgets\Cluster\DeletedDocumentCountTests.cs" />
     <Compile Include="Widgets\Cluster\DocumentCountTests.cs" />
   </ItemGroup>
   <ItemGroup>

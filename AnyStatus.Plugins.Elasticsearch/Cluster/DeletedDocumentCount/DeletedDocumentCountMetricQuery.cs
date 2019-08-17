@@ -20,7 +20,7 @@ using AnyStatus.Plugins.Elasticsearch.Helpers;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AnyStatus.Plugins.Elasticsearch.Index.DeletedDocumentCount
+namespace AnyStatus.Plugins.Elasticsearch.Cluster.DeletedDocumentCount
 {
     public class DeletedDocumentCountMetricQuery : IMetricQuery<DeletedDocumentCountWidget>
     {
@@ -42,20 +42,20 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.DeletedDocumentCount
 
         public async Task Handle(MetricQueryRequest<DeletedDocumentCountWidget> request, CancellationToken cancellationToken)
         {
-            var documentCountWidget = request.DataContext;
+            var deleteDocumentCountWidget = request.DataContext;
 
-            var client = elasticsearchHelper.GetElasticClient(documentCountWidget);
+            var client = elasticsearchHelper.GetElasticClient(deleteDocumentCountWidget);
 
-            var clusterStatsResponse = await client.IndexStatsAsync(documentCountWidget.IndexName, "indices.*.primaries.docs.deleted", cancellationToken);
+            var clusterStatsResponse = await client.StatsAsync("indices.docs.deleted", cancellationToken);
 
             if (clusterStatsResponse.IsValid)
             {
-                request.DataContext.Value = clusterStatsResponse.Indices[documentCountWidget.IndexName].Primaries.Documents.Deleted;
+                request.DataContext.Value = clusterStatsResponse.Indices.Documents.Deleted;
                 request.DataContext.State = State.Ok;
             }
             else
             {
-                documentCountWidget.State = State.Invalid;
+                deleteDocumentCountWidget.State = State.Invalid;
             }
         }
     }

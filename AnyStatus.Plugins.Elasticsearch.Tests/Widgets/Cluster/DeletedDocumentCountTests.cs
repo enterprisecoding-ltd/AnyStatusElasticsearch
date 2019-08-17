@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 using AnyStatus.API;
 using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient;
-using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Index;
+using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Stats;
 using AnyStatus.Plugins.Elasticsearch.Helpers;
-using AnyStatus.Plugins.Elasticsearch.Index.DocumentCount;
+using AnyStatus.Plugins.Elasticsearch.Cluster.DeletedDocumentCount;
 using AnyStatus.Plugins.Elasticsearch.Shared;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -27,16 +27,15 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Index
+namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Cluster
 {
     [TestClass]
-    public class DocumentCountTests
+    public class DeletedDocumentCountTests
     {
         [TestMethod]
-        public async Task IndexDocumentCountShouldValid()
+        public async Task ClusterDeletedDocumentCountShouldValid()
         {
-            var indicesStatsMock = new Mock<IndicesStats>();
-            var indexCountResponseMock = new Mock<IndicesStatsResponse>();
+            var clusterStatsResponseMock = new Mock<ClusterStatsResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();
             var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] {
                 new List<string>(),
@@ -45,37 +44,34 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Index
                 false
             });
 
-            var indicesDisctionaryMock = new Dictionary<string, IndicesStats>{ { "index1", indicesStatsMock.Object} };
-
-            indicesStatsMock.Setup(response => response.Primaries.Documents.Count).Returns(500);
-            indexCountResponseMock.SetupGet(response => response.Indices).Returns(indicesDisctionaryMock);
-            indexCountResponseMock.Setup(response => response.IsValid).Returns(true);
+            clusterStatsResponseMock.Setup(response => response.Indices.Documents.Deleted).Returns(50);
+            clusterStatsResponseMock.Setup(response => response.IsValid).Returns(true);
 
             elasticsearchHelperMock.Setup(helper => helper.GetElasticClient(It.IsAny<IElasticsearchWidget>()))
                 .Returns(elasticsearchSimpleClientMock.Object);
 
-            elasticsearchSimpleClientMock.Setup(client => client.IndexStatsAsync("index1", "indices.*.primaries.docs.count", It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult(indexCountResponseMock.Object));
+            elasticsearchSimpleClientMock.Setup(client => client.StatsAsync("indices.docs.deleted", It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(clusterStatsResponseMock.Object));
 
-            var widget = new DocumentCountWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" }, IndexName = "index1" };
+            var widget = new DeletedDocumentCountWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" } };
 
             var request = MetricQueryRequest.Create(widget);
 
-            var handler = new DocumentCountMetricQuery(elasticsearchHelperMock.Object);
+            var handler = new DeletedDocumentCountMetricQuery(elasticsearchHelperMock.Object);
 
             await handler.Handle(request, CancellationToken.None).ConfigureAwait(false);
 
             Assert.AreEqual(State.Ok, widget.State);
-            Assert.AreEqual((long)500, widget.Value);
+            Assert.AreEqual((long)50, widget.Value);
 
             elasticsearchHelperMock.Verify(client => client.GetElasticClient(It.IsAny<IElasticsearchWidget>()), Times.Once());
-            elasticsearchSimpleClientMock.Verify(client => client.IndexStatsAsync("index1", "indices.*.primaries.docs.count", It.IsAny<CancellationToken>()), Times.Once());
+            elasticsearchSimpleClientMock.Verify(client => client.StatsAsync("indices.docs.deleted", It.IsAny<CancellationToken>()), Times.Once());
         }
 
         [TestMethod]
-        public async Task IndexDocumentCountShouldInvalidWhenResponseIsInvalid()
+        public async Task ClusterDeletedDocumentCountShouldInvalidWhenResponseIsInvalid()
         {
-            var indexCountResponseMock = new Mock<IndicesStatsResponse>();
+            var clusterStatsResponseMock = new Mock<ClusterStatsResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();
             var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] {
                 new List<string>(),
@@ -84,26 +80,26 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Index
                 false
             });
 
-            indexCountResponseMock.Setup(response => response.IsValid).Returns(false);
+            clusterStatsResponseMock.Setup(response => response.IsValid).Returns(false);
 
             elasticsearchHelperMock.Setup(helper => helper.GetElasticClient(It.IsAny<IElasticsearchWidget>()))
                 .Returns(elasticsearchSimpleClientMock.Object);
 
-            elasticsearchSimpleClientMock.Setup(client => client.IndexStatsAsync("index1", "indices.*.primaries.docs.count", It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult(indexCountResponseMock.Object));
+            elasticsearchSimpleClientMock.Setup(client => client.StatsAsync("indices.docs.deleted", It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(clusterStatsResponseMock.Object));
 
-            var widget = new DocumentCountWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" }, IndexName = "index1" };
+            var widget = new DeletedDocumentCountWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" } };
 
             var request = MetricQueryRequest.Create(widget);
 
-            var handler = new DocumentCountMetricQuery(elasticsearchHelperMock.Object);
+            var handler = new DeletedDocumentCountMetricQuery(elasticsearchHelperMock.Object);
 
             await handler.Handle(request, CancellationToken.None).ConfigureAwait(false);
 
             Assert.AreEqual(State.Invalid, widget.State);
 
             elasticsearchHelperMock.Verify(client => client.GetElasticClient(It.IsAny<IElasticsearchWidget>()), Times.Once());
-            elasticsearchSimpleClientMock.Verify(client => client.IndexStatsAsync("index1", "indices.*.primaries.docs.count", It.IsAny<CancellationToken>()), Times.Once());
+            elasticsearchSimpleClientMock.Verify(client => client.StatsAsync("indices.docs.deleted", It.IsAny<CancellationToken>()), Times.Once());
         }
     }
 }
