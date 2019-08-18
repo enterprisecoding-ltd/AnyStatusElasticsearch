@@ -19,7 +19,7 @@ using AnyStatus.API;
 using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient;
 using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Index;
 using AnyStatus.Plugins.Elasticsearch.Helpers;
-using AnyStatus.Plugins.Elasticsearch.Index.DocumentCount;
+using AnyStatus.Plugins.Elasticsearch.Index.IndexDocumentCount;
 using AnyStatus.Plugins.Elasticsearch.Shared;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -37,7 +37,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Index
         [TestMethod]
         public async Task IndexDocumentCountShouldValid()
         {
-            var widget = new DocumentCountWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" }, IndexName = indexName };
+            var widget = new IndexDocumentCountWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" }, IndexName = indexName };
 
             var indicesStatsMock = new Mock<IndicesStats>();
             var indexCountResponseMock = new Mock<IndicesStatsResponse>();
@@ -58,7 +58,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Index
 
             var request = MetricQueryRequest.Create(widget);
 
-            var handler = new DocumentCountMetricQuery(elasticsearchHelperMock.Object);
+            var handler = new IndexDocumentCountMetricQuery(elasticsearchHelperMock.Object);
 
             await handler.Handle(request, CancellationToken.None).ConfigureAwait(false);
 
@@ -72,7 +72,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Index
         [TestMethod]
         public async Task IndexDocumentCountShouldInvalidWhenResponseIsInvalid()
         {
-            var widget = new DocumentCountWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" }, IndexName = indexName };
+            var widget = new IndexDocumentCountWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" }, IndexName = indexName };
 
             var indexCountResponseMock = new Mock<IndicesStatsResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();
@@ -88,7 +88,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Index
 
             var request = MetricQueryRequest.Create(widget);
 
-            var handler = new DocumentCountMetricQuery(elasticsearchHelperMock.Object);
+            var handler = new IndexDocumentCountMetricQuery(elasticsearchHelperMock.Object);
 
             await handler.Handle(request, CancellationToken.None).ConfigureAwait(false);
 

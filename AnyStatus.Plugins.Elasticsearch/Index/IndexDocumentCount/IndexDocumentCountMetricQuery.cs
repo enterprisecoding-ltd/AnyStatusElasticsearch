@@ -20,27 +20,27 @@ using AnyStatus.Plugins.Elasticsearch.Helpers;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AnyStatus.Plugins.Elasticsearch.Index.DocumentCount
+namespace AnyStatus.Plugins.Elasticsearch.Index.IndexDocumentCount
 {
-    public class DocumentCountMetricQuery : IMetricQuery<DocumentCountWidget>
+    public class IndexDocumentCountMetricQuery : IMetricQuery<IndexDocumentCountWidget>
     {
         /// <summary>
         /// Elasticsearch Helper to retrieve elastic client
         /// </summary>
         private readonly ElasticsearchHelper elasticsearchHelper;
 
-        public DocumentCountMetricQuery() : this(new ElasticsearchHelper()) { }
+        public IndexDocumentCountMetricQuery() : this(new ElasticsearchHelper()) { }
 
         /// <summary>
         /// Constructer used by unit tests
         /// </summary>
         /// <param name="elasticsearchHelper">Elasticsearch Helper class instance to use</param>
-        internal DocumentCountMetricQuery(ElasticsearchHelper elasticsearchHelper)
+        internal IndexDocumentCountMetricQuery(ElasticsearchHelper elasticsearchHelper)
         {
             this.elasticsearchHelper = elasticsearchHelper;
         }
 
-        public async Task Handle(MetricQueryRequest<DocumentCountWidget> request, CancellationToken cancellationToken)
+        public async Task Handle(MetricQueryRequest<IndexDocumentCountWidget> request, CancellationToken cancellationToken)
         {
             var documentCountWidget = request.DataContext;
 

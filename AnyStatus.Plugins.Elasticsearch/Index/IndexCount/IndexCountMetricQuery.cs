@@ -21,7 +21,7 @@ using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Cat;
 using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Shared;
 using AnyStatus.Plugins.Elasticsearch.Helpers;
 using AnyStatus.Plugins.Elasticsearch.Index.DeletedDocumentCount;
-using AnyStatus.Plugins.Elasticsearch.Index.DocumentCount;
+using AnyStatus.Plugins.Elasticsearch.Index.IndexDocumentCount;
 using AnyStatus.Plugins.Elasticsearch.Index.IndexHealth;
 using AnyStatus.Plugins.Elasticsearch.Index.IndexStoreSize;
 using System.Threading;
@@ -137,10 +137,10 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexCount
         {
             return new CollectionSynchronizer<IndexEntry, Item>
             {
-                Compare = (indexEntry, item) => item is DocumentCountWidget documentCountWidget && indexEntry.Uuid == documentCountWidget.IndexUuid,
+                Compare = (indexEntry, item) => item is IndexDocumentCountWidget documentCountWidget && indexEntry.Uuid == documentCountWidget.IndexUuid,
                 Remove = item => request.DataContext.Remove(item),
-                Update = (indexEntry, item) => ((DocumentCountWidget)item).IndexUuid = indexEntry.Uuid,
-                Add = indexEntry => request.DataContext.Add(new DocumentCountWidget
+                Update = (indexEntry, item) => ((IndexDocumentCountWidget)item).IndexUuid = indexEntry.Uuid,
+                Add = indexEntry => request.DataContext.Add(new IndexDocumentCountWidget
                 {
                     Name = indexEntry.Index,
                     IndexName = indexEntry.Index,

@@ -82,8 +82,8 @@
     <Compile Include="Index\IndexStoreSize\IndexStoreSizeMetricQuery.cs" />
     <Compile Include="Index\IndexStoreSize\StoreSizeType.cs" />
     <Compile Include="Index\IndexStoreSize\IndexStoreSizeWidget.cs" />
-    <Compile Include="Index\DocumentCount\DocumentCountMetricQuery.cs" />
-    <Compile Include="Index\DocumentCount\DocumentCountWidget.cs" />
+    <Compile Include="Index\IndexDocumentCount\IndexDocumentCountMetricQuery.cs" />
+    <Compile Include="Index\IndexDocumentCount\IndexDocumentCountWidget.cs" />
     <Compile Include="Index\IndexCount\IndexCountMetricQuery.cs" />
     <Compile Include="Index\IndexCount\IndexCountWidget.cs" />
     <Compile Include="Index\IndexCount\IndexDetail.cs" />

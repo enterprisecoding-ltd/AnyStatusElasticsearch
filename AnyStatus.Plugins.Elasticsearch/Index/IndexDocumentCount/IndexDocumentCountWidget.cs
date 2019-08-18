@@ -23,12 +23,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Xml.Serialization;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
-namespace AnyStatus.Plugins.Elasticsearch.Index.DocumentCount
+namespace AnyStatus.Plugins.Elasticsearch.Index.IndexDocumentCount
 {
     [DisplayName("Index Document Count")]
     [DisplayColumn("Elasticsearch")]
     [Description("Shows total document count for the Elasticsearch Cluster")]
-    public class DocumentCountWidget : Metric, IElasticsearchWidget, ISchedulable
+    public class IndexDocumentCountWidget : Metric, IElasticsearchWidget, ISchedulable
     {
         [Url]
         [Required]
@@ -77,7 +77,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.DocumentCount
         [Browsable(false)]
         public string IndexUuid { get; internal set; }
 
-        public DocumentCountWidget()
+        public IndexDocumentCountWidget()
         {
             Name = "Index Document Count";
 
