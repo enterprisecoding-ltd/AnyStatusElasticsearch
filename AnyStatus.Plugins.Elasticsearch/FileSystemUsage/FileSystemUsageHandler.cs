@@ -59,7 +59,7 @@ namespace AnyStatus.Plugins.Elasticsearch.FileSystemUsage
 
             if (clusterStatsResponse.IsValid)
             {
-                if (fileSystemUsageWidget.PercentageType == Shared.FileSystemPercentageType.PercentageUsed)
+                if (fileSystemUsageWidget.PercentageType == FileSystemPercentageType.PercentageUsed)
                 {
                     var usedInBytes = clusterStatsResponse.Nodes.FileSystem.TotalInBytes - clusterStatsResponse.Nodes.FileSystem.AvailableInBytes;
                     request.DataContext.Progress = (int)Math.Round((usedInBytes / (double)clusterStatsResponse.Nodes.FileSystem.TotalInBytes) * 100);

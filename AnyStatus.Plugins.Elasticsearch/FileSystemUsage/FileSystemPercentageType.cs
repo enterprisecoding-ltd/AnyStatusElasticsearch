@@ -15,11 +15,21 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-namespace AnyStatus.Plugins.Elasticsearch.Shared
+namespace AnyStatus.Plugins.Elasticsearch.FileSystemUsage
 {
+    /// <summary>
+    /// Percentage type to show
+    /// </summary>
     public enum FileSystemPercentageType
     {
+        /// <summary>
+        /// Show percentage used
+        /// </summary>
         PercentageUsed,
+
+        /// <summary>
+        /// Show percentage reamining
+        /// </summary>
         PercentageRemaining
     }
 }

@@ -17,15 +17,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
-namespace AnyStatus.Plugins.Elasticsearch.Shared
+namespace AnyStatus.Plugins.Elasticsearch.FileSystemUsage
 {
+    /// <summary>
+    /// Provides human readable entries for <see cref="FileSystemPercentageType"/>
+    /// </summary>
     public class FileSystemPercentageTypeItemsSource : IItemsSource
     {
+        /// <summary>
+        /// Maps <see cref="FileSystemPercentageType"/> entries wit human redable texts
+        /// </summary>
+        /// <returns>Returns mapped entries</returns>
         public ItemCollection GetValues()
         {
             ItemCollection values = new ItemCollection
             {
-                { FileSystemPercentageType.PercentageUsed, "PercentageUsed" },
+                { FileSystemPercentageType.PercentageUsed, "Percentage Used" },
                 { FileSystemPercentageType.PercentageRemaining, "Percentage Remaining" },
             };
 

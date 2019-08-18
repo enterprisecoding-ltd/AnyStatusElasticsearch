@@ -109,13 +109,13 @@
     <Compile Include="Helpers\FileSizeFormatter.cs" />
     <Compile Include="Cluster\DeletedDocumentCount\DeletedDocumentCountMetricQuery.cs" />
     <Compile Include="Cluster\DeletedDocumentCount\DeletedDocumentCountWidget.cs" />
-    <Compile Include="Shared\FileSystemPercentageTypeItemsSource.cs" />
+    <Compile Include="FileSystemUsage\FileSystemPercentageTypeItemsSource.cs" />
     <Compile Include="StoreSize\StoreSizeMetricQuery.cs" />
     <Compile Include="StoreSize\StoreSizeWidget.cs" />
     <Compile Include="Cluster\DocumentCount\DocumentCountMetricQuery.cs" />
     <Compile Include="Cluster\DocumentCount\DocumentCountWidget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Shared\FileSystemPercentageType.cs" />
+    <Compile Include="FileSystemUsage\FileSystemPercentageType.cs" />
     <Compile Include="Shared\IElasticsearchNodeWidget.cs" />
     <Compile Include="Shared\IElasticsearchWidget.cs" />
   </ItemGroup>
