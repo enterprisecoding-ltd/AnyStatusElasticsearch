@@ -23,12 +23,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Xml.Serialization;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
-namespace AnyStatus.Plugins.Elasticsearch.Index.StoreSize
+namespace AnyStatus.Plugins.Elasticsearch.Index.IndexStoreSize
 {
     [DisplayName("Index Store Size")]
     [DisplayColumn("Elasticsearch")]
     [Description("Shows primary/total store size of a given elasticserch index")]
-    public class StoreSizeWidget : Metric, IElasticsearchWidget, ISchedulable
+    public class IndexStoreSizeWidget : Metric, IElasticsearchWidget, ISchedulable
     {
         [Url]
         [Required]
@@ -84,7 +84,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.StoreSize
         [Browsable(false)]
         public string IndexUuid { get; internal set; }
 
-        public StoreSizeWidget()
+        public IndexStoreSizeWidget()
         {
             Name = "Index Store Size";
 

@@ -32,17 +32,16 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets
     [TestClass]
     public class StoreSizeTests
     {
+        private const string nodeId = "es01";
+
         [TestMethod]
         public async Task ClusterStoreSizeShouldValid()
         {
+            var widget = new StoreSizeWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" } };
+
             var clusterStatsResponseMock = new Mock<ClusterStatsResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();
-            var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] {
-                new List<string>(),
-                string.Empty,
-                string.Empty,
-                false
-            });
+            var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] { widget });
 
             clusterStatsResponseMock.Setup(response => response.Indices.Store.SizeInBytes).Returns(50);
             clusterStatsResponseMock.Setup(response => response.IsValid).Returns(true);
@@ -52,8 +51,6 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets
 
             elasticsearchSimpleClientMock.Setup(client => client.StatsAsync("indices.store.size_in_bytes", It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult(clusterStatsResponseMock.Object));
-
-            var widget = new StoreSizeWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" } };
 
             var request = MetricQueryRequest.Create(widget);
 
@@ -71,14 +68,11 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets
         [TestMethod]
         public async Task ClusterStoreSizeShouldInvalidWhenResponseIsInvalid()
         {
+            var widget = new StoreSizeWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" } };
+
             var clusterStatsResponseMock = new Mock<ClusterStatsResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();
-            var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] {
-                new List<string>(),
-                string.Empty,
-                string.Empty,
-                false
-            });
+            var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] { widget });
 
             clusterStatsResponseMock.Setup(response => response.IsValid).Returns(false);
 
@@ -87,8 +81,6 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets
 
             elasticsearchSimpleClientMock.Setup(client => client.StatsAsync("indices.store.size_in_bytes", It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult(clusterStatsResponseMock.Object));
-
-            var widget = new StoreSizeWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" } };
 
             var request = MetricQueryRequest.Create(widget);
 
@@ -105,14 +97,11 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets
         [TestMethod]
         public async Task NodeStoreSizeShouldValid()
         {
+            var widget = new StoreSizeWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" }, NodeId = nodeId };
+
             var clusterStatsResponseMock = new Mock<ClusterStatsResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();
-            var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] {
-                new List<string>(),
-                string.Empty,
-                string.Empty,
-                false
-            });
+            var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] { widget });
 
             clusterStatsResponseMock.Setup(response => response.Indices.Store.SizeInBytes).Returns(50);
             clusterStatsResponseMock.Setup(response => response.IsValid).Returns(true);
@@ -120,10 +109,8 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets
             elasticsearchHelperMock.Setup(helper => helper.GetElasticClient(It.IsAny<IElasticsearchWidget>()))
                 .Returns(elasticsearchSimpleClientMock.Object);
 
-            elasticsearchSimpleClientMock.Setup(client => client.StatsAsync("indices.store.size_in_bytes", "es01", It.IsAny<CancellationToken>()))
+            elasticsearchSimpleClientMock.Setup(client => client.StatsAsync("indices.store.size_in_bytes", nodeId, It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult(clusterStatsResponseMock.Object));
-
-            var widget = new StoreSizeWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" }, NodeId = "es01" };
 
             var request = MetricQueryRequest.Create(widget);
 
@@ -135,30 +122,25 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets
             Assert.AreEqual("50.0 Bytes", widget.Value);
 
             elasticsearchHelperMock.Verify(client => client.GetElasticClient(It.IsAny<IElasticsearchWidget>()), Times.Once());
-            elasticsearchSimpleClientMock.Verify(client => client.StatsAsync("indices.store.size_in_bytes", "es01", It.IsAny<CancellationToken>()), Times.Once());
+            elasticsearchSimpleClientMock.Verify(client => client.StatsAsync("indices.store.size_in_bytes", nodeId, It.IsAny<CancellationToken>()), Times.Once());
         }
 
         [TestMethod]
         public async Task NodeStoreSizeShouldInvalidWhenResponseIsInvalid()
         {
+            var widget = new StoreSizeWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" }, NodeId = nodeId };
+
             var clusterStatsResponseMock = new Mock<ClusterStatsResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();
-            var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] {
-                new List<string>(),
-                string.Empty,
-                string.Empty,
-                false
-            });
+            var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] { widget });
 
             clusterStatsResponseMock.Setup(response => response.IsValid).Returns(false);
 
             elasticsearchHelperMock.Setup(helper => helper.GetElasticClient(It.IsAny<IElasticsearchWidget>()))
                 .Returns(elasticsearchSimpleClientMock.Object);
 
-            elasticsearchSimpleClientMock.Setup(client => client.StatsAsync("indices.store.size_in_bytes", "es01", It.IsAny<CancellationToken>()))
+            elasticsearchSimpleClientMock.Setup(client => client.StatsAsync("indices.store.size_in_bytes", nodeId, It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult(clusterStatsResponseMock.Object));
-
-            var widget = new StoreSizeWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" }, NodeId = "es01" };
 
             var request = MetricQueryRequest.Create(widget);
 
@@ -169,7 +151,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets
             Assert.AreEqual(State.Invalid, widget.State);
 
             elasticsearchHelperMock.Verify(client => client.GetElasticClient(It.IsAny<IElasticsearchWidget>()), Times.Once());
-            elasticsearchSimpleClientMock.Verify(client => client.StatsAsync("indices.store.size_in_bytes", "es01", It.IsAny<CancellationToken>()), Times.Once());
+            elasticsearchSimpleClientMock.Verify(client => client.StatsAsync("indices.store.size_in_bytes", nodeId, It.IsAny<CancellationToken>()), Times.Once());
         }
     }
 }

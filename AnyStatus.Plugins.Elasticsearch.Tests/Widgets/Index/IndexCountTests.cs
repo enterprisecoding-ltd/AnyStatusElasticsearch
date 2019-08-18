@@ -35,14 +35,11 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Index
         [TestMethod]
         public async Task IndexCountShouldValid()
         {
+            var widget = new IndexCountWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" } };
+
             var indexListResponseMock = new Mock<IndexListResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();
-            var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] {
-                new List<string>(),
-                string.Empty,
-                string.Empty,
-                false
-            });
+            var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] { widget });
 
             indexListResponseMock.Setup(response => response.Indices).Returns(new[] {
                 new IndexEntry{ Index = "index1" },
@@ -57,8 +54,6 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Index
 
             elasticsearchSimpleClientMock.Setup(client => client.IndexListAsync(It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult(indexListResponseMock.Object));
-
-            var widget = new IndexCountWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" } };
 
             var request = MetricQueryRequest.Create(widget);
 
@@ -76,14 +71,11 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Index
         [TestMethod]
         public async Task IndexCountShouldInvalidWhenResponseIsInvalid()
         {
+            var widget = new IndexCountWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" } };
+
             var indexListResponseMock = new Mock<IndexListResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();
-            var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] {
-                new List<string>(),
-                string.Empty,
-                string.Empty,
-                false
-            });
+            var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] { widget });
 
             indexListResponseMock.Setup(response => response.IsValid).Returns(false);
 
@@ -92,8 +84,6 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Index
 
             elasticsearchSimpleClientMock.Setup(client => client.IndexListAsync(It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult(indexListResponseMock.Object));
-
-            var widget = new IndexCountWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" } };
 
             var request = MetricQueryRequest.Create(widget);
 

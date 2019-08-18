@@ -24,11 +24,17 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace AnyStatus.Plugins.Elasticsearch.Index.IndexCount
 {
+    /// <summary>
+    /// Shows total index count on given Elasticsearch Cluster
+    /// </summary>
     [DisplayName("Index Count")]
     [DisplayColumn("Elasticsearch")]
     [Description("Shows total document count for the Elasticsearch Cluster")]
     public class IndexCountWidget : Metric, IElasticsearchWidget, ISchedulable
     {
+        /// <summary>
+        /// Elasticsearch nodes uris to connect
+        /// </summary>
         [Url]
         [Required]
         [PropertyOrder(10)]
@@ -37,6 +43,9 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexCount
         [Description("Elasticsearch node uris to connect")]
         public List<string> NodeUris { get; set; }
 
+        /// <summary>
+        /// Index details to show for each discovered index
+        /// </summary>
         [Category("Index Count")]
         [PropertyOrder(20)]
         [ItemsSource(typeof(IndexDetailsItemsSource))]
@@ -44,22 +53,34 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexCount
         [Description("Index detail type to show for each discovered index")]
         public IndexDetail IndexDetails { get; set; }
 
+        /// <summary>
+        /// Should we use basic authentication?
+        /// </summary>
         [Category("Index Count")]
         [PropertyOrder(30)]
         [DisplayName("Use Basic Authentication")]
         [Description("Use Basic Authentication to connect Elasticsearch Cluster")]
         public bool UseBasicAuthentication { get; set; }
 
+        /// <summary>
+        /// Username for basic authentication
+        /// </summary>
         [Category("Index Count")]
         [PropertyOrder(40)]
         [Description("Username to connect Elasticsearch Cluster")]
         public string Username { get; set; }
 
+        /// <summary>
+        /// Password for basic authentication
+        /// </summary>
         [Category("Index Count")]
         [PropertyOrder(50)]
         [Description("Password to connect Elasticsearch Cluster")]
         public string Password { get; set; }
 
+        /// <summary>
+        /// Should we trust unknown certificates?
+        /// </summary>
         [Category("Index Count")]
         [PropertyOrder(60)]
         [DisplayName("Trust Certificate")]

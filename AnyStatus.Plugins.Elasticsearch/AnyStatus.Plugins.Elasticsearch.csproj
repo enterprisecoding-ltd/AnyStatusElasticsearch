@@ -79,9 +79,9 @@
     <Compile Include="Index\DeletedDocumentCount\DeletedDocumentCountMetricQuery.cs" />
     <Compile Include="Index\DeletedDocumentCount\DeletedDocumentCountWidget.cs" />
     <Compile Include="Index\IndexCount\IndexDetailsItemsSource.cs" />
-    <Compile Include="Index\StoreSize\StoreSizeMetricQuery.cs" />
-    <Compile Include="Index\StoreSize\StoreSizeType.cs" />
-    <Compile Include="Index\StoreSize\StoreSizeWidget.cs" />
+    <Compile Include="Index\IndexStoreSize\IndexStoreSizeMetricQuery.cs" />
+    <Compile Include="Index\IndexStoreSize\StoreSizeType.cs" />
+    <Compile Include="Index\IndexStoreSize\IndexStoreSizeWidget.cs" />
     <Compile Include="Index\DocumentCount\DocumentCountMetricQuery.cs" />
     <Compile Include="Index\DocumentCount\DocumentCountWidget.cs" />
     <Compile Include="Index\IndexCount\IndexCountMetricQuery.cs" />

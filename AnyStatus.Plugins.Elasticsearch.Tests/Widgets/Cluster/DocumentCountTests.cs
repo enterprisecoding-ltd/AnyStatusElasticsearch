@@ -35,14 +35,11 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Cluster
         [TestMethod]
         public async Task DocumentCountShouldValid()
         {
+            var widget = new DocumentCountWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" } };
+
             var clusterStatsResponseMock = new Mock<ClusterStatsResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();
-            var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] {
-                new List<string>(),
-                string.Empty,
-                string.Empty,
-                false
-            });
+            var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] { widget});
 
             clusterStatsResponseMock.Setup(response => response.Indices.Documents.Count).Returns(50);
             clusterStatsResponseMock.Setup(response => response.IsValid).Returns(true);
@@ -52,8 +49,6 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Cluster
 
             elasticsearchSimpleClientMock.Setup(client => client.StatsAsync("indices.docs.count", It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult(clusterStatsResponseMock.Object));
-
-            var widget = new DocumentCountWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" } };
 
             var request = MetricQueryRequest.Create(widget);
 
@@ -71,14 +66,11 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Cluster
         [TestMethod]
         public async Task DocumentCountShouldInvalidWhenResponseIsInvalid()
         {
+            var widget = new DocumentCountWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" } };
+
             var clusterStatsResponseMock = new Mock<ClusterStatsResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();
-            var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] {
-                new List<string>(),
-                string.Empty,
-                string.Empty,
-                false
-            });
+            var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] { widget});
 
             clusterStatsResponseMock.Setup(response => response.IsValid).Returns(false);
 
@@ -87,8 +79,6 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Cluster
 
             elasticsearchSimpleClientMock.Setup(client => client.StatsAsync("indices.docs.count", It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult(clusterStatsResponseMock.Object));
-
-            var widget = new DocumentCountWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" } };
 
             var request = MetricQueryRequest.Create(widget);
 

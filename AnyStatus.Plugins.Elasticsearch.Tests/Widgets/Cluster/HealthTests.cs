@@ -36,14 +36,11 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Cluster
         [TestMethod]
         public async Task ClusterHealthShouldValidWhenClusterStatusGreen()
         {
+            var widget = new ClusterHealthWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" } };
+
             var clusterHealthResponseMock = new Mock<ClusterHealthResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();
-            var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] {
-                new List<string>(),
-                string.Empty,
-                string.Empty,
-                false
-            });
+            var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] { widget });
 
             clusterHealthResponseMock.Setup(response => response.IsValid).Returns(true);
             clusterHealthResponseMock.Setup(response => response.Status).Returns(Health.Green);
@@ -53,8 +50,6 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Cluster
 
             elasticsearchSimpleClientMock.Setup(client => client.HealthAsync(It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult(clusterHealthResponseMock.Object));
-
-            var widget = new ClusterHealthWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" } };
 
             var request = HealthCheckRequest.Create(widget);
 
@@ -71,14 +66,11 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Cluster
         [TestMethod]
         public async Task ClusterHealthShouldPartiallySucceededWhenClusterStatusYellow()
         {
+            var widget = new ClusterHealthWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" } };
+
             var clusterHealthResponseMock = new Mock<ClusterHealthResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();
-            var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] {
-                new List<string>(),
-                string.Empty,
-                string.Empty,
-                false
-            });
+            var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] { widget });
 
             clusterHealthResponseMock.Setup(response => response.IsValid).Returns(true);
             clusterHealthResponseMock.Setup(response => response.Status).Returns(Health.Yellow);
@@ -88,8 +80,6 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Cluster
 
             elasticsearchSimpleClientMock.Setup(client => client.HealthAsync(It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult(clusterHealthResponseMock.Object));
-
-            var widget = new ClusterHealthWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" } };
 
             var request = HealthCheckRequest.Create(widget);
 
@@ -106,14 +96,11 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Cluster
         [TestMethod]
         public async Task ClusterHealthShouldFailedWhenClusterStatusRed()
         {
+            var widget = new ClusterHealthWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" } };
+
             var clusterHealthResponseMock = new Mock<ClusterHealthResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();
-            var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] {
-                new List<string>(),
-                string.Empty,
-                string.Empty,
-                false
-            });
+            var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] { widget });
 
             clusterHealthResponseMock.Setup(response => response.IsValid).Returns(true);
             clusterHealthResponseMock.Setup(response => response.Status).Returns(Health.Red);
@@ -123,8 +110,6 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Cluster
 
             elasticsearchSimpleClientMock.Setup(client => client.HealthAsync(It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult(clusterHealthResponseMock.Object));
-
-            var widget = new ClusterHealthWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" } };
 
             var request = HealthCheckRequest.Create(widget);
 
@@ -141,14 +126,11 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Cluster
         [TestMethod]
         public async Task ClusterHealthShouldInvalidWhenResponseIsInvalid()
         {
+            var widget = new ClusterHealthWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" } };
+
             var clusterHealthResponseMock = new Mock<ClusterHealthResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();
-            var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] {
-                new List<string>(),
-                string.Empty,
-                string.Empty,
-                false
-            });
+            var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] { widget });
 
             clusterHealthResponseMock.Setup(response => response.IsValid).Returns(false);
 
@@ -157,8 +139,6 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets.Cluster
 
             elasticsearchSimpleClientMock.Setup(client => client.HealthAsync(It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult(clusterHealthResponseMock.Object));
-
-            var widget = new ClusterHealthWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" } };
 
             var request = HealthCheckRequest.Create(widget);
 

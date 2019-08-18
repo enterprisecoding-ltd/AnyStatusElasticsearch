@@ -33,6 +33,7 @@ using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Cluster;
 using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Health;
 using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Index;
 using AnyStatus.Plugins.Elasticsearch.ElasticsearchClient.Objects.Stats;
+using AnyStatus.Plugins.Elasticsearch.Shared;
 
 namespace AnyStatus.Plugins.Elasticsearch.ElasticsearchClient
 {
@@ -50,27 +51,34 @@ namespace AnyStatus.Plugins.Elasticsearch.ElasticsearchClient
         /// </summary>
         private readonly List<HttpClient> httpClients;
 
-        public ElasticsearchSimpleClient(IEnumerable<string> uris, string username = null, string password = null, bool trustCertificate = false)
+        public ElasticsearchSimpleClient(IElasticsearchWidget elasticsearchWidget)
         {
-            httpClients = new List<HttpClient>(uris.Count());
-            foreach (var uri in uris)
+            httpClients = new List<HttpClient>(elasticsearchWidget.NodeUris.Count());
+            foreach (var uri in elasticsearchWidget.NodeUris)
             {
                 var httpClient = new HttpClient { BaseAddress = new Uri(uri) };
-                if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password))
+                if (elasticsearchWidget.UseBasicAuthentication 
+                    && !string.IsNullOrWhiteSpace(elasticsearchWidget.Username) 
+                    && !string.IsNullOrWhiteSpace(elasticsearchWidget.Password))
                 {
-                    var authenticationHeaderBytes = Encoding.UTF8.GetBytes($"{username}:{password}");
+                    var authenticationHeaderBytes = Encoding.UTF8.GetBytes($"{elasticsearchWidget.Username}:{elasticsearchWidget.Password}");
                     httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(authenticationHeaderBytes));
                 }
 
                 httpClients.Add(httpClient);
             }
 
-            if (trustCertificate)
+            if (elasticsearchWidget.TrustCertificate)
             {
                 ServicePointManager.ServerCertificateValidationCallback += RemoteCertificateValidation;
             }
         }
 
+        /// <summary>
+        /// Retrieves cluster heaşth status
+        /// </summary>
+        /// <param name="cancellationToken">Token to cancel Elasticsearch request</param>
+        /// <returns>Cluster health status</returns>
         public virtual async Task<ClusterHealthResponse> HealthAsync(CancellationToken cancellationToken)
         {
             ClusterHealthResponse result;

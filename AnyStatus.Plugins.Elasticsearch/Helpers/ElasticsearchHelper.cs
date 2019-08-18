@@ -25,7 +25,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Helpers
 
         public virtual ElasticsearchSimpleClient GetElasticClient(IElasticsearchWidget elasticsearchWidget)
         {
-            var client = new ElasticsearchSimpleClient(elasticsearchWidget.NodeUris, elasticsearchWidget.Username, elasticsearchWidget.Password, elasticsearchWidget.TrustCertificate);
+            var client = new ElasticsearchSimpleClient(elasticsearchWidget);
             return client;
         }
     }

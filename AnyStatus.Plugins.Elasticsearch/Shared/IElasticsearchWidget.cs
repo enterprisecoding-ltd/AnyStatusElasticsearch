@@ -21,10 +21,29 @@ namespace AnyStatus.Plugins.Elasticsearch.Shared
 {
     public interface IElasticsearchWidget
     {
+        /// <summary>
+        /// Elasticsearch nodes uris to connect
+        /// </summary>
         List<string> NodeUris { get; set; }
+
+        /// <summary>
+        /// Should we use basic authentication?
+        /// </summary>
         bool UseBasicAuthentication { get; set; }
+
+        /// <summary>
+        /// Username for basic authentication
+        /// </summary>
         string Username { get; set; }
+
+        /// <summary>
+        /// Password for basic authentication
+        /// </summary>
         string Password { get; set; }
+
+        /// <summary>
+        /// Should we trust unknown certificates?
+        /// </summary>
         bool TrustCertificate { get; set; }
     }
 }

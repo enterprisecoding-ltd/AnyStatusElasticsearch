@@ -23,7 +23,7 @@ using AnyStatus.Plugins.Elasticsearch.Helpers;
 using AnyStatus.Plugins.Elasticsearch.Index.DeletedDocumentCount;
 using AnyStatus.Plugins.Elasticsearch.Index.DocumentCount;
 using AnyStatus.Plugins.Elasticsearch.Index.IndexHealth;
-using AnyStatus.Plugins.Elasticsearch.Index.StoreSize;
+using AnyStatus.Plugins.Elasticsearch.Index.IndexStoreSize;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -181,10 +181,10 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexCount
         {
             return new CollectionSynchronizer<IndexEntry, Item>
             {
-                Compare = (indexEntry, item) => item is StoreSizeWidget storeSizeWidget && indexEntry.Uuid == storeSizeWidget.IndexUuid && storeSizeWidget.SizeType == StoreSizeType.Total,
+                Compare = (indexEntry, item) => item is IndexStoreSizeWidget storeSizeWidget && indexEntry.Uuid == storeSizeWidget.IndexUuid && storeSizeWidget.SizeType == StoreSizeType.Total,
                 Remove = item => request.DataContext.Remove(item),
-                Update = (indexEntry, item) => ((StoreSizeWidget)item).IndexUuid = indexEntry.Uuid,
-                Add = indexEntry => request.DataContext.Add(new StoreSizeWidget
+                Update = (indexEntry, item) => ((IndexStoreSizeWidget)item).IndexUuid = indexEntry.Uuid,
+                Add = indexEntry => request.DataContext.Add(new IndexStoreSizeWidget
                 {
                     Name = indexEntry.Index,
                     IndexName = indexEntry.Index,
@@ -204,10 +204,10 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexCount
         {
             return new CollectionSynchronizer<IndexEntry, Item>
             {
-                Compare = (indexEntry, item) => item is StoreSizeWidget storeSizeWidget && indexEntry.Uuid == storeSizeWidget.IndexUuid && storeSizeWidget.SizeType == StoreSizeType.Primary,
+                Compare = (indexEntry, item) => item is IndexStoreSizeWidget storeSizeWidget && indexEntry.Uuid == storeSizeWidget.IndexUuid && storeSizeWidget.SizeType == StoreSizeType.Primary,
                 Remove = item => request.DataContext.Remove(item),
-                Update = (indexEntry, item) => ((StoreSizeWidget)item).IndexUuid = indexEntry.Uuid,
-                Add = indexEntry => request.DataContext.Add(new StoreSizeWidget
+                Update = (indexEntry, item) => ((IndexStoreSizeWidget)item).IndexUuid = indexEntry.Uuid,
+                Add = indexEntry => request.DataContext.Add(new IndexStoreSizeWidget
                 {
                     Name = indexEntry.Index,
                     IndexName = indexEntry.Index,

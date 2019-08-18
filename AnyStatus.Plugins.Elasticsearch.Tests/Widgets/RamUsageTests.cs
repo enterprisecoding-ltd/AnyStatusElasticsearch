@@ -32,17 +32,16 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets
     [TestClass]
     public class RamUsageTests
     {
+        private const string nodeId = "es01";
+
         [TestMethod]
         public async Task ClusterRamUsageShouldValid()
         {
+            var widget = new RamUsageWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" } };
+
             var clusterStatsResponseMock = new Mock<ClusterStatsResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();
-            var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] {
-                new List<string>(),
-                string.Empty,
-                string.Empty,
-                false
-            });
+            var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] { widget });
 
             clusterStatsResponseMock.Setup(response => response.Nodes.OperatingSystem.Memory.UsedPercent).Returns(50);
             clusterStatsResponseMock.Setup(response => response.IsValid).Returns(true);
@@ -52,8 +51,6 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets
 
             elasticsearchSimpleClientMock.Setup(client => client.StatsAsync("nodes.os.mem.used_percent", It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult(clusterStatsResponseMock.Object));
-
-            var widget = new RamUsageWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" } };
 
             var request = MetricQueryRequest.Create(widget);
 
@@ -71,14 +68,11 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets
         [TestMethod]
         public async Task ClusterRamUsageShouldInvalidWhenResponseIsInvalid()
         {
+            var widget = new RamUsageWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" } };
+
             var clusterStatsResponseMock = new Mock<ClusterStatsResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();
-            var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] {
-                new List<string>(),
-                string.Empty,
-                string.Empty,
-                false
-            });
+            var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] { widget });
 
             clusterStatsResponseMock.Setup(response => response.IsValid).Returns(false);
 
@@ -87,8 +81,6 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets
 
             elasticsearchSimpleClientMock.Setup(client => client.StatsAsync("nodes.os.mem.used_percent", It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult(clusterStatsResponseMock.Object));
-
-            var widget = new RamUsageWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" } };
 
             var request = MetricQueryRequest.Create(widget);
 
@@ -105,14 +97,11 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets
         [TestMethod]
         public async Task NodeRamUsageShouldValid()
         {
+            var widget = new RamUsageWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" }, NodeId = nodeId };
+
             var clusterStatsResponseMock = new Mock<ClusterStatsResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();
-            var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] {
-                new List<string>(),
-                string.Empty,
-                string.Empty,
-                false
-            });
+            var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] { widget });
 
             clusterStatsResponseMock.Setup(response => response.Nodes.OperatingSystem.Memory.UsedPercent).Returns(50);
             clusterStatsResponseMock.Setup(response => response.IsValid).Returns(true);
@@ -120,10 +109,8 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets
             elasticsearchHelperMock.Setup(helper => helper.GetElasticClient(It.IsAny<IElasticsearchWidget>()))
                 .Returns(elasticsearchSimpleClientMock.Object);
 
-            elasticsearchSimpleClientMock.Setup(client => client.StatsAsync("nodes.os.mem.used_percent", "es01", It.IsAny<CancellationToken>()))
+            elasticsearchSimpleClientMock.Setup(client => client.StatsAsync("nodes.os.mem.used_percent", nodeId, It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult(clusterStatsResponseMock.Object));
-
-            var widget = new RamUsageWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" }, NodeId = "es01" };
 
             var request = MetricQueryRequest.Create(widget);
 
@@ -135,30 +122,25 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets
             Assert.AreEqual(50, widget.Value);
 
             elasticsearchHelperMock.Verify(client => client.GetElasticClient(It.IsAny<IElasticsearchWidget>()), Times.Once());
-            elasticsearchSimpleClientMock.Verify(client => client.StatsAsync("nodes.os.mem.used_percent", "es01", It.IsAny<CancellationToken>()), Times.Once());
+            elasticsearchSimpleClientMock.Verify(client => client.StatsAsync("nodes.os.mem.used_percent", nodeId, It.IsAny<CancellationToken>()), Times.Once());
         }
 
         [TestMethod]
         public async Task NodeRamUsageShouldInvalidWhenResponseIsInvalid()
         {
+            var widget = new RamUsageWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" }, NodeId = nodeId };
+
             var clusterStatsResponseMock = new Mock<ClusterStatsResponse>();
             var elasticsearchHelperMock = new Mock<ElasticsearchHelper>();
-            var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] {
-                new List<string>(),
-                string.Empty,
-                string.Empty,
-                false
-            });
+            var elasticsearchSimpleClientMock = new Mock<ElasticsearchSimpleClient>(MockBehavior.Strict, new object[] { widget });
 
             clusterStatsResponseMock.Setup(response => response.IsValid).Returns(false);
 
             elasticsearchHelperMock.Setup(helper => helper.GetElasticClient(It.IsAny<IElasticsearchWidget>()))
                 .Returns(elasticsearchSimpleClientMock.Object);
 
-            elasticsearchSimpleClientMock.Setup(client => client.StatsAsync("nodes.os.mem.used_percent", "es01", It.IsAny<CancellationToken>()))
+            elasticsearchSimpleClientMock.Setup(client => client.StatsAsync("nodes.os.mem.used_percent", nodeId, It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult(clusterStatsResponseMock.Object));
-
-            var widget = new RamUsageWidget { NodeUris = new List<string>() { "http://127.0.0.1:9200" }, NodeId = "es01" };
 
             var request = MetricQueryRequest.Create(widget);
 
@@ -169,7 +151,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets
             Assert.AreEqual(State.Invalid, widget.State);
 
             elasticsearchHelperMock.Verify(client => client.GetElasticClient(It.IsAny<IElasticsearchWidget>()), Times.Once());
-            elasticsearchSimpleClientMock.Verify(client => client.StatsAsync("nodes.os.mem.used_percent", "es01", It.IsAny<CancellationToken>()), Times.Once());
+            elasticsearchSimpleClientMock.Verify(client => client.StatsAsync("nodes.os.mem.used_percent", nodeId, It.IsAny<CancellationToken>()), Times.Once());
         }
     }
 }

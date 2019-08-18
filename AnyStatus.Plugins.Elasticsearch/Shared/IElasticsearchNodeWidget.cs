@@ -19,6 +19,9 @@ namespace AnyStatus.Plugins.Elasticsearch.Shared
 {
     public interface IElasticsearchNodeWidget: IElasticsearchWidget
     {
+        /// <summary>
+        /// Elasticsearch cluster node id to retrive data
+        /// </summary>
         string NodeId { get; set; }
     }
 }

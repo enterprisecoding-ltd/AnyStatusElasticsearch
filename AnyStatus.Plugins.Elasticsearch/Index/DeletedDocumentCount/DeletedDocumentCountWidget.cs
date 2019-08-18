@@ -30,6 +30,9 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.DeletedDocumentCount
     [Description("Shows total document count for the Elasticsearch Cluster")]
     public class DeletedDocumentCountWidget : Metric, IElasticsearchWidget, ISchedulable
     {
+        /// <summary>
+        /// Elasticsearch nodes uris to connect
+        /// </summary>
         [Url]
         [Required]
         [PropertyOrder(10)]
@@ -38,6 +41,9 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.DeletedDocumentCount
         [Description("Elasticsearch node uris to connect")]
         public List<string> NodeUris { get; set; }
 
+        /// <summary>
+        /// Index name to show deleted document count
+        /// </summary>
         [Required]
         [Category("Index Deleted Document Count")]
         [PropertyOrder(20)]
@@ -45,22 +51,34 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.DeletedDocumentCount
         [Description("Index name to check health")]
         public string IndexName { get; set; }
 
+        /// <summary>
+        /// Should we use basic authentication?
+        /// </summary>
         [Category("Index Deleted Document Count")]
         [PropertyOrder(30)]
         [DisplayName("Use Basic Authentication")]
         [Description("Use Basic Authentication to connect Elasticsearch Cluster")]
         public bool UseBasicAuthentication { get; set; }
 
+        /// <summary>
+        /// Username for basic authentication
+        /// </summary>
         [Category("Index Deleted Document Count")]
         [PropertyOrder(40)]
         [Description("Username to connect Elasticsearch Cluster")]
         public string Username { get; set; }
 
+        /// <summary>
+        /// Password for basic authentication
+        /// </summary>
         [Category("Index Deleted Document Count")]
         [PropertyOrder(50)]
         [Description("Password to connect Elasticsearch Cluster")]
         public string Password { get; set; }
 
+        /// <summary>
+        /// Should we trust unknown certificates?
+        /// </summary>
         [Category("Index Deleted Document Count")]
         [PropertyOrder(60)]
         [DisplayName("Trust Certificate")]
