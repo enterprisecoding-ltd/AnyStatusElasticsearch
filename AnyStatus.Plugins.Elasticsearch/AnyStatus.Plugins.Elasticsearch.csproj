@@ -76,8 +76,8 @@
     <Compile Include="FileSystemUsage\FileSystemUsageWidget.cs" />
     <Compile Include="Cluster\Health\ClusterHealthCheck.cs" />
     <Compile Include="Cluster\Health\ClusterHealthWidget.cs" />
-    <Compile Include="Index\DeletedDocumentCount\DeletedDocumentCountMetricQuery.cs" />
-    <Compile Include="Index\DeletedDocumentCount\DeletedDocumentCountWidget.cs" />
+    <Compile Include="Index\IndexDeletedDocumentCount\IndexDeletedDocumentCountMetricQuery.cs" />
+    <Compile Include="Index\IndexDeletedDocumentCount\IndexDeletedDocumentCountWidget.cs" />
     <Compile Include="Index\IndexCount\IndexDetailsItemsSource.cs" />
     <Compile Include="Index\IndexStoreSize\IndexStoreSizeMetricQuery.cs" />
     <Compile Include="Index\IndexStoreSize\StoreSizeType.cs" />

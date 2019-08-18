@@ -20,27 +20,27 @@ using AnyStatus.Plugins.Elasticsearch.Helpers;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AnyStatus.Plugins.Elasticsearch.Index.DeletedDocumentCount
+namespace AnyStatus.Plugins.Elasticsearch.Index.IndexDeletedDocumentCount
 {
-    public class DeletedDocumentCountMetricQuery : IMetricQuery<DeletedDocumentCountWidget>
+    public class IndexDeletedDocumentCountMetricQuery : IMetricQuery<IndexDeletedDocumentCountWidget>
     {
         /// <summary>
         /// Elasticsearch Helper to retrieve elastic client
         /// </summary>
         private readonly ElasticsearchHelper elasticsearchHelper;
 
-        public DeletedDocumentCountMetricQuery() : this(new ElasticsearchHelper()) { }
+        public IndexDeletedDocumentCountMetricQuery() : this(new ElasticsearchHelper()) { }
 
         /// <summary>
         /// Constructer used by unit tests
         /// </summary>
         /// <param name="elasticsearchHelper">Elasticsearch Helper class instance to use</param>
-        internal DeletedDocumentCountMetricQuery(ElasticsearchHelper elasticsearchHelper)
+        internal IndexDeletedDocumentCountMetricQuery(ElasticsearchHelper elasticsearchHelper)
         {
             this.elasticsearchHelper = elasticsearchHelper;
         }
 
-        public async Task Handle(MetricQueryRequest<DeletedDocumentCountWidget> request, CancellationToken cancellationToken)
+        public async Task Handle(MetricQueryRequest<IndexDeletedDocumentCountWidget> request, CancellationToken cancellationToken)
         {
             var documentCountWidget = request.DataContext;
 

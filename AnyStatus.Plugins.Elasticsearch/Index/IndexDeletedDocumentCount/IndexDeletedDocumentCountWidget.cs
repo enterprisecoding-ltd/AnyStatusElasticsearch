@@ -23,12 +23,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Xml.Serialization;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
-namespace AnyStatus.Plugins.Elasticsearch.Index.DeletedDocumentCount
+namespace AnyStatus.Plugins.Elasticsearch.Index.IndexDeletedDocumentCount
 {
     [DisplayName("Index Deleted Document Count")]
     [DisplayColumn("Elasticsearch")]
     [Description("Shows total document count for the Elasticsearch Cluster")]
-    public class DeletedDocumentCountWidget : Metric, IElasticsearchWidget, ISchedulable
+    public class IndexDeletedDocumentCountWidget : Metric, IElasticsearchWidget, ISchedulable
     {
         /// <summary>
         /// Elasticsearch nodes uris to connect
@@ -95,7 +95,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.DeletedDocumentCount
         [Browsable(false)]
         public string IndexUuid { get; internal set; }
 
-        public DeletedDocumentCountWidget()
+        public IndexDeletedDocumentCountWidget()
         {
             Name = "Index Deleted Document Count";
 
