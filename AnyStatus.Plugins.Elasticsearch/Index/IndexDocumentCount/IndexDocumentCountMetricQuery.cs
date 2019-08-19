@@ -22,7 +22,7 @@ using System.Threading.Tasks;
 
 namespace AnyStatus.Plugins.Elasticsearch.Index.IndexDocumentCount
 {
-    public class IndexDocumentCountMetricQuery : IMetricQuery<IndexDocumentCountWidget>
+    public class IndexDocumentCountMetricQuery : IRequestHandler<MetricQueryRequest<IndexDocumentCountWidget>>
     {
         /// <summary>
         /// Elasticsearch Helper to retrieve elastic client

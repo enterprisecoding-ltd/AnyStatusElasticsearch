@@ -22,7 +22,7 @@ using System.Threading.Tasks;
 
 namespace AnyStatus.Plugins.Elasticsearch.Index.IndexDeletedDocumentCount
 {
-    public class IndexDeletedDocumentCountMetricQuery : IMetricQuery<IndexDeletedDocumentCountWidget>
+    public class IndexDeletedDocumentCountMetricQuery : IRequestHandler<MetricQueryRequest<IndexDeletedDocumentCountWidget>>
     {
         /// <summary>
         /// Elasticsearch Helper to retrieve elastic client

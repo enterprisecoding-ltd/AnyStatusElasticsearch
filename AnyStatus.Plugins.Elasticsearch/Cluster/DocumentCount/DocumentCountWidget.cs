@@ -27,7 +27,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Cluster.DocumentCount
     [DisplayName("Cluster Document Count")]
     [DisplayColumn("Elasticsearch")]
     [Description("Shows total document count for the Elasticsearch Cluster")]
-    public class DocumentCountWidget : Metric, IElasticsearchWidget, ISchedulable
+    public class DocumentCountWidget : Sparkline, IElasticsearchWidget, ISchedulable
     {
         [Url]
         [Required]

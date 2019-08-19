@@ -30,7 +30,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexCount
     [DisplayName("Index Count")]
     [DisplayColumn("Elasticsearch")]
     [Description("Shows total document count for the Elasticsearch Cluster")]
-    public class IndexCountWidget : Metric, IElasticsearchWidget, ISchedulable
+    public class IndexCountWidget : Sparkline, IElasticsearchWidget, ISchedulable
     {
         /// <summary>
         /// Elasticsearch nodes uris to connect

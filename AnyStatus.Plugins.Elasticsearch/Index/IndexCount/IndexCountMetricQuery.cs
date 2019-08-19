@@ -29,7 +29,7 @@ using System.Threading.Tasks;
 
 namespace AnyStatus.Plugins.Elasticsearch.Index.IndexCount
 {
-    public class IndexCountMetricQuery : IMetricQuery<IndexCountWidget>
+    public class IndexCountMetricQuery : IRequestHandler<MetricQueryRequest<IndexCountWidget>>
     {
         /// <summary>
         /// Elasticsearch Helper to retrieve elastic client

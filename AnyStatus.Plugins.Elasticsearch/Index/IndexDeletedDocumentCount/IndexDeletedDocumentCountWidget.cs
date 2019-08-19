@@ -28,7 +28,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexDeletedDocumentCount
     [DisplayName("Index Deleted Document Count")]
     [DisplayColumn("Elasticsearch")]
     [Description("Shows total document count for the Elasticsearch Cluster")]
-    public class IndexDeletedDocumentCountWidget : Metric, IElasticsearchWidget, ISchedulable
+    public class IndexDeletedDocumentCountWidget : Sparkline, IElasticsearchWidget, ISchedulable
     {
         /// <summary>
         /// Elasticsearch nodes uris to connect
