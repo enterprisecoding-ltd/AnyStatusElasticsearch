@@ -74,6 +74,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexDeletedDocumentCount
         [Category("Index Deleted Document Count")]
         [PropertyOrder(50)]
         [Description("Password to connect Elasticsearch Cluster")]
+        [Editor(typeof(PasswordEditor), typeof(PasswordEditor))]
         public string Password { get; set; }
 
         /// <summary>

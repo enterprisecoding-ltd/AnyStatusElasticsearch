@@ -51,6 +51,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Cluster.DocumentCount
         [Category("Cluster Document Count")]
         [PropertyOrder(40)]
         [Description("Password to connect Elasticsearch Cluster")]
+        [Editor(typeof(PasswordEditor), typeof(PasswordEditor))]
         public string Password { get; set; }
 
         [Category("Cluster Document Count")]

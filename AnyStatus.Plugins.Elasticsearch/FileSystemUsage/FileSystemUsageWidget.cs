@@ -52,6 +52,7 @@ namespace AnyStatus.Plugins.Elasticsearch.FileSystemUsage
         [Category("File System Usage")]
         [PropertyOrder(50)]
         [Description("Password to connect Elasticsearch Cluster")]
+        [Editor(typeof(PasswordEditor), typeof(PasswordEditor))]
         public string Password { get; set; }
 
         [Category("File System Usage")]

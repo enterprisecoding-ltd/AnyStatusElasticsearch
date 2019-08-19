@@ -52,6 +52,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Cluster.Health
         [PropertyOrder(40)]
         [Category("Cluster Health")]
         [Description("Password to connect Elasticsearch Cluster")]
+        [Editor(typeof(PasswordEditor), typeof(PasswordEditor))]
         public string Password { get; set; }
 
         [PropertyOrder(50)]

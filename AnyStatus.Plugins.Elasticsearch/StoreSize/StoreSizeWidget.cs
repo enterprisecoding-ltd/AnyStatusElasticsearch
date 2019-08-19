@@ -57,6 +57,7 @@ namespace AnyStatus.Plugins.Elasticsearch.StoreSize
         [Category("Store Size")]
         [PropertyOrder(50)]
         [Description("Password to connect Elasticsearch Cluster")]
+        [Editor(typeof(PasswordEditor), typeof(PasswordEditor))]
         public string Password { get; set; }
 
         [Category("Store Size")]

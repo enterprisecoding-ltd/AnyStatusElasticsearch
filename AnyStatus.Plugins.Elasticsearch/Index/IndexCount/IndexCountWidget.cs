@@ -76,6 +76,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexCount
         [Category("Index Count")]
         [PropertyOrder(50)]
         [Description("Password to connect Elasticsearch Cluster")]
+        [Editor(typeof(PasswordEditor), typeof(PasswordEditor))]
         public string Password { get; set; }
 
         /// <summary>

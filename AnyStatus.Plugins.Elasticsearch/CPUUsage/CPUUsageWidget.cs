@@ -57,6 +57,7 @@ namespace AnyStatus.Plugins.Elasticsearch.CPUUsage
         [Category("CPU Usage")]
         [PropertyOrder(50)]
         [Description("Password to connect Elasticsearch Cluster")]
+        [Editor(typeof(PasswordEditor), typeof(PasswordEditor))]
         public string Password { get; set; }
 
         [Category("CPU Usage")]

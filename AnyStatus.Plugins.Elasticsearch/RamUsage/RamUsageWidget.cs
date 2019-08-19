@@ -57,6 +57,7 @@ namespace AnyStatus.Plugins.Elasticsearch.RamUsage
         [Category("RAM Usage")]
         [PropertyOrder(50)]
         [Description("Password to connect Elasticsearch Cluster")]
+        [Editor(typeof(PasswordEditor), typeof(PasswordEditor))]
         public string Password { get; set; }
 
         [Category("RAM Usage")]
