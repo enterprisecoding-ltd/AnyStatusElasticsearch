@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 using AnyStatus.API;
+using AnyStatus.API.Common.Utils;
 using AnyStatus.Plugins.Elasticsearch.Helpers;
 using System;
 using System.Threading;
@@ -64,7 +65,7 @@ namespace AnyStatus.Plugins.Elasticsearch.FileSystemUsage
                     var usedInBytes = clusterStatsResponse.Nodes.FileSystem.TotalInBytes - clusterStatsResponse.Nodes.FileSystem.AvailableInBytes;
                     request.DataContext.Progress = (int)Math.Round((usedInBytes / (double)clusterStatsResponse.Nodes.FileSystem.TotalInBytes) * 100);
                     request.DataContext.Message = $"Used {request.DataContext.Progress}%{Environment.NewLine}" +
-                           $"{FileSizeFormatter.FormatSize(usedInBytes)} used out of {FileSizeFormatter.FormatSize(clusterStatsResponse.Nodes.FileSystem.TotalInBytes)}";
+                           $"{BytesFormatter.Format(usedInBytes)} used out of {BytesFormatter.Format(clusterStatsResponse.Nodes.FileSystem.TotalInBytes)}";
 
                     request.DataContext.State = request.DataContext.Progress >= request.DataContext.ErrorPercentage ? State.Failed : State.Ok;
                 }
@@ -72,7 +73,7 @@ namespace AnyStatus.Plugins.Elasticsearch.FileSystemUsage
                 {
                     request.DataContext.Progress = (int)Math.Round((clusterStatsResponse.Nodes.FileSystem.AvailableInBytes / (double)clusterStatsResponse.Nodes.FileSystem.TotalInBytes) * 100);
                     request.DataContext.Message = $"Avaliable {request.DataContext.Progress}%{Environment.NewLine}" +
-                           $"{FileSizeFormatter.FormatSize(clusterStatsResponse.Nodes.FileSystem.AvailableInBytes)} available out of {FileSizeFormatter.FormatSize(clusterStatsResponse.Nodes.FileSystem.TotalInBytes)}";
+                           $"{BytesFormatter.Format(clusterStatsResponse.Nodes.FileSystem.AvailableInBytes)} available out of {BytesFormatter.Format(clusterStatsResponse.Nodes.FileSystem.TotalInBytes)}";
 
                     request.DataContext.State = request.DataContext.Progress <= request.DataContext.ErrorPercentage ? State.Failed : State.Ok;
                 }

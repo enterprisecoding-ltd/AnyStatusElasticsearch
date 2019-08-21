@@ -16,7 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 using AnyStatus.API;
+using AnyStatus.API.Common.Utils;
 using AnyStatus.Plugins.Elasticsearch.Helpers;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -52,7 +54,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexStoreSize
 
                 if (clusterStatsResponse.IsValid)
                 {
-                    request.DataContext.Value = FileSizeFormatter.FormatSize(clusterStatsResponse.Indices[documentCountWidget.IndexName].Primaries.Store.SizeInBytes);
+                    request.DataContext.Value = BytesFormatter.Format(Convert.ToInt64(clusterStatsResponse.Indices[documentCountWidget.IndexName].Primaries.Store.SizeInBytes));
                     request.DataContext.State = State.Ok;
                 }
                 else
@@ -65,7 +67,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexStoreSize
 
                 if (clusterStatsResponse.IsValid)
                 {
-                    request.DataContext.Value = FileSizeFormatter.FormatSize(clusterStatsResponse.Indices[documentCountWidget.IndexName].Total.Store.SizeInBytes);
+                    request.DataContext.Value = BytesFormatter.Format(Convert.ToInt64(clusterStatsResponse.Indices[documentCountWidget.IndexName].Total.Store.SizeInBytes));
                     request.DataContext.State = State.Ok;
                 }
                 else

@@ -19,6 +19,8 @@ using AnyStatus.API;
 using System.Threading;
 using System.Threading.Tasks;
 using AnyStatus.Plugins.Elasticsearch.Helpers;
+using AnyStatus.API.Common.Utils;
+using System;
 
 namespace AnyStatus.Plugins.Elasticsearch.StoreSize
 {
@@ -58,7 +60,7 @@ namespace AnyStatus.Plugins.Elasticsearch.StoreSize
 
             if (clusterStatsResponse.IsValid)
             {
-                request.DataContext.Value = FileSizeFormatter.FormatSize(clusterStatsResponse.Indices.Store.SizeInBytes);
+                request.DataContext.Value = BytesFormatter.Format(Convert.ToInt64(clusterStatsResponse.Indices.Store.SizeInBytes));
                 request.DataContext.State = State.Ok;
             }
             else
