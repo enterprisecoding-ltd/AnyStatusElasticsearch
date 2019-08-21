@@ -25,7 +25,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexCount
         {
             ItemCollection values = new ItemCollection
             {
-                { IndexDetail.None, "Node" },
+                { IndexDetail.None, "None" },
                 { IndexDetail.Health, "Health" },
                 { IndexDetail.DocumentsCount, "Documents Count" },
                 { IndexDetail.DeletedDocumentsCount, "Deleted Documents Count" },
