@@ -59,7 +59,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets
             await handler.Handle(request, CancellationToken.None).ConfigureAwait(false);
 
             Assert.AreEqual(State.Ok, widget.State);
-            Assert.AreEqual("50.0 Bytes", widget.Value);
+            Assert.AreEqual(50, widget.Value);
 
             elasticsearchHelperMock.Verify(client => client.GetElasticClient(It.IsAny<IElasticsearchWidget>()), Times.Once());
             elasticsearchSimpleClientMock.Verify(client => client.StatsAsync("indices.store.size_in_bytes", It.IsAny<CancellationToken>()), Times.Once());
@@ -119,7 +119,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets
             await handler.Handle(request, CancellationToken.None).ConfigureAwait(false);
 
             Assert.AreEqual(State.Ok, widget.State);
-            Assert.AreEqual("50.0 Bytes", widget.Value);
+            Assert.AreEqual(50, widget.Value);
 
             elasticsearchHelperMock.Verify(client => client.GetElasticClient(It.IsAny<IElasticsearchWidget>()), Times.Once());
             elasticsearchSimpleClientMock.Verify(client => client.StatsAsync("indices.store.size_in_bytes", nodeId, It.IsAny<CancellationToken>()), Times.Once());

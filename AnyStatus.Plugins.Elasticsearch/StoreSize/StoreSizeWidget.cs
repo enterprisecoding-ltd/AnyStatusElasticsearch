@@ -16,7 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 using AnyStatus.API;
+using AnyStatus.API.Common.Utils;
 using AnyStatus.Plugins.Elasticsearch.Shared;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -27,7 +29,7 @@ namespace AnyStatus.Plugins.Elasticsearch.StoreSize
     [DisplayName("Store Size")]
     [DisplayColumn("Elasticsearch")]
     [Description("Shows store size taken by primary & replica shards for the Elasticsearch Node/Cluster")]
-    public class StoreSizeWidget : Metric, IElasticsearchWidget, ISchedulable
+    public class StoreSizeWidget : Sparkline, IElasticsearchWidget, ISchedulable
     {
         [Url]
         [Required]
@@ -72,6 +74,11 @@ namespace AnyStatus.Plugins.Elasticsearch.StoreSize
 
             Interval = 1;
             Units = IntervalUnits.Minutes;
+        }
+
+        public override string ToString()
+        {
+            return BytesFormatter.Format(Convert.ToInt64(Value));
         }
     }
 }

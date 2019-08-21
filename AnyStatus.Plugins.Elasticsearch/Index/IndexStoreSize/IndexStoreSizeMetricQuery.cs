@@ -24,7 +24,7 @@ using System.Threading.Tasks;
 
 namespace AnyStatus.Plugins.Elasticsearch.Index.IndexStoreSize
 {
-    public class IndexStoreSizeMetricQuery : IMetricQuery<IndexStoreSizeWidget>
+    public class IndexStoreSizeMetricQuery : IRequestHandler<MetricQueryRequest<IndexStoreSizeWidget>>
     {
         /// <summary>
         /// Elasticsearch Helper to retrieve elastic client
@@ -54,7 +54,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexStoreSize
 
                 if (clusterStatsResponse.IsValid)
                 {
-                    request.DataContext.Value = BytesFormatter.Format(Convert.ToInt64(clusterStatsResponse.Indices[documentCountWidget.IndexName].Primaries.Store.SizeInBytes));
+                    request.DataContext.Value = clusterStatsResponse.Indices[documentCountWidget.IndexName].Primaries.Store.SizeInBytes;
                     request.DataContext.State = State.Ok;
                 }
                 else
@@ -67,7 +67,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexStoreSize
 
                 if (clusterStatsResponse.IsValid)
                 {
-                    request.DataContext.Value = BytesFormatter.Format(Convert.ToInt64(clusterStatsResponse.Indices[documentCountWidget.IndexName].Total.Store.SizeInBytes));
+                    request.DataContext.Value = clusterStatsResponse.Indices[documentCountWidget.IndexName].Total.Store.SizeInBytes;
                     request.DataContext.State = State.Ok;
                 }
                 else

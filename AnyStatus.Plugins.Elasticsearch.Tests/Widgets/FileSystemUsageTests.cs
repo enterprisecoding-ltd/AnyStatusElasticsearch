@@ -66,7 +66,8 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets
 
             Assert.AreEqual(State.Ok, widget.State);
             Assert.AreEqual(70, widget.Progress);
-            Assert.AreEqual($"Used 70%{Environment.NewLine}70.0 Bytes used out of 100.0 Bytes", widget.Message);
+            Assert.AreEqual(70, widget.Value);
+            Assert.AreEqual($"Used 70%{Environment.NewLine}70 bytes used out of 100 bytes", widget.Message);
 
             elasticsearchHelperMock.Verify(client => client.GetElasticClient(It.IsAny<IElasticsearchWidget>()), Times.Once());
             elasticsearchSimpleClientMock.Verify(client => client.StatsAsync("nodes.fs", It.IsAny<CancellationToken>()), Times.Once());
@@ -104,7 +105,8 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets
 
             Assert.AreEqual(State.Ok, widget.State);
             Assert.AreEqual(30, widget.Progress);
-            Assert.AreEqual($"Avaliable 30%{Environment.NewLine}30.0 Bytes available out of 100.0 Bytes", widget.Message);
+            Assert.AreEqual(30, widget.Value);
+            Assert.AreEqual($"Avaliable 30%{Environment.NewLine}30 bytes available out of 100 bytes", widget.Message);
 
             elasticsearchHelperMock.Verify(client => client.GetElasticClient(It.IsAny<IElasticsearchWidget>()), Times.Once());
             elasticsearchSimpleClientMock.Verify(client => client.StatsAsync("nodes.fs", It.IsAny<CancellationToken>()), Times.Once());
@@ -142,7 +144,8 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets
 
             Assert.AreEqual(State.Failed, widget.State);
             Assert.AreEqual(30, widget.Progress);
-            Assert.AreEqual($"Avaliable 30%{Environment.NewLine}30.0 Bytes available out of 100.0 Bytes", widget.Message);
+            Assert.AreEqual(30, widget.Value);
+            Assert.AreEqual($"Avaliable 30%{Environment.NewLine}30 bytes available out of 100 bytes", widget.Message);
 
             elasticsearchHelperMock.Verify(client => client.GetElasticClient(It.IsAny<IElasticsearchWidget>()), Times.Once());
             elasticsearchSimpleClientMock.Verify(client => client.StatsAsync("nodes.fs", It.IsAny<CancellationToken>()), Times.Once());
@@ -180,7 +183,8 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets
 
             Assert.AreEqual(State.Failed, widget.State);
             Assert.AreEqual(70, widget.Progress);
-            Assert.AreEqual($"Used 70%{Environment.NewLine}70.0 Bytes used out of 100.0 Bytes", widget.Message);
+            Assert.AreEqual(70, widget.Value);
+            Assert.AreEqual($"Used 70%{Environment.NewLine}70 bytes used out of 100 bytes", widget.Message);
 
             elasticsearchHelperMock.Verify(client => client.GetElasticClient(It.IsAny<IElasticsearchWidget>()), Times.Once());
             elasticsearchSimpleClientMock.Verify(client => client.StatsAsync("nodes.fs", It.IsAny<CancellationToken>()), Times.Once());
@@ -247,7 +251,8 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets
 
             Assert.AreEqual(State.Ok, widget.State);
             Assert.AreEqual(70, widget.Progress);
-            Assert.AreEqual($"Used 70%{Environment.NewLine}70.0 Bytes used out of 100.0 Bytes", widget.Message);
+            Assert.AreEqual(70, widget.Value);
+            Assert.AreEqual($"Used 70%{Environment.NewLine}70 bytes used out of 100 bytes", widget.Message);
 
             elasticsearchHelperMock.Verify(client => client.GetElasticClient(It.IsAny<IElasticsearchWidget>()), Times.Once());
             elasticsearchSimpleClientMock.Verify(client => client.StatsAsync("nodes.fs", nodeId, It.IsAny<CancellationToken>()), Times.Once());
@@ -286,7 +291,8 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets
 
             Assert.AreEqual(State.Ok, widget.State);
             Assert.AreEqual(30, widget.Progress);
-            Assert.AreEqual($"Avaliable 30%{Environment.NewLine}30.0 Bytes available out of 100.0 Bytes", widget.Message);
+            Assert.AreEqual(30, widget.Value);
+            Assert.AreEqual($"Avaliable 30%{Environment.NewLine}30 bytes available out of 100 bytes", widget.Message);
 
             elasticsearchHelperMock.Verify(client => client.GetElasticClient(It.IsAny<IElasticsearchWidget>()), Times.Once());
             elasticsearchSimpleClientMock.Verify(client => client.StatsAsync("nodes.fs", nodeId, It.IsAny<CancellationToken>()), Times.Once());
@@ -325,7 +331,8 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets
 
             Assert.AreEqual(State.Failed, widget.State);
             Assert.AreEqual(30, widget.Progress);
-            Assert.AreEqual($"Avaliable 30%{Environment.NewLine}30.0 Bytes available out of 100.0 Bytes", widget.Message);
+            Assert.AreEqual(30, widget.Value);
+            Assert.AreEqual($"Avaliable 30%{Environment.NewLine}30 bytes available out of 100 bytes", widget.Message);
 
             elasticsearchHelperMock.Verify(client => client.GetElasticClient(It.IsAny<IElasticsearchWidget>()), Times.Once());
             elasticsearchSimpleClientMock.Verify(client => client.StatsAsync("nodes.fs", nodeId, It.IsAny<CancellationToken>()), Times.Once());
@@ -364,7 +371,8 @@ namespace AnyStatus.Plugins.Elasticsearch.Tests.Widgets
 
             Assert.AreEqual(State.Failed, widget.State);
             Assert.AreEqual(70, widget.Progress);
-            Assert.AreEqual($"Used 70%{Environment.NewLine}70.0 Bytes used out of 100.0 Bytes", widget.Message);
+            Assert.AreEqual(70, widget.Value);
+            Assert.AreEqual($"Used 70%{Environment.NewLine}70 bytes used out of 100 bytes", widget.Message);
 
             elasticsearchHelperMock.Verify(client => client.GetElasticClient(It.IsAny<IElasticsearchWidget>()), Times.Once());
             elasticsearchSimpleClientMock.Verify(client => client.StatsAsync("nodes.fs", nodeId, It.IsAny<CancellationToken>()), Times.Once());

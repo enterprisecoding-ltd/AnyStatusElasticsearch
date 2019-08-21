@@ -24,7 +24,7 @@ using System;
 
 namespace AnyStatus.Plugins.Elasticsearch.StoreSize
 {
-    public class StoreSizeMetricQuery : IMetricQuery<StoreSizeWidget>
+    public class StoreSizeMetricQuery : IRequestHandler<MetricQueryRequest<StoreSizeWidget>>
     {
         /// <summary>
         /// Elasticsearch Helper to retrieve elastic client
@@ -60,7 +60,7 @@ namespace AnyStatus.Plugins.Elasticsearch.StoreSize
 
             if (clusterStatsResponse.IsValid)
             {
-                request.DataContext.Value = BytesFormatter.Format(Convert.ToInt64(clusterStatsResponse.Indices.Store.SizeInBytes));
+                request.DataContext.Value = clusterStatsResponse.Indices.Store.SizeInBytes;
                 request.DataContext.State = State.Ok;
             }
             else
