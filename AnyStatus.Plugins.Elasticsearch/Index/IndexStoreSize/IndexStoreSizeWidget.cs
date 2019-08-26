@@ -56,16 +56,31 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexStoreSize
 
         [Category("Index Store Size")]
         [PropertyOrder(40)]
+        [RefreshProperties(RefreshProperties.All)]
         [DisplayName("Use Basic Authentication")]
         [Description("Use Basic Authentication to connect Elasticsearch Cluster")]
-        public bool UseBasicAuthentication { get; set; }
+        public bool UseBasicAuthentication
+        {
+            get => useBasicAuthentication;
+            set
+            {
+                useBasicAuthentication = value;
+
+                OnPropertyChanged();
+
+                SetPropertyVisibility(nameof(Username), useBasicAuthentication);
+                SetPropertyVisibility(nameof(Password), useBasicAuthentication);
+            }
+        }
 
         [Category("Index Store Size")]
+        [Browsable(true)]
         [PropertyOrder(50)]
         [Description("Username to connect Elasticsearch Cluster")]
         public string Username { get; set; }
 
         [Category("Index Store Size")]
+        [Browsable(true)]
         [PropertyOrder(60)]
         [Description("Password to connect Elasticsearch Cluster")]
         public string Password { get; set; }
@@ -86,6 +101,8 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexStoreSize
         [Browsable(false)]
         public string IndexUuid { get; internal set; }
 
+        private bool useBasicAuthentication;
+
         public IndexStoreSizeWidget()
         {
             Name = "Index Store Size";
@@ -93,6 +110,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexStoreSize
             SizeType = StoreSizeType.Primary;
             Interval = 1;
             Units = IntervalUnits.Minutes;
+            UseBasicAuthentication = false;
         }
 
         public override string ToString()

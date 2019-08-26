@@ -40,16 +40,31 @@ namespace AnyStatus.Plugins.Elasticsearch.FileSystemUsage
 
         [Category("File System Usage")]
         [PropertyOrder(30)]
+        [RefreshProperties(RefreshProperties.All)]
         [DisplayName("Use Basic Authentication")]
         [Description("Use Basic Authentication to connect Elasticsearch Cluster")]
-        public bool UseBasicAuthentication { get; set; }
+        public bool UseBasicAuthentication
+        {
+            get => useBasicAuthentication;
+            set
+            {
+                useBasicAuthentication = value;
+
+                OnPropertyChanged();
+
+                SetPropertyVisibility(nameof(Username), useBasicAuthentication);
+                SetPropertyVisibility(nameof(Password), useBasicAuthentication);
+            }
+        }
 
         [Category("File System Usage")]
+        [Browsable(true)]
         [PropertyOrder(40)]
         [Description("Username to connect Elasticsearch Cluster")]
         public string Username { get; set; }
 
         [Category("File System Usage")]
+        [Browsable(true)]
         [PropertyOrder(50)]
         [Description("Password to connect Elasticsearch Cluster")]
         [Editor(typeof(PasswordEditor), typeof(PasswordEditor))]
@@ -98,6 +113,8 @@ namespace AnyStatus.Plugins.Elasticsearch.FileSystemUsage
             }
         }
 
+        private bool useBasicAuthentication;
+
         public FileSystemUsageWidget()
         {
             ErrorPercentage = 85;
@@ -107,6 +124,7 @@ namespace AnyStatus.Plugins.Elasticsearch.FileSystemUsage
             Symbol = "%";
             Interval = 1;
             Units = IntervalUnits.Minutes;
+            UseBasicAuthentication = false;
         }
     }
 }

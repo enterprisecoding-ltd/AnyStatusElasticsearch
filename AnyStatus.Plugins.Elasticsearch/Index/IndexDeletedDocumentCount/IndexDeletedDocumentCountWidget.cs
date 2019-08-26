@@ -56,14 +56,28 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexDeletedDocumentCount
         /// </summary>
         [Category("Index Deleted Document Count")]
         [PropertyOrder(30)]
+        [RefreshProperties(RefreshProperties.All)]
         [DisplayName("Use Basic Authentication")]
         [Description("Use Basic Authentication to connect Elasticsearch Cluster")]
-        public bool UseBasicAuthentication { get; set; }
+        public bool UseBasicAuthentication
+        {
+            get => useBasicAuthentication;
+            set
+            {
+                useBasicAuthentication = value;
+
+                OnPropertyChanged();
+
+                SetPropertyVisibility(nameof(Username), useBasicAuthentication);
+                SetPropertyVisibility(nameof(Password), useBasicAuthentication);
+            }
+        }
 
         /// <summary>
         /// Username for basic authentication
         /// </summary>
         [Category("Index Deleted Document Count")]
+        [Browsable(true)]
         [PropertyOrder(40)]
         [Description("Username to connect Elasticsearch Cluster")]
         public string Username { get; set; }
@@ -72,6 +86,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexDeletedDocumentCount
         /// Password for basic authentication
         /// </summary>
         [Category("Index Deleted Document Count")]
+        [Browsable(true)]
         [PropertyOrder(50)]
         [Description("Password to connect Elasticsearch Cluster")]
         [Editor(typeof(PasswordEditor), typeof(PasswordEditor))]
@@ -96,12 +111,15 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexDeletedDocumentCount
         [Browsable(false)]
         public string IndexUuid { get; internal set; }
 
+        private bool useBasicAuthentication;
+
         public IndexDeletedDocumentCountWidget()
         {
             Name = "Index Deleted Document Count";
 
             Interval = 1;
             Units = IntervalUnits.Minutes;
+            UseBasicAuthentication = false;
         }
     }
 }

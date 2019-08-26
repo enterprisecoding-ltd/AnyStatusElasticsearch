@@ -39,15 +39,29 @@ namespace AnyStatus.Plugins.Elasticsearch.Cluster.DeletedDocumentCount
 
         [Category("Deleted Document Count")]
         [PropertyOrder(20)]
+        [RefreshProperties(RefreshProperties.All)]
         [DisplayName("Use Basic Authentication")]
         [Description("Use Basic Authentication to connect Elasticsearch Cluster")]
-        public bool UseBasicAuthentication { get; set; }
+        public bool UseBasicAuthentication {
+            get => useBasicAuthentication;
+            set
+            {
+                useBasicAuthentication = value;
 
+                OnPropertyChanged();
+
+                SetPropertyVisibility(nameof(Username), useBasicAuthentication);
+                SetPropertyVisibility(nameof(Password), useBasicAuthentication);
+            }
+        }
+
+        [Browsable(true)]
         [Category("Deleted Document Count")]
         [PropertyOrder(30)]
         [Description("Username to connect Elasticsearch Cluster")]
         public string Username { get; set; }
 
+        [Browsable(true)]
         [Category("Deleted Document Count")]
         [PropertyOrder(40)]
         [Description("Password to connect Elasticsearch Cluster")]
@@ -60,12 +74,15 @@ namespace AnyStatus.Plugins.Elasticsearch.Cluster.DeletedDocumentCount
         [Description("Always trust server certificate")]
         public bool TrustCertificate { get; set; }
 
+        private bool useBasicAuthentication;
+
         public DeletedDocumentCountWidget()
         {
             Name = "Deleted Document Count";
 
             Interval = 1;
             Units = IntervalUnits.Minutes;
+            UseBasicAuthentication = false;
         }
     }
 }

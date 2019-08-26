@@ -58,14 +58,28 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexCount
         /// </summary>
         [Category("Index Count")]
         [PropertyOrder(30)]
+        [RefreshProperties(RefreshProperties.All)]
         [DisplayName("Use Basic Authentication")]
         [Description("Use Basic Authentication to connect Elasticsearch Cluster")]
-        public bool UseBasicAuthentication { get; set; }
+        public bool UseBasicAuthentication
+        {
+            get => useBasicAuthentication;
+            set
+            {
+                useBasicAuthentication = value;
+
+                OnPropertyChanged();
+
+                SetPropertyVisibility(nameof(Username), useBasicAuthentication);
+                SetPropertyVisibility(nameof(Password), useBasicAuthentication);
+            }
+        }
 
         /// <summary>
         /// Username for basic authentication
         /// </summary>
         [Category("Index Count")]
+        [Browsable(true)]
         [PropertyOrder(40)]
         [Description("Username to connect Elasticsearch Cluster")]
         public string Username { get; set; }
@@ -74,6 +88,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexCount
         /// Password for basic authentication
         /// </summary>
         [Category("Index Count")]
+        [Browsable(true)]
         [PropertyOrder(50)]
         [Description("Password to connect Elasticsearch Cluster")]
         [Editor(typeof(PasswordEditor), typeof(PasswordEditor))]
@@ -88,6 +103,8 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexCount
         [Description("Always trust server certificate")]
         public bool TrustCertificate { get; set; }
 
+        private bool useBasicAuthentication;
+
         public IndexCountWidget()
         {
             Name = "Index Count";
@@ -96,6 +113,7 @@ namespace AnyStatus.Plugins.Elasticsearch.Index.IndexCount
 
             Interval = 1;
             Units = IntervalUnits.Minutes;
+            UseBasicAuthentication = false;
         }
     }
 }

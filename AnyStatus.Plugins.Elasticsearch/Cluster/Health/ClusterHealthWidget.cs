@@ -40,15 +40,30 @@ namespace AnyStatus.Plugins.Elasticsearch.Cluster.Health
 
         [PropertyOrder(20)]
         [Category("Cluster Health")]
+        [RefreshProperties(RefreshProperties.All)]
         [DisplayName("Use Basic Authentication")]
         [Description("Use Basic Authentication to connect Elasticsearch Cluster")]
-        public bool UseBasicAuthentication { get; set; }
+        public bool UseBasicAuthentication
+        {
+            get => useBasicAuthentication;
+            set
+            {
+                useBasicAuthentication = value;
 
+                OnPropertyChanged();
+
+                SetPropertyVisibility(nameof(Username), useBasicAuthentication);
+                SetPropertyVisibility(nameof(Password), useBasicAuthentication);
+            }
+        }
+
+        [Browsable(true)]
         [PropertyOrder(30)]
         [Category("Cluster Health")]
         [Description("Username to connect Elasticsearch Cluster")]
         public string Username { get; set; }
 
+        [Browsable(true)]
         [PropertyOrder(40)]
         [Category("Cluster Health")]
         [Description("Password to connect Elasticsearch Cluster")]
@@ -61,12 +76,15 @@ namespace AnyStatus.Plugins.Elasticsearch.Cluster.Health
         [Description("Always trust server certificate")]
         public bool TrustCertificate { get; set; }
 
+        private bool useBasicAuthentication;
+
         public ClusterHealthWidget()
         {
             Name = "Cluster Health";
 
             Interval = 1;
             Units = IntervalUnits.Minutes;
+            UseBasicAuthentication = false;
         }
     }
 }

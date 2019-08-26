@@ -47,15 +47,30 @@ namespace AnyStatus.Plugins.Elasticsearch.StoreSize
 
         [Category("Store Size")]
         [PropertyOrder(30)]
+        [RefreshProperties(RefreshProperties.All)]
         [DisplayName("Use Basic Authentication")]
         [Description("Use Basic Authentication to connect Elasticsearch Cluster")]
-        public bool UseBasicAuthentication { get; set; }
+        public bool UseBasicAuthentication
+        {
+            get => useBasicAuthentication;
+            set
+            {
+                useBasicAuthentication = value;
 
+                OnPropertyChanged();
+
+                SetPropertyVisibility(nameof(Username), useBasicAuthentication);
+                SetPropertyVisibility(nameof(Password), useBasicAuthentication);
+            }
+        }
+
+        [Browsable(true)]
         [Category("Store Size")]
         [PropertyOrder(40)]
         [Description("Username to connect Elasticsearch Cluster")]
         public string Username { get; set; }
 
+        [Browsable(true)]
         [Category("Store Size")]
         [PropertyOrder(50)]
         [Description("Password to connect Elasticsearch Cluster")]
@@ -68,12 +83,15 @@ namespace AnyStatus.Plugins.Elasticsearch.StoreSize
         [Description("Always trust server certificate")]
         public bool TrustCertificate { get; set; }
 
+        private bool useBasicAuthentication;
+
         public StoreSizeWidget()
         {
             Name = "Store Size";
 
             Interval = 1;
             Units = IntervalUnits.Minutes;
+            UseBasicAuthentication = false;
         }
 
         public override string ToString()

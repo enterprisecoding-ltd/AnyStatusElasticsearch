@@ -45,15 +45,30 @@ namespace AnyStatus.Plugins.Elasticsearch.RamUsage
 
         [Category("RAM Usage")]
         [PropertyOrder(30)]
+        [RefreshProperties(RefreshProperties.All)]
         [DisplayName("Use Basic Authentication")]
         [Description("Use Basic Authentication to connect Elasticsearch Cluster")]
-        public bool UseBasicAuthentication { get; set; }
+        public bool UseBasicAuthentication
+        {
+            get => useBasicAuthentication;
+            set
+            {
+                useBasicAuthentication = value;
 
+                OnPropertyChanged();
+
+                SetPropertyVisibility(nameof(Username), useBasicAuthentication);
+                SetPropertyVisibility(nameof(Password), useBasicAuthentication);
+            }
+        }
+
+        [Browsable(true)]
         [Category("RAM Usage")]
         [PropertyOrder(40)]
         [Description("Username to connect Elasticsearch Cluster")]
         public string Username { get; set; }
 
+        [Browsable(true)]
         [Category("RAM Usage")]
         [PropertyOrder(50)]
         [Description("Password to connect Elasticsearch Cluster")]
@@ -66,6 +81,8 @@ namespace AnyStatus.Plugins.Elasticsearch.RamUsage
         [Description("Always trust server certificate")]
         public bool TrustCertificate { get; set; }
 
+        private bool useBasicAuthentication;
+
         public RamUsageWidget()
         {
             Name = "RAM Usage";
@@ -73,6 +90,7 @@ namespace AnyStatus.Plugins.Elasticsearch.RamUsage
             MaxValue = 100;
             Interval = 1;
             Units = IntervalUnits.Minutes;
+            UseBasicAuthentication = false;
         }
     }
 }
